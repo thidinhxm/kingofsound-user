@@ -26,6 +26,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 
+app.get('/checkout', (req, res, next) => {
+	res.render('checkout')
+})
+
+app.get('/store', (req, res, next) => {
+	res.render('store')
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
