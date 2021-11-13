@@ -33,6 +33,15 @@ app.get('/checkout', (req, res, next) => {
 app.get('/store', (req, res, next) => {
 	res.render('store')
 })
+
+app.get('/product', (req, res, next) => {
+	res.render('product')
+})
+
+
+app.get('/blank', function(req, res, next) {
+	res.render('blank')
+})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
