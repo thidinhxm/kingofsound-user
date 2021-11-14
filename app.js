@@ -5,7 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const exphbs = require('express-handlebars')
 const indexRouter = require('./routes/index');
-
+const productsRouter = require('./routes/products')
 const app = express();
 
 // view engine setup
@@ -25,22 +25,22 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/products', productsRouter)
 
 app.get('/checkout', (req, res, next) => {
 	res.render('checkout')
 })
 
-app.get('/store', (req, res, next) => {
-	res.render('store')
-})
-
-app.get('/product', (req, res, next) => {
-	res.render('product')
-})
-
-
 app.get('/blank', function(req, res, next) {
 	res.render('blank')
+})
+
+app.get('/login', (req, res, next) => {
+	res.render('login')
+})
+
+app.get('/register', (req, res, next) => {
+	res.render('register')
 })
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
