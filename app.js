@@ -27,21 +27,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 app.use('/products', productsRouter)
 
-app.get('/checkout', (req, res, next) => {
-	res.render('checkout')
-})
-
-app.get('/blank', function(req, res, next) {
-	res.render('blank')
-})
-
-app.get('/login', (req, res, next) => {
-	res.render('login')
-})
-
-app.get('/register', (req, res, next) => {
-	res.render('register')
-})
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
