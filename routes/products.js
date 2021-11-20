@@ -1,10 +1,8 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
+const Product = require('../controllers/productController')
 
-
-router.get('/', function(req, res, next) {
-  res.render('products/productsList');
-});
+router.get('/', Product.getAll);
 
 router.get('/:productId', function(req, res, next) {
     res.render('products/productDetail');
