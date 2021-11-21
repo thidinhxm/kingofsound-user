@@ -1,10 +1,9 @@
 const express = require('express');
 const router = express.Router();
 
+const indexController = require('./indexController');
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index');
-});
+router.get('/', indexController.index);
 
 router.get('/checkout', (req, res, next) => {
 	res.render('checkout')
