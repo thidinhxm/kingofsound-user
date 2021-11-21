@@ -1,31 +1,22 @@
-const controller = {}
-// const {models} = require('../../models');
+const productService = require('./productService');
 
-
-controller.getAll = async (req, res, next) => {
-    // try {
-    //     const products = await models.products.findAll({raw : true});
-    //     res.render('products/productsList', {products});
-    // }
-    // catch(err) {
-    //     next(err);
-    // }
-
-    res.render('../components/products/productViews/productList');
+exports.getAll = async (req, res, next) => {
+    try {
+        const products = await productService.getAll();
+        res.render('../components/products/productViews/productList', {products});
+    } 
+    catch(err) {
+        next(err);
+    }
 }
 
-controller.getOne = async (req, res, next) => {
-    // try {
-    //     const product = await models.products.findOne({
-    //         where : {
-    //             id : req.params.id
-    //         },
-    //         raw : true
-    //     });
-        res.render('../components/products/productViews/productDetail');
-    // }
-    // catch(err) {
-    //     next(err);
-    // }
+exports.getOne = async (req, res, next) => {
+    try {
+        const id = req.params.id;
+        const product = await productService.getOne(id);
+        res.render('../components/products/productViews/productDetail', {product});
+    } 
+    catch(err) {
+        next(err);
+    }
 }
-module.exports = controller;

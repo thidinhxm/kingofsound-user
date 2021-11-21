@@ -3,7 +3,6 @@ const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-// const exphbs = require('express-handlebars')
 const hbs = require('hbs');
 const indexRouter = require('./components/home/index');
 const productRouter = require('./components/products/productRouter')
