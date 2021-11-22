@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.CHAR(20),
       allowNull: true,
       references: {
-        model: 'categorys',
+        model: 'categories',
         key: 'category_id'
       }
     }

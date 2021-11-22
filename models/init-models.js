@@ -1,6 +1,6 @@
 var DataTypes = require("sequelize").DataTypes;
 var _brands = require("./brands");
-var _categorys = require("./categorys");
+var _categories = require("./categories");
 var _comments = require("./comments");
 var _detailcarts = require("./detailcarts");
 var _detailorders = require("./detailorders");
@@ -14,7 +14,7 @@ var _users = require("./users");
 
 function initModels(sequelize) {
   var brands = _brands(sequelize, DataTypes);
-  var categorys = _categorys(sequelize, DataTypes);
+  var categories = _categories(sequelize, DataTypes);
   var comments = _comments(sequelize, DataTypes);
   var detailcarts = _detailcarts(sequelize, DataTypes);
   var detailorders = _detailorders(sequelize, DataTypes);
@@ -38,10 +38,10 @@ function initModels(sequelize) {
   users.belongsToMany(roles, { as: 'role_id_roles', through: user_roles, foreignKey: "user_id", otherKey: "role_id" });
   products.belongsTo(brands, { as: "brand", foreignKey: "brand_id"});
   brands.hasMany(products, { as: "products", foreignKey: "brand_id"});
-  categorys.belongsTo(categorys, { as: "parent_category_category", foreignKey: "parent_category"});
-  categorys.hasMany(categorys, { as: "categories", foreignKey: "parent_category"});
-  products.belongsTo(categorys, { as: "category", foreignKey: "category_id"});
-  categorys.hasMany(products, { as: "products", foreignKey: "category_id"});
+  categories.belongsTo(categories, { as: "parent_category_category", foreignKey: "parent_category"});
+  categories.hasMany(categories, { as: "categories", foreignKey: "parent_category"});
+  products.belongsTo(categories, { as: "category", foreignKey: "category_id"});
+  categories.hasMany(products, { as: "products", foreignKey: "category_id"});
   detailorders.belongsTo(orders, { as: "order", foreignKey: "order_id"});
   orders.hasMany(detailorders, { as: "detailorders", foreignKey: "order_id"});
   comments.belongsTo(products, { as: "product", foreignKey: "product_id"});
@@ -69,7 +69,7 @@ function initModels(sequelize) {
 
   return {
     brands,
-    categorys,
+    categories,
     comments,
     detailcarts,
     detailorders,

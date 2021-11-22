@@ -3,6 +3,8 @@
 /**
  * Module dependencies.
  */
+ const http = require('http');
+
 require('dotenv').config();
 
 const {sequelize} = require('../models');
@@ -10,7 +12,6 @@ sequelize.authenticate().then(() => {
 	console.log('Connection has been established successfully.');
 	const app = require('../app');
 	const debug = require('debug')('web-app-development-project:server');
-	const http = require('http');
 
 	/**
 	 * Get port from environment and store in Express.
