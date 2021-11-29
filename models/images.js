@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
       primaryKey: true
     },
     image_link: {
-      type: DataTypes.CHAR(50),
+      type: DataTypes.TEXT,
       allowNull: true
     }
   }, {

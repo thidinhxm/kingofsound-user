@@ -3,25 +3,16 @@
 	<!-- container -->
 	<div class="container">
 		<!-- row -->
+		{{#with product}}
 		<div class="row">
 			<!-- Product main img -->
 			<div class="col-md-5 col-md-push-2">
 				<div id="product-main-img">
+					{{#each images}}
 					<div class="product-preview">
-						<img src="/img/products/product_02_01.jpg" alt="">
+						<img src="{{image_link}}" alt="">
 					</div>
-
-					<div class="product-preview">
-						<img src="/img/products/product_02_02.jpg" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="/img/products/product_02_03.jpg" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="/img/products/product_02_04.jpg" alt="">
-					</div>
+					{{/each}}
 				</div>
 			</div>
 			<!-- /Product main img -->
@@ -29,29 +20,20 @@
 			<!-- Product thumb imgs -->
 			<div class="col-md-2  col-md-pull-5">
 				<div id="product-imgs">
+					{{#each images}}
 					<div class="product-preview">
-						<img src="/img/products/product_02_01.jpg" alt="">
+						<img src="{{image_link}}" alt="">
 					</div>
-
-					<div class="product-preview">
-						<img src="/img/products/product_02_02.jpg" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="/img/products/product_02_03.jpg" alt="">
-					</div>
-
-					<div class="product-preview">
-						<img src="/img/products/product_02_04.jpg" alt="">
-					</div>
+					{{/each}}
 				</div>
 			</div>
 			<!-- /Product thumb imgs -->
 
 			<!-- Product details -->
+			
 			<div class="col-md-5">
 				<div class="product-details">
-					<h2 class="product-name">Tên sản phẩm</h2>
+					<h2 class="product-name">{{product_name}}</h2>
 					<div>
 						<div class="product-rating">
 							<i class="fa fa-star"></i>
@@ -63,29 +45,34 @@
 						<a class="review-link" href="#">10 Lượt đánh giá | Thêm đánh giá</a>
 					</div>
 					<div>
-						<h3 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h3>
+						<h3 class="product-price">{{price}} VND</h3>
+						{{!-- <del class="product-old-price"></del> --}}
 						<span class="product-available">Sẵn có</span>
 					</div>
-					<p>Mô tả sản phẩm chi tiết.</p>
+					<p>{{descriptions}}</p>
 
 					<div class="product-options">
 						<label>
-							Size
+							Kích thước
 							<select class="input-select">
-								<option value="0">X</option>
+								<option value="0">M</option>
+								<option value="1">L</option>
+								<option value="2">XL</option>
 							</select>
 						</label>
 						<label>
 							Màu
 							<select class="input-select">
 								<option value="0">Đỏ</option>
+								<option value="0">Đen</option>
+								<option value="0">Bạc</option>
 							</select>
 						</label>
 					</div>
 
 					<div class="add-to-cart">
 						<div class="qty-label">
-							Qty
+							Số lượng
 							<div class="input-number">
 								<input type="number">
 								<span class="qty-up">+</span>
@@ -97,13 +84,14 @@
 
 					<ul class="product-btns">
 						<li><a href="#"><i class="fa fa-heart-o"></i> Yêu thích</a></li>
-						{{!-- <li><a href="#"><i class="fa fa-exchange"></i> add to compare</a></li> --}}
 					</ul>
 
 					<ul class="product-links">
 						<li>Loại:</li>
-						<li><a href="#">Loa</a></li>
-						<li><a href="#">Loa xách tay</a></li>
+						
+						<li><a href="#">{{categories.parent_category_name}}</a></li>
+						<li><a href="#">{{categories.category_name}}</a></li>
+						
 					</ul>
 
 					<ul class="product-links">
@@ -116,6 +104,7 @@
 
 				</div>
 			</div>
+			
 			<!-- /Product details -->
 
 			<!-- Product tab -->
@@ -333,13 +322,14 @@
 			</div>
 			<!-- /product tab -->
 		</div>
+		{{/with}}
 		<!-- /row -->
 	</div>
 	<!-- /container -->
 </div>
 <!-- /SECTION -->
 
-<!-- Section -->
+{{!-- <!-- Section -->
 <div class="section">
 	<!-- container -->
 	<div class="container">
@@ -471,4 +461,4 @@
 	</div>
 	<!-- /container -->
 </div>
-<!-- /Section -->
+<!-- /Section --> --}}

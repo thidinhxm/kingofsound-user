@@ -1,9 +1,11 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
+// const paginate = require('express-paginate');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('hbs');
+const paginateHelper = require('express-handlebars-paginate')
 const indexRouter = require('./components/home/index');
 const productRouter = require('./components/products/productRouter')
 const app = express();
@@ -15,7 +17,7 @@ app.set('view engine', 'hbs');
 
 // register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
-
+hbs.registerHelper('paginate', paginateHelper.createPagination);
 
 app.use(logger('dev'));
 app.use(express.json());
