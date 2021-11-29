@@ -8,7 +8,7 @@
 			<div class="col-md-6 col-xs-6">
 				<div class="shop">
 					<div class="shop-img">
-						<img src="/img/products/product_03_01.jpg" alt="">
+						<img src="/img/speaker.jpg" alt="">
 					</div>
 					<div class="shop-body">
 						<h3>Bộ sưu tập<br>Loa</h3>
@@ -22,7 +22,7 @@
 			<div class="col-md-6 col-xs-6">
 				<div class="shop">
 					<div class="shop-img">
-						<img src="/img/products/product_10_01.jpg" alt="">
+						<img src="/img/earphone.jpg" alt="">
 					</div>
 					<div class="shop-body">
 						<h3>Bộ sưu tập<br>Tai nghe</h3>
@@ -69,9 +69,10 @@
 						<div id="tab1" class="tab-pane active">
 							<div class="products-slick" data-nav="#slick-nav-1">
 								<!-- product -->
+								{{#each newProducts}}
 								<div class="product">
 									<div class="product-img">
-										<img src="/img/products/product_02_02.jpg" alt="">
+										<img src="{{'images.image_link'}}" alt="">
 										<div class="product-label">
 											<span class="sale">-30%</span>
 											<span class="new">MỚI</span>
@@ -79,8 +80,8 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Loa Sony</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<h3 class="product-name"><a href="#">{{product_name}}</a></h3>
+										<h4 class="product-price"{{price}} VNĐ</h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -90,122 +91,14 @@
 										</div>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
+											<button class="quick-view"><a href="/products/{{product_id}}"><i class="fa fa-eye"></i></a><span class="tooltipp">Xem sản phẩm</span></button>
 										</div>
 									</div>
 									<div class="add-to-cart">
 										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 									</div>
 								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_11_01.jpg" alt="">
-										<div class="product-label">
-											<span class="new">MỚI</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tai nghe Samsung</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_05_01.jpg" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Loa Sony Vip</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_15_01.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tai nghe siêu xịn</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_20_01.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tai nghe đẹp</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
+								{{/each}}
 								<!-- /product -->
 							</div>
 							<div id="slick-nav-1" class="products-slick-nav"></div>
@@ -298,9 +191,11 @@
 						<div id="tab2" class="tab-pane fade in active">
 							<div class="products-slick" data-nav="#slick-nav-2">
 								<!-- product -->
+
+								{{#each hotProducts}}
 								<div class="product">
 									<div class="product-img">
-										<img src="/img/products/product_04_01.jpg" alt="">
+										<img src="{{'images.image_link'}}" alt="">
 										<div class="product-label">
 											<span class="sale">-30%</span>
 											<span class="new">MỚI</span>
@@ -308,8 +203,8 @@
 									</div>
 									<div class="product-body">
 										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+										<h3 class="product-name"><a href="#">{{product_name}}</a></h3>
+										<h4 class="product-price">{{price}}</h4>
 										<div class="product-rating">
 											<i class="fa fa-star"></i>
 											<i class="fa fa-star"></i>
@@ -319,7 +214,7 @@
 										</div>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
+											<button class="quick-view"><a href="/products/{{product_id}}"><i class="fa fa-eye"></i></a><span class="tooltipp">Xem sản phẩm</span></button>
 										</div>
 									</div>
 									<div class="add-to-cart">
@@ -327,115 +222,7 @@
 									</div>
 								</div>
 								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_25_01.jpg" alt="">
-										<div class="product-label">
-											<span class="new">MỚI</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_13_01.jpg" alt="">
-										<div class="product-label">
-											<span class="sale">-30%</span>
-										</div>
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_08_01.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
-								<!-- /product -->
-
-								<!-- product -->
-								<div class="product">
-									<div class="product-img">
-										<img src="/img/products/product_30_01.jpg" alt="">
-									</div>
-									<div class="product-body">
-										<p class="product-category">Loại</p>
-										<h3 class="product-name"><a href="#">Tên sản phẩm</a></h3>
-										<h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-										</div>
-										<div class="product-btns">
-											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>
-											<button class="quick-view"><i class="fa fa-eye"></i><span class="tooltipp">Xem sản phẩm</span></button>
-										</div>
-									</div>
-									<div class="add-to-cart">
-										<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
-									</div>
-								</div>
-								<!-- /product -->
+								{{/each}}
 							</div>
 							<div id="slick-nav-2" class="products-slick-nav"></div>
 						</div>
@@ -451,7 +238,7 @@
 </div>
 <!-- /SECTION -->
 
-<!-- SECTION -->
+{{!-- <!-- SECTION -->
 <div class="section">
 	<!-- container -->
 	<div class="container">
@@ -743,4 +530,4 @@
 	</div>
 	<!-- /container -->
 </div>
-<!-- /SECTION -->
+<!-- /SECTION --> --}}

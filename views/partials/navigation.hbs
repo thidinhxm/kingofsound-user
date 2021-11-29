@@ -20,3 +20,11 @@
 	<!-- /container -->
 </nav>
 <!-- /NAVIGATION -->
+
+<script>
+	$('.main-nav').on('click', 'li', function() {
+		$('.main-nav li.active').removeClass('active');
+		$(this).addClass('active');
+		console.log(this)
+	});
+</script>

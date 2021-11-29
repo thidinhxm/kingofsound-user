@@ -28,7 +28,6 @@ exports.getAll = (query) => {
     }
     if(query.brands) {
         const brands = query.brands.split(',');
-        console.log(brands);
         option.where.brand_id = {
             [Op.or]: brands
         }
@@ -55,3 +54,61 @@ exports.getOne = (id) => {
         raw : true
     });
 }
+
+exports.getNewProducts = () => {
+    return models.products.findAll({
+        limit : 10,
+        order : [
+            ['model_year', 'DESC']
+        ],
+        include : [{
+            model : models.images,
+            as : 'images',
+            where : {
+                image_stt: 1
+            },
+        }],
+        raw : true
+    });
+}
+
+exports.getHotProducts = () => {
+    return models.products.findAll({
+        limit : 10,
+        order : [
+            ['model_year']
+        ],
+        include : [{
+            model : models.images,
+            as : 'images',
+            where : {
+                image_stt: 1
+            },
+        }],
+        raw : true
+    });
+}
+
+exports.getSimilarProducts = (category_id, brand_id) => {
+    return models.products.findAll({
+        limit : 10,
+        where : {
+            [Op.or] : [
+                { category_id : category_id },
+                { brand_id : brand_id },
+            ],
+        },
+        order : [
+            ['model_year', 'DESC']
+        ],
+        include : [{
+            model : models.images,
+            as : 'images',
+            where : {
+                image_stt: 1
+            },
+        }],
+        raw : true
+    });
+}
+

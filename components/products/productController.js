@@ -19,7 +19,6 @@ exports.getAll = async (req, res, next) => {
         }
         const categories = await categoryService.getAll();
         const brands = await brandService.getAll();
-        console.log(brands);
         res.render('../components/products/productViews/productList', {
             products: products.rows,
             categories, 
@@ -41,7 +40,9 @@ exports.getOne = async (req, res, next) => {
         product.categories.parent_category_name = product.categories['parent_category_category.category_name']
         delete product.categories['parent_category_category.category_name']
         
-        res.render('../components/products/productViews/productDetail', {product});
+        const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id);
+        
+        res.render('../components/products/productViews/productDetail', {product, similarProducts});
     } 
     catch(err) {
         next(err);
