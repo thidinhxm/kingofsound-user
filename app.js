@@ -6,9 +6,9 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const hbs = require('hbs');
 const paginateHelper = require('express-handlebars-paginate')
-const indexRouter = require('./components/home/index');
+const indexRouter = require('./components/home/indexRouter');
 const productRouter = require('./components/products/productRouter')
-const productHelper = require('./components/products/productHelper');
+const reviewHelper = require('./components/reviews/reviewHelper');
 const app = express();
 
 
@@ -19,7 +19,7 @@ app.set('view engine', 'hbs');
 // register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
 hbs.registerHelper('paginate', paginateHelper.createPagination);
-hbs.registerHelper('createRating', productHelper.createRating);
+hbs.registerHelper('createRating', reviewHelper.createRating);
 
 
 app.use(logger('dev'));

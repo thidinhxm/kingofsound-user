@@ -25,7 +25,7 @@ exports.getAverageRating = (reviews) => {
     }, 0) / reviews.length;
 }
 
-exports.createProductRating = async (product) => {
-    product.reviews = await this.getReviewsProduct(product.productid);
-    product.average_rating = this.getAverageRating(product.reviews);
-}
+// exports.createProductRating = async (product) => {
+//     product.reviews = await this.getReviewsProduct(product.productid);
+//     product.average_rating = this.getAverageRating(product.reviews);
+// }
