@@ -27,8 +27,9 @@ module.exports = function(sequelize, DataTypes) {
 			allowNull: false
 		},
 		isBlock: {
-			type: DataTypes.CHAR(3),
-			allowNull: true
+			type: DataTypes.BOOLEAN,
+			allowNull: false,
+			defaultValue: 0
 		}
 	}, {
 		sequelize,

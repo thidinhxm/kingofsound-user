@@ -37,8 +37,8 @@ module.exports = function(sequelize, DataTypes) {
 				unique: true,
 				using: "BTREE",
 				fields: [
-					{ name: "product_id" },
 					{ name: "user_id" },
+					{ name: "product_id" },
 				]
 			},
 			{
@@ -46,13 +46,6 @@ module.exports = function(sequelize, DataTypes) {
 				using: "BTREE",
 				fields: [
 					{ name: "product_id" },
-				]
-			},
-			{
-				name: "fk_user_review",
-				using: "BTREE",
-				fields: [
-					{ name: "user_id" },
 				]
 			},
 		]

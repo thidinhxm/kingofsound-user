@@ -11,4 +11,17 @@ exports.index = async (req, res, next) => {
     }
 }
 
+exports.login = (req, res) => {
+    res.render('../components/home/homeViews/login');
+}
+
+exports.register = (req, res) => {
+    res.render('../components/home/homeViews/register');
+}
+
+exports.checkout = (req, res) => {
+    res.render('../components/home/homeViews/checkout');
+}
+
+
 

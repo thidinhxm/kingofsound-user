@@ -2450,3 +2450,9 @@ button:focus {
 #contactForm {
   padding-bottom: 114px;
 }
+
+.descriptions {
+  line-height: 2;
+  font-size: 16px;
+  font-weight: 500;
+}
