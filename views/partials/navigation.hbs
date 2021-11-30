@@ -6,7 +6,7 @@
 		<div id="responsive-nav">
 			<!-- NAV -->
 			<ul class="main-nav nav navbar-nav">
-				<li class="active"><a href="/">Trang chủ</a></li>
+				<li><a href="/">Trang chủ</a></li>
 				<li><a href="/products">Sản phẩm</a></li>
 				<li><a href="#">Loa</a></li>
 				<li><a href="#">Tai nghe</a></li>
@@ -22,9 +22,17 @@
 <!-- /NAVIGATION -->
 
 <script>
-	$('.main-nav').on('click', 'li', function() {
-		$('.main-nav li.active').removeClass('active');
-		$(this).addClass('active');
-		console.log(this)
+	$(document).ready(function(){
+		const current_page_URL = location.href;
+		$( "a" ).each(function() {
+			if ($(this).attr("href") !== "#") {
+				let target_URL = $(this).prop("href");
+				if (target_URL == current_page_URL) {
+					$('nav a').parents('li, ul').removeClass('active');
+					$(this).parent('li').addClass('active');
+					return false;
+				}
+			}
+		});
 	});
 </script>

@@ -36,13 +36,9 @@
 					<h2 class="product-name">{{product_name}}</h2>
 					<div>
 						<div class="product-rating">
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star"></i>
-							<i class="fa fa-star-o"></i>
+							{{{createRating average_rating}}}
 						</div>
-						<a class="review-link" href="#">10 Lượt đánh giá | Thêm đánh giá</a>
+						<a class="review-link" href="#">{{reviews.length}} Lượt đánh giá | Thêm đánh giá</a>
 					</div>
 					<div>
 						<h3 class="product-price">{{price}} VND</h3>
@@ -113,8 +109,8 @@
 					<!-- product tab nav -->
 					<ul class="tab-nav">
 						<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
-						<li><a data-toggle="tab" href="#tab2">Chi tiết</a></li>
-						<li><a data-toggle="tab" href="#tab3">Đánh giá (3)</a></li>
+						<li><a data-toggle="tab" href="#tab2">Đánh giá ({{reviews.length}})</a></li>
+						<li><a data-toggle="tab" href="#tab3">Chi tiết</a></li>
 					</ul>
 					<!-- /product tab nav -->
 
@@ -132,18 +128,10 @@
 						</div>
 						<!-- /tab1  -->
 
+						
+
 						<!-- tab2  -->
 						<div id="tab2" class="tab-pane fade in">
-							<div class="row">
-								<div class="col-md-12">
-									<p>Mô tả sản phẩm chi tiết.</p>
-								</div>
-							</div>
-						</div>
-						<!-- /tab2  -->
-
-						<!-- tab3  -->
-						<div id="tab3" class="tab-pane fade in">
 							<div class="row">
 								<!-- Rating -->
 								<div class="col-md-3">
@@ -233,54 +221,20 @@
 								<div class="col-md-6">
 									<div id="reviews">
 										<ul class="reviews">
+											{{#each reviews}}
 											<li>
 												<div class="review-heading">
-													<h5 class="name">Người dùng</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
+													<h5 class="name">{{'user.user_name'}}</h5>
+													{{!-- <p class="date">27 DEC 2018, 8:0 PM</p> --}}
 													<div class="review-rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
+														{{{createRating rating}}}
 													</div>
 												</div>
 												<div class="review-body">
-													<p>Comment của sản phẩm</p>
+													<p>{{review}}</p>
 												</div>
 											</li>
-											<li>
-												<div class="review-heading">
-													<h5 class="name">Người dùng</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
-													<div class="review-rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
-													</div>
-												</div>
-												<div class="review-body">
-													<p>Comment của sản phẩm</p>
-												</div>
-											</li>
-											<li>
-												<div class="review-heading">
-													<h5 class="name">Người dùng</h5>
-													<p class="date">27 DEC 2018, 8:0 PM</p>
-													<div class="review-rating">
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star"></i>
-														<i class="fa fa-star-o empty"></i>
-													</div>
-												</div>
-												<div class="review-body">
-													<p>Comment của sản phẩm</p>
-												</div>
-											</li>
+											{{/each}}
 										</ul>
 										<ul class="reviews-pagination">
 											<li class="active">1</li>
@@ -315,6 +269,16 @@
 									</div>
 								</div>
 								<!-- /Review Form -->
+							</div>
+						</div>
+						<!-- /tab2  -->
+
+						<!-- tab3  -->
+						<div id="tab3" class="tab-pane fade in">
+							<div class="row">
+								<div class="col-md-12">
+									<p>Mô tả sản phẩm chi tiết.</p>
+								</div>
 							</div>
 						</div>
 						<!-- /tab3  -->
@@ -361,15 +325,11 @@
 										</div>
 									</div>
 									<div class="product-body">
-										<p class="product-category">Loại</p>
+										{{!-- <p class="product-category">Loại</p> --}}
 										<h3 class="product-name"><a href="#">{{product_name}}</a></h3>
 										<h4 class="product-price">{{price}}</h4>
 										<div class="product-rating">
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star"></i>
-											<i class="fa fa-star-o"></i>
+											{{{createRating average_rating}}}
 										</div>
 										<div class="product-btns">
 											<button class="add-to-wishlist"><i class="fa fa-heart-o"></i><span class="tooltipp">Yêu thích</span></button>

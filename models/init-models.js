@@ -1,16 +1,16 @@
 var DataTypes = require("sequelize").DataTypes;
-var _brands = require("./brands");
-var _categories = require("./categories");
-var _comments = require("./comments");
-var _detailcarts = require("./detailcarts");
-var _detailorders = require("./detailorders");
-var _images = require("./images");
-var _orders = require("./orders");
-var _products = require("./products");
-var _reviews = require("./reviews");
-var _roles = require("./roles");
-var _user_roles = require("./user_roles");
-var _users = require("./users");
+var _brands = require("../components/brands/brandModel");
+var _categories = require("../components/categories/categoryModel");
+var _comments = require("../components/reviews/commentModel");
+var _detailcarts = require("../components/order/detailcartModel");
+var _detailorders = require("../components/order/detailorderModel");
+var _images = require("../components/products/imageModel");
+var _orders = require("../components/order/orderModel");
+var _products = require("../components/products/productModel");
+var _reviews = require("../components/reviews/reviewModel");
+var _roles = require("../components/users/roleModel");
+var _user_roles = require("../components/users/userRoleModel");
+var _users = require("../components/users/userModel");
 
 function initModels(sequelize) {
 	var brands = _brands(sequelize, DataTypes);

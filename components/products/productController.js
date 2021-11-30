@@ -1,6 +1,7 @@
 const productService = require('./productService');
 const categoryService = require('../categories/categoryService');
 const brandService = require('../brands/brandService');
+const reviewService = require('../reviews/reviewService');
 exports.getAll = async (req, res, next) => {
     try {
         req.query.page = Math.max(1, parseInt(req.query.page) || 1);
@@ -11,6 +12,12 @@ exports.getAll = async (req, res, next) => {
         req.query.brands = req.query.brands || '';
 
         const products = await productService.getAll(req.query);
+        
+        products.rows.forEach(async (product) => {
+            product.reviews = await reviewService.getReviewsProduct(product.product_id);
+            product.average_rating = reviewService.getAverageRating(product.reviews);
+        });
+
         const pagination = {
             page: req.query.page,
             limit: req.query.limit,
@@ -19,11 +26,14 @@ exports.getAll = async (req, res, next) => {
         }
         const categories = await categoryService.getAll();
         const brands = await brandService.getAll();
+        const newProducts = await productService.getNewProducts(3);
+
         res.render('../components/products/productViews/productList', {
             products: products.rows,
             categories, 
             brands,
             pagination,
+            newProducts
         });
     } 
     catch(err) {
@@ -36,12 +46,20 @@ exports.getOne = async (req, res, next) => {
         const id = req.params.id;
         const product = await productService.getOne(id);
         product.images = await productService.getImagesProduct(id);
+        
         product.categories = await categoryService.getCategory(product.category_id);
         product.categories.parent_category_name = product.categories['parent_category_category.category_name']
         delete product.categories['parent_category_category.category_name']
         
-        const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id);
+        product.reviews = await reviewService.getReviewsProduct(id);
+        product.average_rating = reviewService.getAverageRating(product.reviews);
+        const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id, id);
         
+        similarProducts.forEach(async (product) => {
+            product.reviews = await reviewService.getReviewsProduct(product.product_id);
+            product.average_rating = reviewService.getAverageRating(product.reviews);
+        });
+
         res.render('../components/products/productViews/productDetail', {product, similarProducts});
     } 
     catch(err) {

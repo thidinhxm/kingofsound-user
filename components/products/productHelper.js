@@ -1,17 +1,13 @@
-exports.createRating = (rating) => {
-    return '<div class="rating-stars">' + 
-                '<i class="fa fa-star"></i>'.repeat(rating) + 
-                '<i class="fa fa-star-o"></i>'.repeat(5 - rating) +
-            '</div>';
+exports.createRating = (rating = 5) => {
+    return  '<i class="fa fa-star"></i>'.repeat(rating) + '<i class="fa fa-star-o"></i>'.repeat(5 - rating);
+           
 }
-exports.createAverageRating = (reviews) => {
-    return reviews.reduce((total, review) => total + review, 0) / reviews.length;
-}
+
 exports.createRatingList = (reviews) => {
     const stars = [5, 4, 3, 2, 1];
     const totalReviews = reviews.reduce((total, review) => total + review, 0);
     const averageRating = totalReviews / reviews.length;
-    
+    // '<div class="rating-stars">' + '</div>';
     return `<div id="rating">
         <div class="rating-avg">
             <span>${averageRating}</span>

@@ -154,7 +154,6 @@
 	// Price Slider
 	var priceSlider = document.getElementById('price-slider');
 	if (priceSlider) {
-		console.log(urlParams.get('min'))
 		noUiSlider.create(priceSlider, {
 			start: [urlParams.get('min'), urlParams.get('max')],
 			connect: true,
@@ -173,7 +172,7 @@
 		priceSlider.noUiSlider.on('end', function( values, handle ) {
 			const value = values[handle];
 			const keys = ['min', 'max'];
-			selectParam(keys[handle], value);
+			changePrice(keys[handle], value);
 		});
 	}
 

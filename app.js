@@ -8,6 +8,7 @@ const hbs = require('hbs');
 const paginateHelper = require('express-handlebars-paginate')
 const indexRouter = require('./components/home/index');
 const productRouter = require('./components/products/productRouter')
+const productHelper = require('./components/products/productHelper');
 const app = express();
 
 
@@ -18,6 +19,8 @@ app.set('view engine', 'hbs');
 // register partials
 hbs.registerPartials(path.join(__dirname, '/views/partials'));
 hbs.registerHelper('paginate', paginateHelper.createPagination);
+hbs.registerHelper('createRating', productHelper.createRating);
+
 
 app.use(logger('dev'));
 app.use(express.json());

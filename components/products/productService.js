@@ -1,7 +1,6 @@
 const {models} = require('../../models');
 const Op = require('sequelize').Op;
 
-
 exports.getAll = (query) => {
     const option = {
         offset: (query.page - 1) * query.limit,
@@ -9,7 +8,8 @@ exports.getAll = (query) => {
         where: {
             price: {
                 [Op.between]: [query.min * 1000, query.max * 1000]
-            }
+            },
+            isActive: 1
         },
         include : [{
             model : models.images,
@@ -46,21 +46,27 @@ exports.getImagesProduct = (id) => {
     });
 }
 
+
+
 exports.getOne = (id) => {
     return models.products.findOne({
         where : {
-            product_id : id
+            product_id : id,
+            isActive : 1
         },
         raw : true
     });
 }
 
-exports.getNewProducts = () => {
+exports.getNewProducts = (limit = 10) => {
     return models.products.findAll({
-        limit : 10,
+        limit : limit,
         order : [
             ['model_year', 'DESC']
         ],
+        where : {
+            isActive : 1
+        },
         include : [{
             model : models.images,
             as : 'images',
@@ -72,12 +78,15 @@ exports.getNewProducts = () => {
     });
 }
 
-exports.getHotProducts = () => {
+exports.getHotProducts = (limit = 10) => {
     return models.products.findAll({
-        limit : 10,
+        limit : limit,
         order : [
             ['model_year']
         ],
+        where : {
+            isActive : 1
+        },
         include : [{
             model : models.images,
             as : 'images',
@@ -89,14 +98,18 @@ exports.getHotProducts = () => {
     });
 }
 
-exports.getSimilarProducts = (category_id, brand_id) => {
+exports.getSimilarProducts = (category_id, brand_id, product_id, limit = 10) => {
     return models.products.findAll({
-        limit : 10,
+        limit : limit,
         where : {
             [Op.or] : [
                 { category_id : category_id },
                 { brand_id : brand_id },
             ],
+            product_id : {
+                [Op.ne] : product_id,
+            },
+            isActive : 1
         },
         order : [
             ['model_year', 'DESC']

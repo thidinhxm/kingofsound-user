@@ -1380,6 +1380,13 @@ textarea.input {
   display: block;
 }
 
+.store-pagination li.disabled {
+  color: #7d6c6d;
+  pointer-events: none;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
 .store-qty {
   margin-right: 30px;
   font-weight: 500;
@@ -2456,3 +2463,5 @@ button:focus {
   font-size: 16px;
   font-weight: 500;
 }
+
+
