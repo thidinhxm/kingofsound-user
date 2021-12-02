@@ -1,10 +1,9 @@
 const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
-// const paginate = require('express-paginate');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const hbs = require('hbs');
+const exphbs = require('express-handlebars');
 const paginateHelper = require('express-handlebars-paginate')
 const indexRouter = require('./components/home/indexRouter');
 const productRouter = require('./components/products/productRouter')
@@ -14,13 +13,15 @@ const app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
+app.engine('hbs', exphbs({
+	extname: 'hbs',
+	defaultLayout: 'layout',
+	helpers: {
+		paginate: paginateHelper.createPagination,
+		createRating: reviewHelper.createRating,
+	}
+}))
 app.set('view engine', 'hbs');
-
-// register partials
-hbs.registerPartials(path.join(__dirname, '/views/partials'));
-hbs.registerHelper('paginate', paginateHelper.createPagination);
-hbs.registerHelper('createRating', reviewHelper.createRating);
-
 
 app.use(logger('dev'));
 app.use(express.json());

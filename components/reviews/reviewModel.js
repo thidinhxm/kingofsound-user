@@ -26,6 +26,10 @@ module.exports = function(sequelize, DataTypes) {
 		review: {
 			type: DataTypes.TEXT,
 			allowNull: true
+		},
+		createat: {
+			type: DataTypes.DATEONLY,
+			allowNull: true
 		}
 	}, {
 		sequelize,

@@ -33,6 +33,10 @@ module.exports = function(sequelize, DataTypes) {
 				model: 'comments',
 				key: 'comment_id'
 			}
+		},
+		createat: {
+			type: DataTypes.DATEONLY,
+			allowNull: true
 		}
 	}, {
 		sequelize,
