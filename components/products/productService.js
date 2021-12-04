@@ -9,7 +9,7 @@ exports.getAll = (query) => {
             price: {
                 [Op.between]: [query.min * 1000, query.max * 1000]
             },
-            isActive: 1
+            is_active: 1
         },
         include : [{
             model : models.images,
@@ -52,7 +52,7 @@ exports.getOne = (id) => {
     return models.products.findOne({
         where : {
             product_id : id,
-            isActive : 1
+            is_active : 1
         },
         raw : true
     });
@@ -65,7 +65,7 @@ exports.getNewProducts = (limit = 10) => {
             ['model_year', 'DESC']
         ],
         where : {
-            isActive : 1
+            is_active : 1
         },
         include : [{
             model : models.images,
@@ -85,7 +85,7 @@ exports.getHotProducts = (limit = 10) => {
             ['model_year']
         ],
         where : {
-            isActive : 1
+            is_active : 1
         },
         include : [{
             model : models.images,
@@ -109,7 +109,7 @@ exports.getSimilarProducts = (category_id, brand_id, product_id, limit = 10) => 
             product_id : {
                 [Op.ne] : product_id,
             },
-            isActive : 1
+            is_active : 1
         },
         order : [
             ['model_year', 'DESC']

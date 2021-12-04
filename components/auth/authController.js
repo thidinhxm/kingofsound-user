@@ -12,7 +12,8 @@ exports.register = (req, res, next) => {
 exports.registerPost = async (req, res, next) => {
     try {
         const { 
-            fullname, 
+            firstname,
+            lastname, 
             email, 
             password, 
             address, 
@@ -37,11 +38,10 @@ exports.registerPost = async (req, res, next) => {
             });
             return;
         }
-        const user_id = email.split('@')[0].substr(0, 20);
 
-        await userService.createUser({
-            user_id: user_id, 
-            fullname: fullname, 
+        const user = await userService.createUser({
+            firstname: firstname, 
+            lastname: lastname,
             email: email, 
             address: address, 
             phone: phone, 
@@ -49,19 +49,12 @@ exports.registerPost = async (req, res, next) => {
         });
 
         await userService.createUserRole({
-            user_id: user_id,
-            role_id: 'KH'
+            user_id: user.user_id,
+            role_id: 3,
         });
 
         if (keepLoggedIn) {
-            req.session.user = {
-                user_id,
-                fullname,
-                email,
-                address,
-                phone,
-                password
-            }
+            req.session.user = user;
         }
         else {
             req.session.user = null;
