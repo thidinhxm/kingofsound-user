@@ -9,7 +9,7 @@ var _orders = require("../components/order/orderModel");
 var _products = require("../components/products/productModel");
 var _reviews = require("../components/reviews/reviewModel");
 var _roles = require("../components/users/roleModel");
-var _userroles = require("../components/users/userRolesModel");
+var _userroles = require("../components/users/userRoleModel");
 var _users = require("../components/users/userModel");
 
 function initModels(sequelize) {

@@ -1,4 +1,5 @@
 const userService = require('../users/userService');
+const passort = require('./passport');
 
 exports.login = (req, res, next) => {
     res.render('../components/auth/authViews/login');
@@ -21,7 +22,7 @@ exports.registerPost = async (req, res, next) => {
         } = req.body;
         
         
-        if (await userService.findByEmail(email)) {
+        if (await userService.getUserByEmail(email)) {
             res.render('../components/auth/authViews/register', {
                 message: 'Email đã tồn tại',
                 type: 'alert-danger'
@@ -39,12 +40,17 @@ exports.registerPost = async (req, res, next) => {
         const user_id = email.split('@')[0].substr(0, 20);
 
         await userService.createUser({
-            user_id, 
-            fullname, 
-            email, 
-            address, 
-            phone, 
-            password
+            user_id: user_id, 
+            fullname: fullname, 
+            email: email, 
+            address: address, 
+            phone: phone, 
+            password: password
+        });
+
+        await userService.createUserRole({
+            user_id: user_id,
+            role_id: 'KH'
         });
 
         if (keepLoggedIn) {
