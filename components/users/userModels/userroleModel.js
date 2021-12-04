@@ -1,6 +1,15 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('detailcarts', {
+  return sequelize.define('userroles', {
+    role_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      references: {
+        model: 'roles',
+        key: 'role_id'
+      }
+    },
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
@@ -9,23 +18,10 @@ module.exports = function(sequelize, DataTypes) {
         model: 'users',
         key: 'user_id'
       }
-    },
-    product_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'products',
-        key: 'product_id'
-      }
-    },
-    quantity: {
-      type: DataTypes.INTEGER,
-      allowNull: true
     }
   }, {
     sequelize,
-    tableName: 'detailcarts',
+    tableName: 'userroles',
     timestamps: false,
     indexes: [
       {
@@ -33,15 +29,15 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
+          { name: "role_id" },
           { name: "user_id" },
-          { name: "product_id" },
         ]
       },
       {
-        name: "fk_detailcarts_product_id",
+        name: "fk_userroles_user_id",
         using: "BTREE",
         fields: [
-          { name: "product_id" },
+          { name: "user_id" },
         ]
       },
     ]
