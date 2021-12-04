@@ -1,0 +1,56 @@
+<!--================Login Box Area =================-->
+<section class="login_box_area section-margin">
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-6">
+				<div class="login_box_img">
+					<div class="hover">
+						<h4>Bạn đã có tài khoản?</h4>
+						<a class="button button-account" href="/login">Đăng nhập ngay</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-6">
+				<div class="login_form_inner register_form_inner">
+					<h3>Tạo tài khoản</h3>
+					<form class="row login_form" action="/register" id="register_form" method="POST" >
+
+						{{#if message}}
+						<div class="col-md-12 form-group alert {{type}}">
+							<strong>{{message}}</strong>
+						</div>
+						{{/if}}
+						<div class="col-md-12 form-group">
+							<input type="text" class="form-control" id="fullname" name="fullname" placeholder="Họ và tên" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ và tên'" required>
+						</div>
+						<div class="col-md-12 form-group">
+							<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
+						</div>
+						<div class="col-md-12 form-group">
+							<input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Địa chỉ'" required>
+						</div>
+						<div class="col-md-12 form-group">
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại'" required>
+						</div>
+						<div class="col-md-12 form-group">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'" required>
+						</div>
+						<div class="col-md-12 form-group">
+							<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Xác nhận mật khẩu'" required>
+						</div>
+						<div class="col-md-12 form-group">
+							<div class="creat_account">
+								<input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
+								<label for="keepLoggedIn">Giữ đăng nhập</label>
+							</div>
+						</div>
+						<div class="col-md-12 form-group">
+							<button type="submit" value="submit" class="button button-register">Đăng ký</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!--================End Login Box Area =================-->

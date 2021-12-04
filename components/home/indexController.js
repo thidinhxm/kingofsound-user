@@ -11,7 +11,6 @@ exports.index = async (req, res, next) => {
 
         hotProducts.forEach(async (product) => {
             product.reviews = await reviewService.getReviewsProduct(product.product_id);
-            console.log(product.reviews);
             product.average_rating = reviewService.getAverageRating(product.reviews);
         });
 
@@ -22,13 +21,7 @@ exports.index = async (req, res, next) => {
     }
 }
 
-exports.login = (req, res) => {
-    res.render('../components/home/homeViews/login');
-}
 
-exports.register = (req, res) => {
-    res.render('../components/home/homeViews/register');
-}
 
 exports.checkout = (req, res) => {
     res.render('../components/home/homeViews/checkout');

@@ -13,17 +13,17 @@
 			<div class="col-lg-6">
 				<div class="login_form_inner">
 					<h3>Đăng nhập tài khoản</h3>
-					<form class="row login_form" action="#/" id="contactForm" >
+					<form class="row login_form" action="/login" id="contactForm" method="POST">
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="name" name="name" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'">
+							<input type="text" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="name" name="name" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
 						</div>
 						<div class="col-md-12 form-group">
 							<div class="creat_account">
-								<input type="checkbox" id="f-option2" name="selector">
-								<label for="f-option2">Giữ đăng nhập</label>
+								<input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
+								<label for="keepLoggedIn">Giữ đăng nhập</label>
 							</div>
 						</div>
 						<div class="col-md-12 form-group">
