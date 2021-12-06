@@ -1,5 +1,5 @@
 const userService = require('../users/userService');
-const passort = require('./passport');
+const passport = require('./passport');
 
 exports.login = (req, res, next) => {
     res.render('../components/auth/authViews/login');
@@ -49,8 +49,8 @@ exports.registerPost = async (req, res, next) => {
         });
 
         await userService.createUserRole({
-            user_id: user.user_id,
             role_id: 3,
+            user_id: user.user_id,
         });
 
         if (keepLoggedIn) {
@@ -64,4 +64,21 @@ exports.registerPost = async (req, res, next) => {
     catch (err) {
         next(err);
     }       
+}
+
+
+exports.loginPost = async (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    }), (req, res, next) => {
+        console.log('passport auth success');
+        if (req.user) {
+            res.redirect('/');
+        }
+        else {
+            res.redirect('/login');
+        }
+    };
 }
