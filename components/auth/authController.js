@@ -69,3 +69,8 @@ exports.registerPost = async (req, res, next) => {
         next(err);
     }       
 }
+
+exports.logout = (req, res, next) => {
+    req.logout();
+    res.redirect('/');
+}

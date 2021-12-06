@@ -5,11 +5,12 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const exphbs = require('express-handlebars');
 const paginateHelper = require('express-handlebars-paginate');
+const session = require('express-session');
+
 const reviewHelper = require('./components/reviews/reviewHelper');
 const indexRouter = require('./components/home/indexRouter');
 const productRouter = require('./components/products/productRouter');
 const authRouter = require('./components/auth/authRouter');
-const session = require('express-session');
 const passport = require('./components/auth/passport');
 const app = express();
 
