@@ -10,11 +10,18 @@
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
-              {{#if user}}
-                <li><a href="/profile"><i class="fa fa-user-o"></i>{{user.firstname}} {{user.lastname}} </a></li>
-              {{else}}
+                {{#if user}}
+                <div class="dropdown">
+                   <li><a href="/profile"><i class="fas fa-users-cog" style=" font-size: 15px;"></i>{{user.firstname}}{{user.lastname}} </a></li>
+                    <div class="dropdown-content">
+                        <a href="/profile">Tài khoản</a>
+                        <a href="#">Giỏ hàng</a>
+                        <a href="#">Đăng xuất</a>
+                    </div>
+                </div>
+                {{else}}
                 <li><a href="/login"><i class="fa fa-user-o"></i> Đăng nhập</a></li>
-              {{/if}}
+                {{/if}}
             </ul>
         </div>
     </div>
@@ -95,7 +102,7 @@
                                 </div>
                                 <div class="cart-btns">
                                     <a href="#">Xem giỏ hàng</a>
-                                    <a href="#">Thanh toán  <i class="fa fa-arrow-circle-right"></i></a>
+                                    <a href="#">Thanh toán <i class="fa fa-arrow-circle-right"></i></a>
                                 </div> --}}
                             </div>
                         </div>
