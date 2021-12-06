@@ -65,3 +65,20 @@ exports.registerPost = async (req, res, next) => {
         next(err);
     }       
 }
+
+
+exports.loginPost = async (req, res, next) => {
+    passport.authenticate('local', {
+        successRedirect: '/',
+        failureRedirect: '/login',
+        failureFlash: true
+    }), (req, res, next) => {
+        console.log('passport auth success');
+        if (req.user) {
+            res.redirect('/');
+        }
+        else {
+            res.redirect('/login');
+        }
+    };
+}
