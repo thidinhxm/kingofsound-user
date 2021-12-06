@@ -10,7 +10,6 @@ const indexRouter = require('./components/home/indexRouter');
 const productRouter = require('./components/products/productRouter');
 const authRouter = require('./components/auth/authRouter');
 const session = require('express-session');
-// const passport = require('passport');
 const passport = require('./components/auth/passport');
 const app = express();
 

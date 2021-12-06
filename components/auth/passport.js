@@ -12,11 +12,7 @@ passport.use(new LocalStrategy({
         if (!user) {
             return done(null, false, { message: 'Không tồn tại email này.' });
         }
-        // if (!validPassword(user, password)) {
-        //     return done(null, false, { message: 'Mật khẩu không đúng.' });
-        // }
-
-        if (password !== user.password) {
+        if (!validPassword(user, password)) {
             return done(null, false, { message: 'Mật khẩu không đúng.' });
         }
 
