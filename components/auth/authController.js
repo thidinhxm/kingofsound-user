@@ -1,5 +1,5 @@
 const userService = require('../users/userService');
-const passort = require('./passport');
+const passport = require('./passport');
 
 exports.login = (req, res, next) => {
     res.render('../components/auth/authViews/login');
@@ -49,8 +49,8 @@ exports.registerPost = async (req, res, next) => {
         });
 
         await userService.createUserRole({
-            user_id: user.user_id,
             role_id: 3,
+            user_id: user.user_id,
         });
 
         if (keepLoggedIn) {

@@ -20,5 +20,5 @@ exports.createUser = (user) => {
 }
 
 exports.createUserRole = (role) => {
-    return models.roles.create(role);
+    return models.userroles.create(role);
 }

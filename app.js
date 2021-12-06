@@ -10,8 +10,10 @@ const indexRouter = require('./components/home/indexRouter');
 const productRouter = require('./components/products/productRouter');
 const authRouter = require('./components/auth/authRouter');
 const session = require('express-session');
-const passport = require('passport');
+// const passport = require('passport');
+const passport = require('./components/auth/passport');
 const app = express();
+
 
 
 // view engine setup
@@ -31,17 +33,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+
 app.use(session({
-	secret: process.env.SESSION_SECRET_KEY,
+	secret: process.env.SESSION_SECRET,
 	resave: false,
 	saveUninitialized: false,
 	cookie: {
 		maxAge: 1000 * 60 * 60 * 24 * 7
 		}
 }));
-
 app.use(passport.initialize());
 app.use(passport.session());
+
+
 
 app.use(function(req, res, next) {
 	res.locals.user = req.user;
