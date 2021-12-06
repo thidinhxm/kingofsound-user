@@ -27,7 +27,7 @@ function validPassword(user, password) {
 }
 
 passport.serializeUser(function(user, done) {
-    done(null, {user_id: user.user_id, email: user.email});
+    done(null, user);
 });
 
 passport.deserializeUser(function(user, done) {

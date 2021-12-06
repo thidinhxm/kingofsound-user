@@ -67,6 +67,7 @@
 					<h3 class="aside-title">Bán chạy nhất</h3>
 
 					{{#each newProducts}}
+					<a href="/products/{{product_id}}">
 					<div class="product-widget">
 						<div class="product-img">
 							<img src="{{'images.image_link'}}" alt="trong">
@@ -77,6 +78,7 @@
 							<h4 class="product-price">{{price}} VNĐ</h4>
 						</div>
 					</div>
+					</a>
 					{{/each}}
 				</div>
 			</div>
@@ -115,6 +117,7 @@
 				<div class="row">
 					<!-- product -->
 					{{#each products}}
+					<a href="/products/{{product_id}}">
 					<div class="col-md-4 col-xs-6">
 						<div class="product">
 							<div class="product-img">
@@ -126,7 +129,7 @@
 							</div>
 							<div class="product-body">
 								<p class="product-category">{{'categories.category_name'}}</p>
-								<h3 class="product-name"><a href="#">{{product_name}}</a></h3>
+								<h3 class="product-name">{{product_name}}</h3>
 								<h4 class="product-price">{{price}} VNĐ</h4>
 								<div class="product-rating">
 									{{{createRating average_rating}}}
@@ -141,6 +144,7 @@
 							</div>
 						</div>
 					</div>
+					</a>
 					{{/each}}
 					<!-- /product -->
 				</div>

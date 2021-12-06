@@ -5,6 +5,10 @@ exports.login = (req, res, next) => {
     res.render('../components/auth/authViews/login');
 }
 
+exports.profile =  (req, res, next) => {
+    res.render('../components/auth/authViews/profile');
+}
+
 exports.register = (req, res, next) => {
     res.render('../components/auth/authViews/register');
 }

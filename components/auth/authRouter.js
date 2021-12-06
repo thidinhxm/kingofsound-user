@@ -5,10 +5,6 @@ const authController = require('./authController');
 
 router.get('/login', authController.login);
 
-router.get('/register', authController.register);
-
-router.post('/register', authController.registerPost);
-
 router.post('/login', passport.authenticate('local', {
     successRedirect: '/',
     failureRedirect: '/login?message=Invalid username or password',
@@ -22,5 +18,12 @@ router.post('/login', passport.authenticate('local', {
         res.redirect('/login');
     }
 });
+
+router.get('/profile', authController.profile);
+
+router.get('/register', authController.register);
+
+router.post('/register', authController.registerPost);
+
 
 module.exports = router;

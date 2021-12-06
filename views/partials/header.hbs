@@ -10,7 +10,11 @@
             </ul>
             <ul class="header-links pull-right">
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
+              {{#if user}}
+                <li><a href="/profile"><i class="fa fa-user-o"></i>{{user.firstname}} {{user.lastname}} </a></li>
+              {{else}}
                 <li><a href="/login"><i class="fa fa-user-o"></i> Đăng nhập</a></li>
+              {{/if}}
             </ul>
         </div>
     </div>
@@ -52,13 +56,6 @@
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Wishlist -->
-                        <div>
-                            <a href="#">
-                                <i class="fa fa-heart-o"></i>
-                                <span>Yêu thích</span>
-                                <div class="qty">0</div>
-                            </a>
-                        </div>
                         <!-- /Wishlist -->
 
                         <!-- Cart -->
@@ -105,12 +102,6 @@
                         <!-- /Cart -->
 
                         <!-- Menu Toogle -->
-                        <div class="menu-toggle">
-                            <a href="#">
-                                <i class="fa fa-bars"></i>
-                                <span>Menu</span>
-                            </a>
-                        </div>
                         <!-- /Menu Toogle -->
                     </div>
                 </div>
