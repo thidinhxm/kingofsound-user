@@ -14,6 +14,13 @@
 				<div class="login_form_inner">
 					<h3>Đăng nhập tài khoản</h3>
 					<form class="row login_form" action="/login" id="contactForm" method="POST">
+
+						{{#if message}}
+						<div class="col-md-12 form-group alert {{type}}">
+							<strong>{{message}}</strong>
+						</div>
+						{{/if}}
+						
 						<div class="col-md-12 form-group">
 							<input type="text" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
 						</div>

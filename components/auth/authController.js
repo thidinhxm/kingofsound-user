@@ -2,11 +2,7 @@ const userService = require('../users/userService');
 const passport = require('./passport');
 
 exports.login = (req, res, next) => {
-    res.render('../components/auth/authViews/login');
-}
-
-exports.profile =  (req, res, next) => {
-    res.render('../components/auth/authViews/profile');
+    res.render('../components/auth/authViews/login', {message: req.flash('error')[0], type: 'alert-danger'});
 }
 
 exports.register = (req, res, next) => {
@@ -74,3 +70,4 @@ exports.logout = (req, res, next) => {
     req.logout();
     res.redirect('/');
 }
+

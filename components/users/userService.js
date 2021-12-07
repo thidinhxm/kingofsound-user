@@ -3,7 +3,18 @@ const bcrypt = require('bcrypt');
 
 exports.getUserByEmail = (email) => {
     return models.users.findOne({
-        where: {email: email},
+        where: {
+            email: email,
+            is_blocked: false
+        },
+        // include: [{
+        //     model: models.userroles,
+        //     as: 'userroles',
+        //     attributes: [],
+        //     where: {
+        //         role_id: 3
+        //     },
+        // }],
         raw: true
     });
 }

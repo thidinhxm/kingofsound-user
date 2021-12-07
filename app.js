@@ -6,10 +6,12 @@ const logger = require('morgan');
 const exphbs = require('express-handlebars');
 const paginateHelper = require('express-handlebars-paginate');
 const session = require('express-session');
+const flash = require('connect-flash');
 
 const reviewHelper = require('./components/reviews/reviewHelper');
 const indexRouter = require('./components/home/indexRouter');
 const productRouter = require('./components/products/productRouter');
+const userRouter = require('./components/users/userRouter');
 const authRouter = require('./components/auth/authRouter');
 const passport = require('./components/auth/passport');
 const app = express();
@@ -45,7 +47,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-
+app.use(flash());
 
 
 app.use(function(req, res, next) {
@@ -56,6 +58,7 @@ app.use(function(req, res, next) {
 app.use('/', indexRouter);
 app.use('/', authRouter);
 app.use('/products', productRouter);
+app.use('/user', userRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));
