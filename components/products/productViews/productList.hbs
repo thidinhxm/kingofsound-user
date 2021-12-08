@@ -128,19 +128,19 @@
 								</div>
 							</div>
 							<div class="product-body">
-								<p class="product-category">{{'categories.category_name'}}</p>
-								<h3 class="product-name">{{product_name}}</h3>
-								<h4 class="product-price">{{price}} VNĐ</h4>
+								{{!-- <p class="product-category">Loại</p> --}}
+								<h3 class="product-name"><a href="/products/{{product_id}}">{{product_name}}</a></h3>
+								<h4 class="product-price">{{price}}</h4>
 								<div class="product-rating">
 									{{{createRating average_rating}}}
 								</div>
 								<div class="product-btns">
-									<button class="add-to-wishlist"><a href="#"><i class="far fa-heart"></i></a><span class="tooltipp">Yêu thích</span></button>
+									<button class="add-to-wishlist"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Thêm vào giỏ hàng</span></button>
 									<button class="quick-view"><a href="/products/{{product_id}}"><i class="fa fa-eye"></i></a><span class="tooltipp">Xem sản phẩm</span></button>
 								</div>
 							</div>
-							<div class="add-to-cart">
-								<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+							<div class="buy-now">
+								<button class="buy-now-btn">Mua ngay</button>
 							</div>
 						</div>
 					</div>
