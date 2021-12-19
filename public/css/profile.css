@@ -1,0 +1,93 @@
+.profile {
+    margin: 0;
+    padding-top: 40px;
+    color: #2e323c;
+    background: #d0d0d1;
+    position: relative;
+    height: 100%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 40px;
+}
+.profile .container
+{
+    width: 90%;
+}
+.profile .account-settings .user-profile {
+    margin: 0 0 1rem 0;
+    padding-bottom: 1rem;
+    text-align: center;
+}
+.profile .account-settings .user-profile .user-avatar {
+    margin: 0 0 1rem 0;
+}
+.profile .account-settings .user-profile .user-avatar img {
+    width: 150px;
+    height: 150px;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    border-radius: 100px;
+}
+.profile .account-settings .user-profile h5.user-name {
+    margin: 0 0 0.5rem 0;
+}
+.profile .account-settings .user-profile h6.user-email {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #a83816;
+}
+.profile .account-settings .about {
+    margin: 2rem 0 0 0;
+    text-align: center;
+}
+.profile .account-settings .about h5 {
+    margin: 0 0 15px 0;
+    color: #007ae1;
+}
+.profile .account-settings .about p {
+    font-size: 0.825rem;
+}
+.profile .form-control {
+    border:none;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    background: #ffffff;
+    color: #18191a;
+    pointer-events: none;
+}
+
+.profile .card {
+    background: #ffffff;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    border: 0;
+    margin-bottom: 1rem;
+    padding:15px;
+}
+.card-x
+{
+    background-color: #d0d0d1!important;
+}
+.profile .btn-secondary
+{
+    background-color: red;
+    color: white;
+}
+.profile .btn-secondary:hover
+{
+    background-color: blue;
+}
+.profile .edit-profile .form-control
+{
+    pointer-events: all;
+    border: 1px solid black;
+}
+.edit-profile 
+{
+    display:block;
+}

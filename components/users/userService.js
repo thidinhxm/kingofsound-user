@@ -33,3 +33,10 @@ exports.createUser = (user) => {
 exports.createUserRole = (role) => {
     return models.userroles.create(role);
 }
+
+exports.getCart = (id) =>
+{
+    return models.detailcarts.findAll({
+        raw:true
+    })
+}

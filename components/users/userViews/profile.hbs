@@ -1,73 +1,79 @@
-<div class="container emp-profile">
-    <form method="post">
-        <div class="row">
-            <div class="col-md-4">
-                <div class="profile-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog"
-                        alt="" />
-                    <div class="file btn btn-lg btn-primary">
-                        Đổi ảnh đại diện
-                        <input type="file" name="file" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-
-                <div id="home" role="tabpanel" aria-labelledby="home-tab">
-                    <div class="row">
-                        <div class = "row">
-                            <div class="col-md-8">
-                            <div class="profile-head">
-                                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                                    <li class="nav-item">
-                                        <h3>Thông tin tài khoản</h3>
-                                    </li>
-                                </ul>
+<div class="profile">
+    <div class="container">
+        <div class="row gutters">
+            <div class="col-md-3 col-3">
+                <div class="card h-100 card-x">
+                    <div class="card-body">
+                        <div class="account-settings">
+                            <div class="user-profile">
+                                <div class="user-avatar">
+                                    <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Maxwell Admin">
+                                </div>
+                                <h5 class="user-name">{{user.firstname}} {{user.lastname}}</h5>
+                                <h6 class="user-email">{{user.email}}</h6>
                             </div>
                         </div>
-                        <div class="col-md-4">
-                           <button class="button button-edit-profile">Chỉnh sửa</button>
-                        </div>
-                        </div>
-                    </div>
-                    <div class ="about">
-                        <div class="row">
-                        <div class="col-md-4">
-                            <label>Họ Tên : </label>
-                        </div>
-                        <div class="col-md-8">
-                            <p>{{user.firstname}} {{user.lastname}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Email : </label>
-                        </div>
-                        <div class="col-md-8">
-                            <p>{{user.email}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Số điện thoại : </label>
-                        </div>
-                        <div class="col-md-8">
-                            <p>{{user.phone}}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-4">
-                            <label>Địa Chỉ : </label>
-                        </div>
-                        <div class="col-md-8">
-                            <p>{{user.address}}</p>
-                        </div>
-                    </div>
                     </div>
                 </div>
+            </div>
+            <div class="col-md-9 col-9">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <h6 class="mb-2 text-primary">Thông tin tài khoản</h6>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="firtname">Họ</label>
+                                    <input type="text" class="form-control" id="firstname" value="{{user.firstname}}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="lastname">Tên</label>
+                                    <input type="email" class="form-control" id="lastname" value="{{user.lastname}}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="Email">Email</label>
+                                    <input type="text" class="form-control" id="email" value="{{user.email}}">
+                                </div>
+                            </div>
+                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label for="phone">Điện thoại</label>
+                                    <input type="url" class="form-control" id="phone" value="{{user.phone}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label for="address">Đia chỉ</label>
+                                    <input type="name" class="form-control" id="address" value="{{user.address}}">
+                                </div>
+                            </div>
+                        </div>
 
-
+                        <div class=" row gutters">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <div class="text-right">
+                                    <a href="/" class="btn btn-secondary">
+                                        Quay lại</a>
+                                    <a href="/user/editprofile" class="btn btn-primary">
+                                        Chỉnh sửa
+                                    </a>
+                                    <a href="/user/changepassword" class="btn btn-primary">
+                                        Đổi mật khẩu
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </form>
+    </div>
 </div>
