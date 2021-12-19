@@ -49,10 +49,12 @@
       <tr>
         <th colspan="2">Đơn hàng của bạn</th>
       </tr>
+       {{#each detailCart}}
       <tr>
-        <td>Product Name x 2(Qty)</td>
-        <td class="tt">20.000.000</td>
+        <td>{{'product.product_name'}} x {{quantity}}(Qty)</td>
+        <td class="tt">{{'product.price'}}</td>
       </tr>
+       {{/each}}
       <tr>
         <td>Tổng tiền</td>
         <td class="tt">20.000.000</td>

@@ -1,4 +1,5 @@
 const {models} = require('../../models');
+const Op = require('sequelize').Op;
 const bcrypt = require('bcrypt');
 
 exports.getUserByEmail = (email) => {
@@ -37,6 +38,42 @@ exports.createUserRole = (role) => {
 exports.getCart = (id) =>
 {
     return models.detailcarts.findAll({
+        include:[{
+            model:models.products,
+            as:'product',
+            include:[
+               {
+                model:models.images,
+                as:'images',
+                where:{image_stt:1}
+               },
+               {
+                model:models.categories,
+                as:'category',
+               }
+            ]
+        }],
+        where:{
+            user_id:id
+        },
         raw:true
     })
+}
+exports.updateUser = (user) =>
+{
+    return models.users.update
+    ({
+        firstname:user.firstname,
+        lastname:user.lastname,
+        email:user.email,
+        phone:user.phone,
+        address:user.address
+    },
+   {
+    where:{
+        user_id:user.user_id
+    },
+    raw:true
+   }
+    )
 }

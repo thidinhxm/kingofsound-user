@@ -1,5 +1,5 @@
 <div class="profile">
-    <form method="GET" action="/user/editprofile">
+    <form method="PUT" action="/user/editprofile">
     <div class="container">
         <div class="row gutters">
             <div class="col-md-3 col-3">
@@ -56,7 +56,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="form-group">
                                         <label for="address">Đia chỉ</label>
-                                        <input type="name" class="form-control" name="address" value="{{user.address}}">
+                                        <input type="text" class="form-control" name="address" value="{{user.address}}">
                                     </div>
                                 </div>
                             </div>

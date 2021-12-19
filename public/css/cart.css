@@ -3,7 +3,7 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
 
 .cart html,
-html a {
+.cart html a {
   -webkit-font-smoothing: antialiased;
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004);
 }
@@ -216,8 +216,9 @@ li.subtotal:after {
 
 .basket-product {
   border-bottom: 1px solid #ccc;
-  padding: 1rem 0;
+  padding: 1rem 2rem;
   position: relative;
+  
 }
 
 .product-image {
@@ -360,4 +361,13 @@ li.subtotal:after {
     font-size: 20px;
     color: white;
     margin-bottom: 30px;
+}
+.empty-content
+{
+  display: inline-block;
+
+  margin-top: 20px!important;
+  color: orange;
+  font-size: 30px!important;
+  font-weight: bolder!important;
 }

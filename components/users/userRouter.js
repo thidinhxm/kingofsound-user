@@ -4,9 +4,11 @@ const userController = require('./userController');
 
 router.get('/', userController.isLogin, userController.profile);
 router.get('/profile', userController.isLogin, userController.profile);
-router.get('/cart/:user_id', userController.cart)
-router.get('/checkout/:user_id', userController.checkout)
+router.get('/cart/', userController.cart)
+router.get('/checkout/', userController.checkout)
 router.get('/editprofile', userController.editProfile)
 router.get('/changepassword', userController.changePassword)
+router.put('/editprofile', userController.updateUser);
+router.put('/changepassword', userController.updatePassword)
 
 module.exports = router;

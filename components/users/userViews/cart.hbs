@@ -13,42 +13,48 @@
         <li class="subtotal">Thành tiền</li>
       </ul>
     </div>
-{{#if detailCart}}
+    {{#if detailCart}}
     {{#each detailCart}}
     <div class="basket-product">
       <div class="item">
         <div class="product-image">
-          <img src="http://placehold.it/120x166" alt="Placholder Image 2" class="product-frame" height="120px"
-            width="120px">
+          <img src="{{'product.images.image_link'}}" alt="Placholder Image 2" class="product-frame" height="100px"
+            width="100px">
         </div>
         <div class="product-details">
-          <h1><strong><span class="item-quantity">{{quantity}}</span> x Eliza J</strong> Lace Sleeve Cuff Dress</h1>
-          <p><strong>Navy, Size 18</strong></p>
-          <p>Product Code - 232321939</p>
+          <h1><strong><span class="item-quantity">{{quantity}}</span> x {{'product.model_year'}}</strong></h1>
+          <p><strong>Loại : {{'product.category.category_name'}}</strong></p>
+          <p>Phiên bản - {{'product.model_year'}}</p>
         </div>
       </div>
-      <div class="price">5000000</div>
+      <div class="price">{{'product.price'}}</div>
       <div class="quantity">
         <input type="number" value="4" min="1" class="quantity-field">
       </div>
-      <div class="subtotal">20000000</div>
+      <div class="subtotal">{{total}}</div>
       <div class="remove">
         <button>Remove</button>
       </div>
     </div>
-    {{/each}}
+     {{/each}}
   </div>
+  {{else}}
+  <h1 class="empty-content">Giỏ hàng đang trống tiếp tục lựa chọn sản phẩm bạn thích và đặt hàng!</h1>
+  <br>
+  <hr>
+  {{/if}}
+  {{#if detailCart}}
   <div class="container order-exc">
     <div class="row">
       <div class="col-md-4">
       </div>
       <div class="col-md-6" class="final-total">
         <div class="total-value final-value">
-          <b class="total">Tổng tiền :</b> <i id="basket-total">20.000.000</i>
+          <b class="total">Tổng tiền :</b> <i id="basket-total">{{total}}</i>
         </div>
       </div>
       {{#if user}}
-      <a href="/user/checkout/{{user.user_id}}"><button class="promo-code-cta">Đặt hàng</a></button>
+      <a href="/user/checkout"><button class="promo-code-cta">Đặt hàng</a></button>
       {{else}}
       <a href="/login"><button class="promo-code-cta">Đặt hàng</a></button>
       {{/if}}
@@ -56,6 +62,4 @@
     </div>
   </div>
 </div>
-{{else}}
-<h1>Lựa chọn sản phẩm bạn thích và đặt hàng!</h1>
 {{/if}}
