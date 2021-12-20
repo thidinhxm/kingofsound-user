@@ -13,8 +13,8 @@
 			<div class="col-lg-6">
 				<div class="login_form_inner">
 					<h3>Đăng nhập tài khoản</h3>
-					<form class="row login_form" action="/login" id="contactForm" method="POST">
-
+					<form class="row login_form" action="/login" id="login_form" method="POST">
+						
 						{{#if message}}
 						<div class="col-md-12 form-group alert {{type}}">
 							<strong>{{message}}</strong>
@@ -26,12 +26,6 @@
 						</div>
 						<div class="col-md-12 form-group">
 							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
-						</div>
-						<div class="col-md-12 form-group">
-							<div class="creat_account">
-								<input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
-								<label for="keepLoggedIn">Giữ đăng nhập</label>
-							</div>
 						</div>
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit" class="button button-login">Đăng nhập</button>
