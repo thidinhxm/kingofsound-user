@@ -22,10 +22,3 @@ exports.index = async (req, res, next) => {
 }
 
 
-
-exports.checkout = (req, res) => {
-    res.render('../components/home/homeViews/checkout');
-}
-
-
-

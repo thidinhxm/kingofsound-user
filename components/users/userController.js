@@ -11,30 +11,7 @@ exports.isLogin = (req, res, next) => {
 exports.profile = (req, res) => {
     res.render('../components/users/userViews/profile')
 }
-exports.cart =  async(req, res) => {
-        const user = req.user;
-        const id = user.user_id;
-        let total = 0; 
-        const detailCart =  await userService.getCart(id);
-        for(const detail in detailCart)
-        {
-         total = total + detail.quantity * detail['product.price'];
-        }
-        res.render('../components/users/userViews/cart',{detailCart,total})
-        
 
-}
-exports.checkout = async (req, res) => {
-    const user = req.user;
-    const id = user.user_id; 
-    let total = 0;
-    const detailCart =  await userService.getCart(id);
-    for(const detail in detailCart)
-       {
-        total = total + detail.quantity * detail['product.price'];
-       }
-    res.render('../components/users/userViews/checkout', {detailCart, total})
-}
 exports.editProfile = (req, res) => {
     res.render('../components/users/userViews/editProfile')
 }

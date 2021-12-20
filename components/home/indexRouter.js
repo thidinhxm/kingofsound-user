@@ -5,8 +5,5 @@ const indexController = require('./indexController');
 /* GET home page. */
 router.get('/', indexController.index);
 
-router.get('/checkout', indexController.checkout);
-
-
 module.exports = router;
 
