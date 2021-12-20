@@ -1,9 +1,7 @@
 <div class="cart">
   <div class="basket">
-    <div class="basket-module">
-      <label for="promo-code">Mã giảm giá</label>
-      <input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-      <button class="promo-code-cta">Áp dụng</button>
+    <div class="order">
+        <h3 class ="title">Đơn hàng #{{order_id}}</h3>
     </div>
     <div class="basket-labels">
       <ul>
@@ -13,8 +11,7 @@
         <li class="subtotal">Thành tiền</li>
       </ul>
     </div>
-    {{#if detailCart}}
-    {{#each detailCart}}
+   {{#each detailOrder}}
     <div class="basket-product">
       <div class="item">
         <div class="product-image">
@@ -29,37 +26,25 @@
       </div>
       <div class="price">{{'product.price'}}</div>
       <div class="quantity">
-        <input type="number" value="4" min="1" class="quantity-field">
+        <input type="number" value="4" min="1" class="quantity-field" readonly>
       </div>
       <div class="subtotal">{{total}}</div>
-      <div class="remove">
-        <button>Remove</button>
-      </div>
+     2000000
     </div>
-     {{/each}}
+   {{/each}}
   </div>
-  {{else}}
-  <h1 class="empty-content">Giỏ hàng đang trống tiếp tục lựa chọn sản phẩm bạn thích và đặt hàng!</h1>
-  <br>
-  <hr>
-  {{/if}}
-  {{#if detailCart}}
   <div class="container order-exc">
     <div class="row">
+         <div class="col-md-2">
+              <a href="/order"><button class="promo-code-cta" style ="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay lại</a></button>
+      </div>
       <div class="col-md-4">
       </div>
       <div class="col-md-6" class="final-total">
         <div class="total-value final-value">
           <b class="total">Tổng tiền :</b> <i id="basket-total">{{total}}</i>
         </div>
-      </div>
-      {{#if user}}
-      <a href="/cart/checkout"><button class="promo-code-cta">Đặt hàng</a></button>
-      {{else}}
-      <a href="/login"><button class="promo-code-cta">Đặt hàng</a></button>
-      {{/if}}
-
+      </div>   
     </div>
   </div>
 </div>
-{{/if}}
