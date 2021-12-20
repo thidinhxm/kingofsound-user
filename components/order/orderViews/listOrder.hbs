@@ -22,20 +22,24 @@
 										<h4 class="nomargin">Hóa đơn #{{order_id    }}</h4>
 										<div class="row">
                                             <div class="col-md-5"><b>Ngày đặt:</b> </div>
-                                            <div class="col-md-6">{{order_date}}</div>
+                                            <div class="col-md-6">{{create_date}}</div>
                                         </div>
                                         <div class="row">
-                                            <div class="col-md-5"><b>Ngày nhận: </b></div>
+                                            <div class="col-md-5"><b>Ngày gửi: </b>{{send_date}}</div>
+                                            <div class="col-md-6">22/12/2021</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-5"><b>Ngày nhận: </b>{{receive_date}}</div>
                                             <div class="col-md-6">22/12/2021</div>
                                         </div>
 									</div>
 								</div>
 							</td>
-							<td data-th="total">{{order_total_price}}</td>
+							<td data-th="total">{{order_total}}</td>
 							<td data-th="status">
                                    {{order_status}}
 							</td>
-							<td data-th="payment-status">Chờ thanh toán</td>
+							<td data-th="payment-status">{{payment_status}}</td>
 							<td class="actions" data-th="">
 								<a href="/order/{{order_id}}"><button class="btn btn-info btn-sm"><i class="far fa-eye"></i></i></button></a>
 								<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>								

@@ -20,7 +20,7 @@ let total = 0;
 const detailCart =  await cartService.getCart(id);
 for(const detail in detailCart)
    {
-    total = total + detail.quantity * detail['product.price'];
+    total = total + detailCart.subtotal;
    }
 res.render('../components/cart/cartViews/checkout', {detailCart, total})
 }

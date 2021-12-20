@@ -7,11 +7,15 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    order_date: {
+    create_date: {
       type: DataTypes.DATEONLY,
       allowNull: true
     },
-    order_total_price: {
+    send_date: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    order_total: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
@@ -26,6 +30,23 @@ module.exports = function(sequelize, DataTypes) {
     order_status: {
       type: DataTypes.STRING(30),
       allowNull: true
+    },
+    payment_status: {
+      type: DataTypes.STRING(30),
+      allowNull: false,
+      defaultValue: "Chưa thanh toán"
+    },
+    receive_date: {
+      type: DataTypes.DATEONLY,
+      allowNull: true
+    },
+    receive_address: {
+      type: DataTypes.STRING(50),
+      allowNull: false
+    },
+    receive_phone: {
+      type: DataTypes.CHAR(11),
+      allowNull: false
     }
   }, {
     sequelize,
