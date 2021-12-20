@@ -8,5 +8,6 @@ exports.list = async (req, res) => {
 exports.detail = async (req, res) => {
     const order_id = req.params.order_id;
     const detailOrder = await orderSevice.detailOrder(order_id);
-    res.render('../components/order/orderViews/detailOrder',{detailOrder,order_id});
+    const order =  await orderSevice.order(order_id);
+    res.render('../components/order/orderViews/detailOrder',{detailOrder,order});
 }

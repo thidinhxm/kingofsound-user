@@ -37,3 +37,15 @@ exports.detailOrder= (id) =>
         }
     )
 }
+exports.order = (id) =>
+{
+    return models.orders.findOne(
+        {
+            where:
+            {
+                order_id:id
+            }
+            ,raw:true
+        }
+    )
+}

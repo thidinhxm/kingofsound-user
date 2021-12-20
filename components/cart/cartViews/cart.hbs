@@ -17,7 +17,8 @@
     {{#each detailCart}}
     <div class="basket-product">
       <div class="item">
-        <div class="product-image">
+        <a href="/products/{{'product.product_id'}}">
+          <div class="product-image">
           <img src="{{'product.images.image_link'}}" alt="Placholder Image 2" class="product-frame" height="100px"
             width="100px">
         </div>
@@ -26,6 +27,7 @@
           <p><strong>Loại : {{'product.category.category_name'}}</strong></p>
           <p>Phiên bản - {{'product.model_year'}}</p>
         </div>
+        </a>
       </div>
       <div class="price">{{'product.price'}}</div>
       <div class="quantity">
