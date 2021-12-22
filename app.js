@@ -7,6 +7,7 @@ const exphbs = require('express-handlebars');
 const paginateHelper = require('express-handlebars-paginate');
 const session = require('express-session');
 const flash = require('connect-flash');
+const {v4: uuidv4} = require('uuid');
 
 const reviewHelper = require('./components/reviews/reviewHelper');
 const indexRouter = require('./components/home/indexRouter');
@@ -16,6 +17,7 @@ const authRouter = require('./components/auth/authRouter');
 const cartRouter = require('./components/carts/cartRouter')
 const orderRouter = require('./components/orders/orderRouter')
 const passport = require('./components/auth/passport');
+const {getOrCreateCart} = require('./components/carts/cartController');
 const app = express();
 
 
@@ -53,7 +55,24 @@ app.use(flash());
 
 
 app.use(function(req, res, next) {
+	if (req.user) {
+		req.session.user_id = req.user.user_id;
+	}
+	else if (!req.session.user_id) {
+		req.session.user_id = uuidv4();
+	}
+	next();
+});
+
+app.use(async(req, res, next) => {
+	req.session.cart = await getOrCreateCart(req.session.user_id);
+	next();
+});
+
+app.use(function(req, res, next) {
 	res.locals.user = req.user;
+	res.locals.cart = req.session.cart;
+	console.log(res.locals.cart);
 	next();
 });
 

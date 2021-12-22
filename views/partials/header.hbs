@@ -15,7 +15,6 @@
                    <li><a href="/user/profile"><i class="far fa-user" style=" font-size: 15px;"></i>{{user.firstname}} {{user.lastname}} </a></li>
                     <div class="dropdown-content">
                         <a href="/user/profile">Tài khoản</a>
-                        <a href="/cart">Giỏ hàng</a>
                         <a href="/orders">Đơn hàng</a>
                         <a href="/logout">Đăng xuất</a>
                     </div>
@@ -69,7 +68,14 @@
                                 <a href="/cart">
                                 <i class="fa fa-shopping-cart"></i>
                                 <span>Giỏ hàng</span>
+
+                                {{#with cart}}
+                                {{#if detailCart}}
+                                <div class="qty">{{detailCart.length}}</div>
+                                {{else}}
                                 <div class="qty">0</div>
+                                {{/if}}
+                                {{/with}}
                                 </a>
                             </a>
                         </div>

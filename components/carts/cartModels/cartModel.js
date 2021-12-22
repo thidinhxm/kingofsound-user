@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     total_price: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false,
+      defaultValue: 0
     },
     created_at: {
       type: DataTypes.DATE,
