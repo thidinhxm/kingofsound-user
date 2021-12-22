@@ -7,13 +7,13 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'user_id'
-      }
+    name: {
+      type: DataTypes.STRING(60),
+      allowNull: false
+    },
+    email: {
+      type: DataTypes.STRING(50),
+      allowNull: false
     },
     product_id: {
       type: DataTypes.INTEGER,
@@ -36,8 +36,9 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     created_at: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
@@ -50,13 +51,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "comment_id" },
-        ]
-      },
-      {
-        name: "fk_comments_user_id",
-        using: "BTREE",
-        fields: [
-          { name: "user_id" },
         ]
       },
       {

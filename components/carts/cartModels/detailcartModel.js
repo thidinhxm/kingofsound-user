@@ -1,13 +1,13 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('detailcarts', {
-    user_id: {
+    cart_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
       primaryKey: true,
       references: {
-        model: 'users',
-        key: 'user_id'
+        model: 'carts',
+        key: 'cart_id'
       }
     },
     product_id: {
@@ -21,7 +21,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     quantity: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false,
+      defaultValue: 1
     },
     subtotal: {
       type: DataTypes.INTEGER,
@@ -38,7 +39,7 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "user_id" },
+          { name: "cart_id" },
           { name: "product_id" },
         ]
       },

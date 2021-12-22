@@ -7,15 +7,11 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    create_date: {
-      type: DataTypes.DATEONLY,
-      allowNull: true
-    },
     send_date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true
     },
-    order_total: {
+    total_price: {
       type: DataTypes.INTEGER,
       allowNull: true
     },
@@ -37,7 +33,7 @@ module.exports = function(sequelize, DataTypes) {
       defaultValue: "Chưa thanh toán"
     },
     receive_date: {
-      type: DataTypes.DATEONLY,
+      type: DataTypes.DATE,
       allowNull: true
     },
     receive_address: {
@@ -47,6 +43,19 @@ module.exports = function(sequelize, DataTypes) {
     receive_phone: {
       type: DataTypes.CHAR(11),
       allowNull: false
+    },
+    voucher: {
+      type: DataTypes.CHAR(10),
+      allowNull: true,
+      references: {
+        model: 'vouchers',
+        key: 'voucher_id'
+      }
+    },
+    created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
@@ -66,6 +75,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "user_id" },
+        ]
+      },
+      {
+        name: "fk_orders_voucher",
+        using: "BTREE",
+        fields: [
+          { name: "voucher" },
         ]
       },
     ]
