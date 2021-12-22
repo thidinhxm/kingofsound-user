@@ -13,21 +13,19 @@
 			<div class="col-lg-6">
 				<div class="login_form_inner">
 					<h3>Đăng nhập tài khoản</h3>
-					<form class="row login_form" action="/login" id="contactForm" method="POST">
+					<form class="row login_form" action="/login" id="login_form" method="POST">
 
-						
-						
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'">
+							<input type="text" class="form-control" id="email-login" name="email" placeholder="Email">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'">
+							<input type="password" class="form-control" id="password-login" name="password" placeholder="Mật khẩu">
 						</div>
 						<div class="col-md-12 form-group err-block">
 							<strong class="text-danger" id="error-login"></strong>
 						</div>
 						<div class="col-md-12 form-group">
-							<button type="submit" value="submit" class="button button-login">Đăng nhập</button>
+							<button type="submit" value="submit" class="button button-login" id="button-login">Đăng nhập</button>
 							<a href="#">Quên mật khẩu?</a>
 						</div>
 					</form>

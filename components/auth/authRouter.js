@@ -21,4 +21,6 @@ router.get('/logout', authController.logout);
 
 router.post('/api/check-exists-account', authAPI.checkExistsAccount);
 
+router.post('/api/check-user', authAPI.checkUser);
+
 module.exports = router;

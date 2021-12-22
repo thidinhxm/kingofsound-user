@@ -18,7 +18,7 @@ const checkInputRegister = function(email, password, comfirmPassword, firstname,
     if (!phoneRegex.test(phone)) {
         return 'Số điện thoại không hợp lệ';
     }
-    
+
     return null;
 }
 
@@ -63,3 +63,27 @@ $('#button-register').click(function(e) {
 });
 
 /*------------ AJAX LOGIN --------------*/
+$('#button-login').click(function(e) {
+    e.preventDefault();
+    const email = $('#email-login').val();
+    const password = $('#password-login').val();
+    
+    $.ajax({
+        url: '/api/check-user',
+        type: 'POST',
+        data: {
+            email: email,
+            password: password
+        },
+        success: function(data) {
+            if (data) {
+                $('#login_form').submit();
+                return true;
+            }
+            else {
+                $('#error-login').text('Email hoặc mật khẩu không đúng');
+                return false;
+            }
+        }
+    });
+});
