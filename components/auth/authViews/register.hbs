@@ -14,38 +14,32 @@
 				<div class="login_form_inner register_form_inner">
 					<h3>Tạo tài khoản</h3>
 					<form class="row login_form" action="/register" id="register_form" method="POST" >
-						{{#if message}}
-						<div class="col-md-12 form-group alert {{type}}">
-							<strong>{{message}}</strong>
-						</div>
-						{{/if}}
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="firstnam" name="firstname" placeholder="Họ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Họ'" required>
-							<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Tên" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Tên'" required>
+							<input type="email" class="form-control" id="email" name="email" placeholder="Email">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="email" class="form-control" id="email" name="email" placeholder="Email" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Email'" required>
+							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Địa chỉ'" required>
+							<input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Số điện thoại'" required>
+							<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Họ" >
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Mật khẩu'" required>
+							<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Tên">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Xác nhận mật khẩu'" required>
+							<input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
 						</div>
 						<div class="col-md-12 form-group">
-							<div class="creat_account">
-								<input type="checkbox" id="keepLoggedIn" name="keepLoggedIn">
-								<label for="keepLoggedIn">Giữ đăng nhập</label>
-							</div>
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại">
+						</div>
+						<div class="col-md-12 form-group err-block">
+							<strong class="text-danger" id="error-register"></strong>
 						</div>
 						<div class="col-md-12 form-group">
-							<button type="submit" value="submit" class="button button-register">Đăng ký</button>
+							<button type="submit" value="submit" class="button button-register" id="button-register">Đăng ký</button>
 						</div>
 					</form>
 				</div>

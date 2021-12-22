@@ -7,14 +7,23 @@ exports.getUserByEmail = (email) => {
             email: email,
             is_blocked: false
         },
-        // include: [{
-        //     model: models.userroles,
-        //     as: 'userroles',
-        //     attributes: [],
-        //     where: {
-        //         role_id: 3
-        //     },
-        // }],
+        include: [{
+            model: models.userroles,
+            as: 'userroles',
+            attributes: [],
+            where: {
+                role_id: 3
+            },
+        }],
+        raw: true
+    });
+}
+
+exports.getAccountByEmail = (email) => {
+    return models.users.findOne({
+        where: {
+            email: email,
+        },
         raw: true
     });
 }
