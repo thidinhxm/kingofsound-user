@@ -30,6 +30,9 @@ app.engine('hbs', exphbs({
 	helpers: {
 		paginate: paginateHelper.createPagination,
 		createRating: reviewHelper.createRating,
+		getNumberRating: reviewHelper.getNumberRating,
+		getPercentRating: reviewHelper.getPercentRating,
+		formatDateTime: reviewHelper.formatDateTime,
 	}
 }))
 app.set('view engine', 'hbs');

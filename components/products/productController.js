@@ -52,12 +52,12 @@ exports.getOne = async (req, res, next) => {
         await productService.updateViewProduct(id);
 
         product.reviews = await reviewService.getReviewsProduct(id);
-        product.average_rating = reviewService.getAverageRating(product.reviews);
+        product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
         const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id, id);
         
         similarProducts.forEach(async (product) => {
             product.reviews = await reviewService.getReviewsProduct(product.product_id);
-            product.average_rating = reviewService.getAverageRating(product.reviews);
+            product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
         });
 
         res.render('../components/products/productViews/productDetail', {product, similarProducts});

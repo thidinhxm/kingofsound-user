@@ -79,10 +79,10 @@
 
 					<ul class="product-links">
 						<li>Chia sẻ:</li>
-						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
-						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
-						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-						<li><a href="#"><i class="fa fa-envelope"></i></a></li>
+						<li><a href="#"><i class="fab fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fab fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fab fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fas fa-envelope"></i></a></li>
 					</ul>
 
 				</div>
@@ -97,7 +97,7 @@
 					<ul class="tab-nav">
 						<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
 						<li><a data-toggle="tab" href="#tab2">Đánh giá ({{reviews.length}})</a></li>
-						<li><a data-toggle="tab" href="#tab3">Chi tiết</a></li>
+						<li><a data-toggle="tab" href="#tab3">Bình luận (0)</a></li>
 					</ul>
 					<!-- /product tab nav -->
 
@@ -124,80 +124,56 @@
 								<div class="col-md-3">
 									<div id="rating">
 										<div class="rating-avg">
-											<span>4.5</span>
+											<span>{{average_rating}}</span>
 											<div class="rating-stars">
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star"></i>
-												<i class="fa fa-star-o"></i>
+												{{{createRating average_rating}}}
 											</div>
 										</div>
 										<ul class="rating">
 											<li>
 												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
+													{{{createRating 5}}}
 												</div>
 												<div class="rating-progress">
-													<div style="width: 80%;"></div>
+													<div style="width:{{getPercentRating reviews 5}}%"></div>
 												</div>
-												<span class="sum">3</span>
+												<span class="sum">{{getNumberRating reviews 5}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
+													{{{createRating 4}}}
 												</div>
 												<div class="rating-progress">
-													<div style="width: 60%;"></div>
+													<div style="width:{{getPercentRating reviews 4}}%"></div>
 												</div>
-												<span class="sum">2</span>
+												<span class="sum">{{getNumberRating reviews 4}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
+													{{{createRating 3}}}
 												</div>
 												<div class="rating-progress">
-													<div></div>
+													<div style="width:{{getPercentRating reviews 3}}%"></div>
 												</div>
-												<span class="sum">0</span>
+												<span class="sum">{{getNumberRating reviews 3}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
+													{{{createRating 2}}}
 												</div>
 												<div class="rating-progress">
-													<div></div>
+													<div style="width:{{getPercentRating reviews 2}}%"></div>
 												</div>
-												<span class="sum">0</span>
+												<span class="sum">{{getNumberRating reviews 2}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
-													<i class="fa fa-star"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
-													<i class="fa fa-star-o"></i>
+													{{{createRating 1}}}
 												</div>
 												<div class="rating-progress">
-													<div></div>
+													<div style="width:{{getPercentRating reviews 1}}%"></div>
 												</div>
-												<span class="sum">0</span>
+												<span class="sum">{{getNumberRating reviews 1}}</span>
 											</li>
 										</ul>
 									</div>
@@ -212,7 +188,7 @@
 											<li>
 												<div class="review-heading">
 													<h5 class="name">{{'user.lastname'}}</h5>
-													<p class="date">{{created_at}}</p>
+													<p class="date">{{formatDateTime created_at}}</p>
 													<div class="review-rating">
 														{{{createRating rating}}}
 													</div>
@@ -263,9 +239,58 @@
 						<!-- tab3  -->
 						<div id="tab3" class="tab-pane fade in">
 							<div class="row">
-								<div class="col-md-12">
-									<p>Mô tả sản phẩm chi tiết.</p>
+								<!-- Reviews -->
+								<div class="col-md-8">
+									<div id="reviews">
+										<ul class="reviews">
+											{{#each reviews}}
+											<li>
+												<div class="review-heading">
+													<h5 class="name">{{'user.lastname'}}</h5>
+													<p class="date">{{formatDateTime created_at}}</p>
+													<div class="review-rating">
+														{{{createRating rating}}}
+													</div>
+												</div>
+												<div class="review-body">
+													<p>{{review}}</p>
+												</div>
+											</li>
+											{{/each}}
+										</ul>
+										<ul class="reviews-pagination">
+											<li class="active">1</li>
+											<li><a href="#">2</a></li>
+											<li><a href="#">3</a></li>
+											<li><a href="#">4</a></li>
+											<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
+										</ul>
+									</div>
 								</div>
+								<!-- /Reviews -->
+
+								<!-- Comment Form -->
+								<div class="col-md-4">
+									<div id="review-form">
+										<form class="review-form">
+											<input class="input" type="text" placeholder="Tên của bạn">
+											<input class="input" type="email" placeholder="Email của bạn">
+											<textarea class="input" placeholder="Đánh giá của bạn"></textarea>
+											<div class="input-rating">
+												<span>Đánh giá của bạn: </span>
+												<div class="stars">
+													<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
+													<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
+													<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
+													<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
+													<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
+												</div>
+											</div>
+											<button class="primary-btn">Nộp</button>
+										</form>
+									</div>
+								</div>
+								<!-- /Comment Form -->
 							</div>
 						</div>
 						<!-- /tab3  -->

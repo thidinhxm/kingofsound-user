@@ -3,25 +3,17 @@ exports.createRating = (rating = 5) => {
            
 }
 
-exports.createRatingList = (reviews) => {
-    const stars = [5, 4, 3, 2, 1];
-    const totalReviews = reviews.reduce((total, review) => total + review, 0);
-    const averageRating = totalReviews / reviews.length;
-    // '<div class="rating-stars">' + '</div>';
-    return `<div id="rating">
-        <div class="rating-avg">
-            <span>${averageRating}</span>
-            ${this.createRating(parseInt(averageRating))}
-        </div>
-        <ul class="rating">
-            ${stars.map(star => {
-                return `<li>
-                    ${this.createRating(star)}
-                    <div class="rating-progress">
-                        <div style="width: ${totalReviews / reviews[star - 1] * 100}%;"></div>
-                    </div>
-                </li>`
-            })}
-        </ul>
-    </div>`;
+exports.getNumberRating = (reviews, rating) => {
+    return reviews.reduce((total, review) => total + (review.rating === rating ? 1 : 0), 0);
+}
+
+exports.getPercentRating = (reviews, rating) => {
+    const starCount = this.getNumberRating(reviews, rating);
+    const starPercentage = starCount / reviews.length;
+    return starPercentage * 100;
+}
+
+exports.formatDateTime = (timestamp) => {
+    const date = new Date(timestamp);
+    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
 }
