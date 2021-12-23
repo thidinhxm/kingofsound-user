@@ -1,5 +1,5 @@
 const {models} = require('../../models');
-const Op = require('sequelize').Op;
+const {Op, literal} = require('sequelize');
 
 exports.getAll = (query) => {
     const option = {
@@ -125,3 +125,12 @@ exports.getSimilarProducts = (category_id, brand_id, product_id, limit = 10) => 
     });
 }
 
+exports.updateViewProduct = (id) => {
+    return models.products.update({
+        number_of_views : literal('number_of_views + 1')
+    }, {
+        where : {
+            product_id : id
+        }
+    });
+}

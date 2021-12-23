@@ -48,9 +48,9 @@ exports.getOne = async (req, res, next) => {
         product.images = await productService.getImagesProduct(id);
         
         product.categories = await categoryService.getCategory(product.category_id);
-        product.categories.parent_category_name = product.categories['parent_category_category.category_name']
-        delete product.categories['parent_category_category.category_name']
         
+        await productService.updateViewProduct(id);
+
         product.reviews = await reviewService.getReviewsProduct(id);
         product.average_rating = reviewService.getAverageRating(product.reviews);
         const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id, id);

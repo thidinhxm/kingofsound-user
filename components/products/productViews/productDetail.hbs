@@ -38,34 +38,22 @@
 						<div class="product-rating">
 							{{{createRating average_rating}}}
 						</div>
-						<a class="review-link" href="#">{{reviews.length}} Lượt đánh giá | Thêm đánh giá</a>
+						<span class="review-link" href="#">{{reviews.length}} Lượt đánh giá</span>
+					</div>
+
+					<div>
+						<div class="product-views">
+							<i class="fa fa-eye"></i>
+							<span class="review-link">
+								{{number_of_views}} Lượt xem
+							</span>
+						</div>
+						
 					</div>
 					<div>
 						<h3 class="product-price">{{price}} VND</h3>
-						{{!-- <del class="product-old-price"></del> --}}
-						<span class="product-available">Sẵn có</span>
+						<span class="product-available">{{#if quantity}} Sẵn có {{else}} Hết hàng {{/if}}</span>
 					</div>
-					<p>{{descriptions}}</p>
-
-					<div class="product-options">
-						<label>
-							Kích thước
-							<select class="input-select">
-								<option value="0">M</option>
-								<option value="1">L</option>
-								<option value="2">XL</option>
-							</select>
-						</label>
-						<label>
-							Màu
-							<select class="input-select">
-								<option value="0">Đỏ</option>
-								<option value="0">Đen</option>
-								<option value="0">Bạc</option>
-							</select>
-						</label>
-					</div>
-
 					<div class="buy-now">
 						<div class="qty-label">
 							Số lượng
@@ -76,14 +64,10 @@
 							</div>
 						</div>
 						<div>
-							<button class="buy-now-btn"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+							<button class="add-to-cart" name="product_id" value="{{product_id}}"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 							<button class="buy-now-btn"></i>Mua ngay</button>
 						</div>
 					</div>
-
-					<ul class="product-btns">
-						<li><a href="#"><i class="far fa-heart"></i> Yêu thích</a></li>
-					</ul>
 
 					<ul class="product-links">
 						<li>Loại:</li>
@@ -335,7 +319,7 @@
 											{{{createRating average_rating}}}
 										</div>
 										<div class="product-btns">
-											<button class="add-to-cart"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Thêm vào giỏ hàng</span></button>
+											<button class="add-to-cart" name="product_id" value="{{product_id}}"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Thêm vào giỏ hàng</span></button>
 											<button class="quick-view"><a href="/products/{{product_id}}"><i class="fa fa-eye"></i></a><span class="tooltipp">Xem sản phẩm</span></button>
 										</div>
 									</div>
