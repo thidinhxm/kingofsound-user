@@ -12,7 +12,7 @@ exports.getOrCreateCart = async(user_id) => {
 }
 
 exports.index =  async(req, res) => {
-   const cart = req.session.cart;
+    const cart = req.session.cart;
     res.render('../components/carts/cartViews/cart', {cart});
 
 }

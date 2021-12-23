@@ -87,3 +87,27 @@ $('#button-login').click(function(e) {
         }
     });
 });
+
+
+/*------------ AJAX ADD-TO-CART --------------*/
+$('.add-to-cart').click(function(e) {
+    e.preventDefault();
+    const product_id = $(this).val();
+    $.ajax({
+        url: '/cart/api/add-to-cart',
+        type: 'POST',
+        data: {
+            product_id: product_id,
+        },
+        success: function(data) {
+            if (data.success) {
+                $('#cart-product-quantity').text(data.cart.detailCart.length);
+                return true;
+            }
+            else {
+                $('#error-add-to-cart').text('Thêm vào giỏ hàng thất bại');
+                return false;
+            }
+        }
+    });
+});

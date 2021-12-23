@@ -47,3 +47,36 @@ exports.addToCart = (cart_id, product_id, quantity = 1) => {
         quantity: quantity
     })
 }
+
+exports.updateCart = async (cart_id, product_id, quantity = 1) => {
+    try {
+        const detailCart = await models.detailcarts.findOne({
+            where: {
+                cart_id: cart_id,
+                product_id: product_id
+            },
+            raw: true
+        })
+    
+        if (detailCart) {
+            await models.detailcarts.update({
+                quantity: detailCart.quantity + quantity,
+            }, {
+                where: {
+                    cart_id: cart_id,
+                    product_id: product_id
+                }
+            })
+        }
+        else {
+            await models.detailcarts.create({
+                cart_id: cart_id,
+                product_id: product_id,
+                quantity: quantity
+            })
+        }
+    }
+    catch(err) {
+        throw err;
+    }  
+}

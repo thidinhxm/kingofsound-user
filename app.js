@@ -55,16 +55,15 @@ app.use(flash());
 
 
 app.use(function(req, res, next) {
-	if (req.user) {
-		req.session.user_id = req.user.user_id;
+	if (!req.session.unauth_id) {
+		req.session.unauth_id = uuidv4();
 	}
-	else if (!req.session.user_id) {
-		req.session.user_id = uuidv4();
-	}
+	req.session.user_id = req.user ? req.user.user_id : req.session.unauth_id;
+
 	next();
 });
 
-app.use(async(req, res, next) => {
+app.use(async function(req, res, next) {
 	req.session.cart = await getOrCreateCart(req.session.user_id);
 	next();
 });
@@ -72,7 +71,6 @@ app.use(async(req, res, next) => {
 app.use(function(req, res, next) {
 	res.locals.user = req.user;
 	res.locals.cart = req.session.cart;
-	console.log(res.locals.cart);
 	next();
 });
 
