@@ -2,6 +2,7 @@ const productService = require('./productService');
 const categoryService = require('../categories/categoryService');
 const brandService = require('../brands/brandService');
 const reviewService = require('../reviews/reviewService');
+const commentService = require('../comments/commentService');
 exports.getAll = async (req, res, next) => {
     try {
         req.query.page = Math.max(1, parseInt(req.query.page) || 1);
@@ -51,7 +52,9 @@ exports.getOne = async (req, res, next) => {
         
         await productService.updateViewProduct(id);
 
+        product.comments = await commentService.getCommentsProduct(id);
         product.reviews = await reviewService.getReviewsProduct(id);
+        
         product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
         const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id, id);
         

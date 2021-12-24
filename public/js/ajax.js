@@ -111,3 +111,42 @@ $('.add-to-cart').click(function(e) {
         }
     });
 });
+
+
+/*------------ AJAX ADD COMMENT --------------*/
+$('#btn-add-comment').click(function(e) {
+    e.preventDefault();
+    const product_id = $(this).val();
+    const name = $('#name-comment').val();
+    const email = $('#email-comment').val();
+    const descriptions = $('#descriptions-comment').val();
+    const error = checkInputComment(name, email, content);
+    if (error != null) {
+        $('#error-add-comment').text(error);
+        return false;
+    }
+    $.ajax({
+        url: '/api/add-comment',
+        type: 'POST',
+        data: {
+            product_id: product_id,
+            name: name,
+            email: email,
+            content: content
+        },
+        success: function(data) {
+            if (data.success) {
+                $('#error-add-comment').text('');
+                $('#name-comment').val('');
+                $('#email-comment').val('');
+                $('#descriptions-comment').val('');
+                return true;
+            }
+            else {
+                $('#error-add-comment').text('Thêm bình luận thất bại');
+                return false;
+            }
+        }
+    });
+});
+        

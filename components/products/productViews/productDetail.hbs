@@ -1,3 +1,6 @@
+
+{{> header }}
+{{> navigation }}
 <!-- SECTION -->
 <div class="section">
 	<!-- container -->
@@ -97,7 +100,7 @@
 					<ul class="tab-nav">
 						<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
 						<li><a data-toggle="tab" href="#tab2">Đánh giá ({{reviews.length}})</a></li>
-						<li><a data-toggle="tab" href="#tab3">Bình luận (0)</a></li>
+						<li><a data-toggle="tab" href="#tab3">Bình luận ({{comments.length}})</a></li>
 					</ul>
 					<!-- /product tab nav -->
 
@@ -243,17 +246,14 @@
 								<div class="col-md-8">
 									<div id="reviews">
 										<ul class="reviews">
-											{{#each reviews}}
+											{{#each comments}}
 											<li>
 												<div class="review-heading">
-													<h5 class="name">{{'user.lastname'}}</h5>
+													<h5 class="name">{{name}}</h5>
 													<p class="date">{{formatDateTime created_at}}</p>
-													<div class="review-rating">
-														{{{createRating rating}}}
-													</div>
 												</div>
 												<div class="review-body">
-													<p>{{review}}</p>
+													<p>{{descriptions}}</p>
 												</div>
 											</li>
 											{{/each}}
@@ -273,20 +273,13 @@
 								<div class="col-md-4">
 									<div id="review-form">
 										<form class="review-form">
-											<input class="input" type="text" placeholder="Tên của bạn">
-											<input class="input" type="email" placeholder="Email của bạn">
-											<textarea class="input" placeholder="Đánh giá của bạn"></textarea>
-											<div class="input-rating">
-												<span>Đánh giá của bạn: </span>
-												<div class="stars">
-													<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-													<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-													<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-													<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-													<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-												</div>
+											<div class="err-block">
+												<span class="text-danger about" id="error-comment"></span>
 											</div>
-											<button class="primary-btn">Nộp</button>
+											<input class="input" type="text" placeholder="Tên của bạn" name="name" id="name-comment">
+											<input class="input" type="email" placeholder="Email của bạn" name="email" id="email-comment">
+											<textarea class="input" placeholder="Bình luận của bạn" name="descriptions" id="descriptions-comment"></textarea>
+											<button class="primary-btn" id="btn-add-comment" name="product_id" value="{{product_id}}">Nộp</button>
 										</form>
 									</div>
 								</div>
@@ -368,3 +361,5 @@
 	<!-- /container -->
 </div>
 <!-- /Section -->
+{{> newsletter}}
+{{> footer }}

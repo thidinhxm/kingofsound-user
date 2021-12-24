@@ -1,51 +1,56 @@
+
+{{> header }}
+{{> navigation }}
 <div class="cart">
-  <div class="basket">
-    <div class="order">
-        <h3 class ="title">Đơn hàng #{{order.order_id}}</h3>
-    </div>
-    <div class="basket-labels">
-      <ul>
-        <li class="item item-heading">Sản phẩm</li>
-        <li class="price">Đơn giá</li>
-        <li class="quantity">Số lượng</li>
-        <li class="subtotal">Thành tiền</li>
-      </ul>
-    </div>
-   {{#each detailOrder}}
-    <div class="basket-product">
-      <div class="item">
-        <a href="/products/{{'product.product_id'}}">
-        <div class="product-image">
-          <img src="{{'product.images.image_link'}}" alt="Placholder Image 2" class="product-frame" height="100px"
-            width="100px">
-        </div>
-        <div class="product-details">
-          <h1><strong><span class="item-quantity">{{quantity}}</span> x {{'product.product_name'}}</strong></h1>
-          <p><strong>Loại : {{'product.category.category_name'}}</strong></p>
-          <p>Phiên bản - {{'product.model_year'}}</p>
-        </div>
-        </a>
-      </div>
-      <div class="price">{{'product.price'}}</div>
-      <div class="quantity">
-        <input type="number" value="4" min="1" class="quantity-field" readonly>
-      </div>
-      <div class="subtotal">{{subtotal}}</div>
-    </div>
-   {{/each}}
-  </div>
-  <div class="container order-exc">
-    <div class="row">
-         <div class="col-md-2">
-              <a href="/order"><button class="promo-code-cta" style ="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay lại</a></button>
-      </div>
-      <div class="col-md-4">
-      </div>
-      <div class="col-md-6" class="final-total">
-        <div class="total-value final-value">
-          <b class="total">Tổng tiền :</b> <i id="basket-total">{{order.order_total}}</i>
-        </div>
-      </div>   
-    </div>
-  </div>
+	<div class="basket">
+		<div class="order">
+				<h3 class ="title">Đơn hàng #{{order.order_id}}</h3>
+		</div>
+		<div class="basket-labels">
+			<ul>
+				<li class="item item-heading">Sản phẩm</li>
+				<li class="price">Đơn giá</li>
+				<li class="quantity">Số lượng</li>
+				<li class="subtotal">Thành tiền</li>
+			</ul>
+		</div>
+	 {{#each detailOrder}}
+		<div class="basket-product">
+			<div class="item">
+				<a href="/products/{{'product.product_id'}}">
+				<div class="product-image">
+					<img src="{{'product.images.image_link'}}" alt="Placholder Image 2" class="product-frame" height="100px"
+						width="100px">
+				</div>
+				<div class="product-details">
+					<h1><strong><span class="item-quantity">{{quantity}}</span> x {{'product.product_name'}}</strong></h1>
+					<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
+					<p>Phiên bản - {{'product.model_year'}}</p>
+				</div>
+				</a>
+			</div>
+			<div class="price">{{'product.price'}}</div>
+			<div class="quantity">
+				<input type="number" value="4" min="1" class="quantity-field" readonly>
+			</div>
+			<div class="subtotal">{{subtotal}}</div>
+		</div>
+	 {{/each}}
+	</div>
+	<div class="container order-exc">
+		<div class="row">
+				 <div class="col-md-2">
+							<a href="/order"><button class="promo-code-cta" style ="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay lại</a></button>
+			</div>
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-6" class="final-total">
+				<div class="total-value final-value">
+					<b class="total">Tổng tiền :</b> <i id="basket-total">{{order.order_total}}</i>
+				</div>
+			</div>   
+		</div>
+	</div>
 </div>
+{{> newsletter}}
+{{> footer }}
