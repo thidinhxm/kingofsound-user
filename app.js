@@ -18,7 +18,7 @@ const cartRouter = require('./components/carts/cartRouter')
 const orderRouter = require('./components/orders/orderRouter')
 const commentRouter = require('./components/comments/commentRouter');
 const passport = require('./components/auth/passport');
-const {getOrCreateCart} = require('./components/carts/cartController');
+const {createCart, createUnauthUser, updateCartUnauthUser} = require('./components/carts/cartService');
 const app = express();
 
 
@@ -36,7 +36,9 @@ app.engine('hbs', exphbs({
 		formatDateTime: reviewHelper.formatDateTime,
 	}
 }))
+
 app.set('view engine', 'hbs');
+
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -57,24 +59,29 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-
-app.use(function(req, res, next) {
-	if (!req.session.unauth_id) {
-		req.session.unauth_id = uuidv4();
-	}
-	req.session.user_id = req.user ? req.user.user_id : req.session.unauth_id;
-
-	next();
-});
-
 app.use(async function(req, res, next) {
-	req.session.cart = await getOrCreateCart(req.session.user_id);
-	next();
+	try {
+		if (!req.user) {
+			if (!req.session.unauth_id) {
+				req.session.unauth_id = uuidv4();
+				req.session.cart = await createCart(null);
+				await createUnauthUser(req.session.unauth_id, req.session.cart.cart_id);
+			}
+			else if (!req.session.cart) {
+				req.session.cart = await createCart(null);
+				await updateCartUnauthUser(req.session.unauth_id, req.session.cart.cart_id);
+			}
+		}
+		next();
+	}
+	catch (err) {
+		next(err);
+	}
 });
 
 app.use(function(req, res, next) {
 	res.locals.user = req.user;
-	res.locals.cart = req.session.cart;
+	res.locals.cart = req.user ? req.user.cart : req.session.cart;
 	next();
 });
 

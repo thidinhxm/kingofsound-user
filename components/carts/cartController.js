@@ -1,19 +1,13 @@
 const cartService = require('./cartService');
 
-exports.getOrCreateCart = async(user_id) => {
-    let cart = await cartService.getCart(user_id);
-    if (!cart) {
-        cart = await cartService.createCart(user_id);
+exports.index =  async (req, res, next) => {
+    try {
+        const cart = req.session.cart;
+        res.render('../components/carts/cartViews/cart', {cart});
     }
-    else {
-        cart.detailCart = await cartService.getDetailCart(cart.cart_id);
+    catch(err) {
+        next(err);
     }
-    return cart;
-}
-
-exports.index =  async(req, res) => {
-    const cart = req.session.cart;
-    res.render('../components/carts/cartViews/cart', {cart});
 
 }
 

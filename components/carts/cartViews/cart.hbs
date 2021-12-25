@@ -1,76 +1,142 @@
 
 {{> header }}
 {{> navigation }}
-<div class="cart">
-	<div class="basket">
-		<div class="basket-module">
-			<label for="promo-code">Mã giảm giá</label>
-			<input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-			<button class="promo-code-cta">Áp dụng</button>
-		</div>
-		<div class="basket-labels">
-			<ul>
-				<li class="item item-heading ">Sản phẩm</li>
-				<li class="price">Đơn giá</li>
-				<li class="quantity">Số lượng</li>
-				<li class="subtotal">Thành tiền</li>
-			</ul>
-		</div>
+<div class="cart" id="cart-list">
+	{{#if cart}}
 		{{#with cart}}
-		{{#if detailCart}}
-		{{#each detailCart}}
-		<div class="basket-product">
-			<div class="item">
-				<a href="/products/{{'product.product_id'}}">
-					<div class="product-image">
-					<img src="{{'product.images.image_link'}}" alt="Placholder Image 2" class="product-frame" height="100px"
-						width="100px">
-				</div>
-				<div class="product-details">
-					<h1><strong><span class="item-quantity">{{quantity}}</span> x {{'product.product_name'}}</strong></h1>
-					<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
-					<p>Phiên bản - {{'product.model_year'}}</p>
-				</div>
-				</a>
+		{{#if products}}
+		<div class="basket">
+			<div class="basket-module">
+				<label for="promo-code">Mã giảm giá</label>
+				<input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+				<button class="promo-code-cta">Áp dụng</button>
 			</div>
-			<div class="price">{{'product.price'}}</div>
-			<div class="quantity">
-				<input type="number" value="{{quantity}}" min="1" class="quantity-field">
+			<div class="basket-labels">
+				<ul>
+					<li class="item item-heading ">Sản phẩm</li>
+					<li class="price">Đơn giá</li>
+					<li class="quantity">Số lượng</li>
+					<li class="subtotal">Thành tiền</li>
+				</ul>
 			</div>
-			<div class="subtotal">{{subtotal}}</div>
-			<div class="remove">
-				<button>Remove</button>
+			{{#each products}}
+			<div class="basket-product">
+				<div class="item">
+					<a href="/products/{{product_id}}">
+						<div class="product-image">
+						<img src="{{image}}" alt="Placholder Image 2" class="product-frame" height="100px"
+							width="100px">
+					</div>
+					<div class="product-details">
+						<h1><strong><span class="item-quantity">{{quantity}}</span> x {{product_name}}</strong></h1>
+						<p><strong>Loại : {{category_id}}</strong></p>
+						<p>Phiên bản - {{model_year}}</p>
+					</div>
+					</a>
+				</div>
+				<div class="price">{{price}}</div>
+				<div class="quantity">
+					<input type="number" value="{{quantity}}" min="1" class="quantity-field">
+				</div>
+				<div class="subtotal">{{subtotal}}</div>
+				<div class="remove">
+					<button class="remove-from-cart" onclick="removeFromCart({{product_id}})">Remove</button>
+				</div>
+			</div>
+			{{/each}}
+		</div>
+		<div class="container order-exc">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-6" class="final-total">
+					<div class="total-value final-value">
+						<b class="total">Tổng tiền :</b> <i id="basket-total">{{products.total}}</i>
+					</div>
+				</div>
+				{{#if user}}
+				<a href="/cart/checkout"><button class="promo-code-cta">Đặt hàng</a></button>
+				{{else}}
+				<a href="/login"><button class="promo-code-cta">Đặt hàng</a></button>
+				{{/if}}
 			</div>
 		</div>
-		 {{/each}}
-	</div>
-	{{else}}
-	<h1 class="empty-content text-center">Giỏ hàng đang trống tiếp tục lựa chọn sản phẩm bạn thích và đặt hàng!</h1>
-	<br>
-	<hr>
-	{{/if}}
-	{{/with}}
-
-	{{#if cart.detailCart}}
-	<div class="container order-exc">
-		<div class="row">
-			<div class="col-md-4">
-			</div>
-			<div class="col-md-6" class="final-total">
-				<div class="total-value final-value">
-					<b class="total">Tổng tiền :</b> <i id="basket-total">{{cart.total_price}}</i>
-				</div>
-			</div>
-			{{#if user}}
-			<a href="/cart/checkout"><button class="promo-code-cta">Đặt hàng</a></button>
-			{{else}}
-			<a href="/login"><button class="promo-code-cta">Đặt hàng</a></button>
-			{{/if}}
-
-		</div>
-	</div>
+		{{else}}
+		<h1 class="empty-content text-center">Giỏ hàng đang trống tiếp tục lựa chọn sản phẩm bạn thích và đặt hàng!</h1>
+		<br>
+		<hr>
+		{{/if}}
+		{{/with}}
+		{{/if}}
 </div>
-{{/if}}
+	<script type="text/x-handlebars-template" id="cart-list-template">
+		\{{#if cart}}
+		\{{#with cart}}
+		\{{#if products}}
+		<div class="basket">
+			<div class="basket-module">
+				<label for="promo-code">Mã giảm giá</label>
+				<input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+				<button class="promo-code-cta">Áp dụng</button>
+			</div>
+			<div class="basket-labels">
+				<ul>
+					<li class="item item-heading ">Sản phẩm</li>
+					<li class="price">Đơn giá</li>
+					<li class="quantity">Số lượng</li>
+					<li class="subtotal">Thành tiền</li>
+				</ul>
+			</div>
+			\{{#each products}}
+			<div class="basket-product">
+				<div class="item">
+					<a href="/products/\{{product_id}}">
+						<div class="product-image">
+						<img src="\{{image}}" alt="Placholder Image 2" class="product-frame" height="100px"
+							width="100px">
+					</div>
+					<div class="product-details">
+						<h1><strong><span class="item-quantity">\{{quantity}}</span> x \{{product_name}}</strong></h1>
+						<p><strong>Loại : \{{category_id}}</strong></p>
+						<p>Phiên bản - \{{model_year}}</p>
+					</div>
+					</a>
+				</div>
+				<div class="price">\{{price}}</div>
+				<div class="quantity">
+					<input type="number" value="\{{quantity}}" min="1" class="quantity-field">
+				</div>
+				<div class="subtotal">\{{subtotal}}</div>
+				<div class="remove">
+					<button class="remove-from-cart" onclick="removeFromCart(\{{product_id}})">Remove</button>
+				</div>
+			</div>
+			\{{/each}}
+		</div>
+		<div class="container order-exc">
+			<div class="row">
+				<div class="col-md-4">
+				</div>
+				<div class="col-md-6" class="final-total">
+					<div class="total-value final-value">
+						<b class="total">Tổng tiền :</b> <i id="basket-total">\{{products.total}}</i>
+					</div>
+				</div>
+				\{{#if user}}
+				<a href="/cart/checkout"><button class="promo-code-cta">Đặt hàng</a></button>
+				\{{else}}
+				<a href="/login"><button class="promo-code-cta">Đặt hàng</a></button>
+				\{{/if}}
+			</div>
+		</div>
+		\{{else}}
+		<h1 class="empty-content text-center">Giỏ hàng đang trống tiếp tục lựa chọn sản phẩm bạn thích và đặt hàng!</h1>
+		<br>
+		<hr>
+		\{{/if}}
+		\{{/with}}
+		\{{/if}}
+	</script>
 {{> newsletter}}
 {{> footer }}
 

@@ -23,17 +23,9 @@ module.exports = function(sequelize, DataTypes) {
         key: 'product_id'
       }
     },
-    descriptions: {
+    content: {
       type: DataTypes.TEXT,
       allowNull: true
-    },
-    parent_comment: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: 'comments',
-        key: 'comment_id'
-      }
     },
     created_at: {
       type: DataTypes.DATE,
@@ -58,13 +50,6 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "product_id" },
-        ]
-      },
-      {
-        name: "fk_comments_parent_comment",
-        using: "BTREE",
-        fields: [
-          { name: "parent_comment" },
         ]
       },
     ]

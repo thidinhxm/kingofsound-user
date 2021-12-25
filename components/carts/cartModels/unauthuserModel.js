@@ -1,28 +1,22 @@
 const Sequelize = require('sequelize');
 module.exports = function(sequelize, DataTypes) {
-  return sequelize.define('carts', {
-    cart_id: {
-      autoIncrement: true,
-      type: DataTypes.INTEGER,
+  return sequelize.define('unauthusers', {
+    unauth_id: {
+      type: DataTypes.CHAR(36),
       allowNull: false,
       primaryKey: true
     },
-    user_id: {
+    cart_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
       references: {
-        model: 'users',
-        key: 'user_id'
+        model: 'carts',
+        key: 'cart_id'
       }
-    },
-    created_at: {
-      type: DataTypes.DATE,
-      allowNull: false,
-      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
     }
   }, {
     sequelize,
-    tableName: 'carts',
+    tableName: 'unauthusers',
     timestamps: false,
     indexes: [
       {
@@ -30,14 +24,14 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         using: "BTREE",
         fields: [
-          { name: "cart_id" },
+          { name: "unauth_id" },
         ]
       },
       {
-        name: "fk_carts_user_id",
+        name: "fk_unauthusers_cart_id",
         using: "BTREE",
         fields: [
-          { name: "user_id" },
+          { name: "cart_id" },
         ]
       },
     ]

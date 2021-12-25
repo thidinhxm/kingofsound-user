@@ -101,17 +101,88 @@ $('.add-to-cart').click(function(e) {
         },
         success: function(data) {
             if (data.success) {
-                $('#cart-product-quantity').text(data.cart.detailCart.length);
+                $('#cart-product-quantity').text(data.cart.products.length);
                 return true;
             }
-            else {
-                $('#error-add-to-cart').text('Thêm vào giỏ hàng thất bại');
-                return false;
-            }
+            return false;
         }
     });
 });
 
+
+/*------------ AJAX REMOVE-FROM-CART --------------*/
+const removeFromCart = function(product_id) {
+    console.log(product_id);
+    $.ajax({
+        url: `/cart/${product_id}/delete`,
+        type: 'DELETE',
+        data: {
+            product_id: product_id,
+        },
+        success: function(data) {
+            if (data.success) {
+                let cartListTemplate = Handlebars.compile($('#cart-list-template').html());
+                $('#cart-list').html(cartListTemplate({cart: data.cart}));
+                console.log(data.cart);
+                $('#cart-product-quantity').text(data.cart.products.length);
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    });
+};
+   
+
+// $('.remove-from-cart').click(function(e) {
+//     e.preventDefault();
+//     const product_id = $(this).val();
+//     $.ajax({
+//         url: `/cart/${product_id}/delete`,
+//         type: 'DELETE',
+//         data: {
+//             product_id: product_id,
+//         },
+//         success: function(data) {
+//             if (data.success) {
+//                 let cartListTemplate = Handlebars.compile($('#cart-list-template').html());
+//                 $('#cart-list').html(cartListTemplate({cart: data.cart}));
+//                 console.log(data.cart);
+//                 $('#cart-product-quantity').text(data.cart.products.length);
+//                 return true;
+//             }
+//             else {
+//                 return false;
+//             }
+//         }
+//     });
+// });
+
+// /*------------ AJAX CHANGE-QUANTITY --------------*/
+// $('.change-quantity').click(function(e) {
+//     e.preventDefault();
+//     const product_id = $(this).val();
+//     const quantity = $(this).parent().find('.quantity').val();
+//     $.ajax({
+//         url: '/cart/api/change-quantity',
+//         type: 'POST',
+//         data: {
+//             product_id: product_id,
+//             quantity: quantity
+//         },
+//         success: function(data) {
+//             if (data.success) {
+//                 $('#cart-product-quantity').text(data.cart.detailCart.length);
+//                 return true;
+//             }
+//             else {
+//                 $('#error-change-quantity').text('Thay đổi số lượng thất bại');
+//                 return false;
+//             }
+//         }
+//     });
+// });
 
 /*------------ AJAX ADD COMMENT --------------*/
 $('#btn-add-comment').click(function(e) {

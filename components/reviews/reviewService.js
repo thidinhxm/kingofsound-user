@@ -2,7 +2,7 @@ const {models} = require('../../models');
 
 exports.getReviewsProduct = (product_id) => {
     return models.reviews.findAll({
-        attributes : ['review', 'rating', 'created_at'],
+        attributes : ['content', 'rating', 'created_at'],
         where : {
             product_id : product_id
         },

@@ -10,6 +10,7 @@ var _orders = require("../components/orders/orderModels/orderModel");
 var _products = require("../components/products/productModels/productModel");
 var _reviews = require("../components/reviews/reviewModel");
 var _roles = require("../components/users/userModels/roleModel");
+var _unauthusers = require("../components/carts/cartModels/unauthuserModel");
 var _userroles = require("../components/users/userModels/userroleModel");
 var _users = require("../components/users/userModels/userModel");
 var _vouchers = require("../components/vouchers/voucherModels/voucherModel");
@@ -26,6 +27,7 @@ function initModels(sequelize) {
   var products = _products(sequelize, DataTypes);
   var reviews = _reviews(sequelize, DataTypes);
   var roles = _roles(sequelize, DataTypes);
+  var unauthusers = _unauthusers(sequelize, DataTypes);
   var userroles = _userroles(sequelize, DataTypes);
   var users = _users(sequelize, DataTypes);
   var vouchers = _vouchers(sequelize, DataTypes);
@@ -40,12 +42,12 @@ function initModels(sequelize) {
   brands.hasMany(products, { as: "products", foreignKey: "brand_id"});
   detailcarts.belongsTo(carts, { as: "cart", foreignKey: "cart_id"});
   carts.hasMany(detailcarts, { as: "detailcarts", foreignKey: "cart_id"});
+  unauthusers.belongsTo(carts, { as: "cart", foreignKey: "cart_id"});
+  carts.hasMany(unauthusers, { as: "unauthusers", foreignKey: "cart_id"});
   categories.belongsTo(categories, { as: "parent_category_category", foreignKey: "parent_category"});
   categories.hasMany(categories, { as: "categories", foreignKey: "parent_category"});
   products.belongsTo(categories, { as: "category", foreignKey: "category_id"});
   categories.hasMany(products, { as: "products", foreignKey: "category_id"});
-  comments.belongsTo(comments, { as: "parent_comment_comment", foreignKey: "parent_comment"});
-  comments.hasMany(comments, { as: "comments", foreignKey: "parent_comment"});
   detailorders.belongsTo(orders, { as: "order", foreignKey: "order_id"});
   orders.hasMany(detailorders, { as: "detailorders", foreignKey: "order_id"});
   comments.belongsTo(products, { as: "product", foreignKey: "product_id"});
@@ -60,6 +62,8 @@ function initModels(sequelize) {
   products.hasMany(reviews, { as: "reviews", foreignKey: "product_id"});
   userroles.belongsTo(roles, { as: "role", foreignKey: "role_id"});
   roles.hasMany(userroles, { as: "userroles", foreignKey: "role_id"});
+  carts.belongsTo(users, { as: "user", foreignKey: "user_id"});
+  users.hasMany(carts, { as: "carts", foreignKey: "user_id"});
   orders.belongsTo(users, { as: "user", foreignKey: "user_id"});
   users.hasMany(orders, { as: "orders", foreignKey: "user_id"});
   reviews.belongsTo(users, { as: "user", foreignKey: "user_id"});
@@ -81,6 +85,7 @@ function initModels(sequelize) {
     products,
     reviews,
     roles,
+    unauthusers,
     userroles,
     users,
     vouchers,

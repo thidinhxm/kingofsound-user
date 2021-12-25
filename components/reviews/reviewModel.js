@@ -27,7 +27,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false
     },
-    review: {
+    content: {
       type: DataTypes.TEXT,
       allowNull: true
     },

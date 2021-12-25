@@ -8,4 +8,5 @@ router.get('/', cartController.index);
 // router.get('/checkout', cartController.checkout);
 
 router.post('/api/add-to-cart', cartAPI.addToCart);
+router.delete('/:id/delete', cartAPI.removeFromCart);
 module.exports = router;

@@ -1,20 +1,52 @@
-const {models} = require('../../models');
 const cartService = require('./cartService');
-const {getOrCreateCart} = require('./cartController');
 
 exports.addToCart = async (req, res, next) => {
     try {
         const {product_id} = req.body;
-        const cart_id = req.session.cart.cart_id;
-        await cartService.updateCart(cart_id, product_id);
-        req.session.cart = await getOrCreateCart(req.session.user_id);
-        console.log('cart', req.session.cart);
+        if (req.user) {
+            const cart_id = req.user.cart.cart_id;
+            await cartService.addToCart(cart_id, product_id);
+            req.user.cart = await cartService.getUserCart(req.user.user_id);
+        }
+        else {
+            const cart_id = req.session.cart.cart_id;
+            await cartService.addToCart(cart_id, product_id);
+            req.session.cart = await cartService.getUnauthCart(cart_id);
+
+        }
         res.json({
             success: true,
-            cart: req.session.cart
+            cart: req.user ? req.user.cart : req.session.cart
         })
     }
     catch(err) {
-        next(err);
+        res.json({
+            success: false,
+        })
+    }
+}
+
+exports.removeFromCart = async (req, res, next) => {
+    try {
+        const product_id = req.params.id;
+        if (req.user) {
+            const cart_id = req.user.cart.cart_id;
+            await cartService.removeFromCart(cart_id, product_id);
+            req.user.cart = await cartService.getUserCart(req.user.user_id);
+        }
+        else {
+            const cart_id = req.session.cart.cart_id;
+            await cartService.removeFromCart(cart_id, product_id);
+            req.session.cart = await cartService.getUnauthCart(cart_id);
+        }
+        res.json({
+            success: true,
+            cart: req.user ? req.user.cart : req.session.cart
+        })
+    }
+    catch(err) {
+        res.json({
+            success: false,
+        })
     }
 }

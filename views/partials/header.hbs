@@ -70,8 +70,8 @@
                                 <span>Giỏ hàng</span>
 
                                 {{#with cart}}
-                                {{#if detailCart}}
-                                <div class="qty" id="cart-product-quantity">{{detailCart.length}}</div>
+                                {{#if products}}
+                                <div class="qty" id="cart-product-quantity">{{products.length}}</div>
                                 {{else}}
                                 <div class="qty" id="cart-product-quantity">0</div>
                                 {{/if}}

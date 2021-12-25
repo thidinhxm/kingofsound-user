@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 
 const userService = require('../users/userService');
-const passport = require('./passport');
 
 exports.login = (req, res, next) => {
     res.render('../components/auth/authViews/login', {message: req.flash('error')[0], type: 'alert-danger'});
@@ -14,15 +13,9 @@ exports.register = (req, res, next) => {
 exports.registerPost = async (req, res, next) => {
     try {
         const { 
-            firstname,
-            lastname, 
-            email, 
-            password, 
-            address, 
-            phone, 
+            firstname, lastname, email, password, address, phone, 
         } = req.body;
         
-
         const user = await userService.createUser({
             firstname: firstname, 
             lastname: lastname,
