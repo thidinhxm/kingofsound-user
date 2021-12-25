@@ -49,14 +49,17 @@ exports.getDetailsInCart = async (cart_id) => {
                 raw: true
             });
             product.image = image.image_link;
-            return {...product, quantity: detail.quantity, subtotal: product.price * detail.quantity};
+            const priceString = product.price.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            const subtotal = detail.quantity * product.price;
+            const subtotalString = subtotal.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            return {...product, quantity: detail.quantity, subtotal, subtotalString, priceString};
         }));
         let total = 0;
         products.forEach(product => {
             total += product.quantity * product.price;
         });
-        products.total = total.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, '$&,').toString();
-        return products;
+        const totalString = total.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+        return {products, total, totalString};
     }
     catch (err) {
         throw err;
@@ -72,7 +75,10 @@ exports.getUserCart = async (user_id) => {
             raw: true
         });
     
-        cart.products = await this.getDetailsInCart(cart.cart_id);
+        const details = await this.getDetailsInCart(cart.cart_id);
+        cart.products = details.products;
+        cart.total = details.total;
+        cart.totalString = details.totalString;
         return cart;
     }
     catch(err) {
@@ -89,7 +95,10 @@ exports.getUnauthCart = async (unauth_cart_id) => {
             raw: true
         });
         
-        cart.products = await this.getDetailsInCart(cart.cart_id);
+        const details = await this.getDetailsInCart(cart.cart_id);
+        cart.products = details.products;
+        cart.total = details.total;
+        cart.totalString = details.totalString;
         return cart;
     }
     catch(err) {

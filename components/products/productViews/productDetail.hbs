@@ -67,7 +67,7 @@
 							</div>
 						</div>
 						<div>
-							<button class="add-to-cart" name="product_id" value="{{product_id}}"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+							<button class="add-to-cart" onclick="addToCart({{product_id}})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 							<button class="buy-now-btn"></i>Mua ngay</button>
 						</div>
 					</div>
@@ -337,7 +337,7 @@
 											{{{createRating average_rating}}}
 										</div>
 										<div class="product-btns">
-											<button class="add-to-cart" name="product_id" value="{{product_id}}"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Thêm vào giỏ hàng</span></button>
+											<button class="add-to-cart" onclick="addToCart({{product_id}})"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Thêm vào giỏ hàng</span></button>
 											<button class="quick-view"><a href="/products/{{product_id}}"><i class="fa fa-eye"></i></a><span class="tooltipp">Xem sản phẩm</span></button>
 										</div>
 									</div>

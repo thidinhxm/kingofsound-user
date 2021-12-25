@@ -7,6 +7,7 @@ router.get('/', cartController.index);
 
 // router.get('/checkout', cartController.checkout);
 
-router.post('/api/add-to-cart', cartAPI.addToCart);
+router.post('/add', cartAPI.addToCart);
 router.delete('/:id/delete', cartAPI.removeFromCart);
+router.patch('/:id/update', cartAPI.changeQuantity);
 module.exports = router;

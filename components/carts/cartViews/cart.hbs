@@ -34,11 +34,11 @@
 					</div>
 					</a>
 				</div>
-				<div class="price">{{price}}</div>
+				<div class="price">{{priceString}}</div>
 				<div class="quantity">
-					<input type="number" value="{{quantity}}" min="1" class="quantity-field">
+					<input type="number" value="{{quantity}}" min="1" class="quantity-field" onchange="changeQuantity({{product_id}}, this)">
 				</div>
-				<div class="subtotal">{{subtotal}}</div>
+				<div class="subtotal">{{subtotalString}}</div>
 				<div class="remove">
 					<button class="remove-from-cart" onclick="removeFromCart({{product_id}})">Remove</button>
 				</div>
@@ -51,7 +51,7 @@
 				</div>
 				<div class="col-md-6" class="final-total">
 					<div class="total-value final-value">
-						<b class="total">Tổng tiền :</b> <i id="basket-total">{{products.total}}</i>
+						<b class="total">Tổng tiền :</b> <i id="basket-total">{{totalString}}</i>
 					</div>
 				</div>
 				{{#if user}}
@@ -102,11 +102,11 @@
 					</div>
 					</a>
 				</div>
-				<div class="price">\{{price}}</div>
+				<div class="price">\{{priceString}}</div>
 				<div class="quantity">
-					<input type="number" value="\{{quantity}}" min="1" class="quantity-field">
+					<input type="number" value="\{{quantity}}" min="1" class="quantity-field" onchange="changeQuantity(\{{product_id}}, this)">
 				</div>
-				<div class="subtotal">\{{subtotal}}</div>
+				<div class="subtotal">\{{subtotalString}}</div>
 				<div class="remove">
 					<button class="remove-from-cart" onclick="removeFromCart(\{{product_id}})">Remove</button>
 				</div>
@@ -119,7 +119,7 @@
 				</div>
 				<div class="col-md-6" class="final-total">
 					<div class="total-value final-value">
-						<b class="total">Tổng tiền :</b> <i id="basket-total">\{{products.total}}</i>
+						<b class="total">Tổng tiền :</b> <i id="basket-total">\{{totalString}}</i>
 					</div>
 				</div>
 				\{{#if user}}
