@@ -13,7 +13,7 @@ exports.index = async (req, res, next) => {
             product.reviews = await reviewService.getReviewsProduct(product.product_id);
             product.average_rating = reviewService.getAverageRating(product.reviews);
         });
-
+        req.session.oldUrl = req.originalUrl;
         res.render('../components/home/homeViews/index', {newProducts, hotProducts});
     }
     catch (err) {

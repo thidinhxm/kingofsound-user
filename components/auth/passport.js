@@ -6,15 +6,14 @@ const userService = require('../users/userService');
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
-    passReqToCallback: true
-}, async (req, email, password, done) => {
+}, async (email, password, done) => {
     try {
         const user = await userService.getUserByEmail(email);
         if (!user) {
-            return done(null, false, req.flash('error', 'Không tồn tại email này'));
+            return done(null, false);
         }
         if (!validPassword(user, password)) {
-            return done(null, false, req.flash('error', 'Mật khẩu không đúng'));
+            return done(null, false);
         }
 
         return done(null, user);

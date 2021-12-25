@@ -28,7 +28,7 @@ exports.getAll = async (req, res, next) => {
         const categories = await categoryService.getAll();
         const brands = await brandService.getAll();
         const newProducts = await productService.getNewProducts(3);
-
+        req.session.oldUrl = req.originalUrl;
         res.render('../components/products/productViews/productList', {
             products: products.rows,
             categories, 
@@ -62,7 +62,7 @@ exports.getOne = async (req, res, next) => {
             product.reviews = await reviewService.getReviewsProduct(product.product_id);
             product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
         });
-
+        req.session.oldUrl = req.originalUrl;
         res.render('../components/products/productViews/productDetail', {product, similarProducts});
     } 
     catch(err) {

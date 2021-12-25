@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const userService = require('../users/userService');
+const cartService = require('../carts/cartService');
 
 exports.login = (req, res, next) => {
     res.render('../components/auth/authViews/login', {message: req.flash('error')[0], type: 'alert-danger'});
@@ -37,8 +38,9 @@ exports.registerPost = async (req, res, next) => {
     }       
 }
 
-exports.logout = (req, res, next) => {
+exports.logout = async (req, res, next) => {
     req.logout();
+    req.session.cart = await cartService.getUnauthCart(req.session.unauth_id);
     res.redirect('/');
 }
 

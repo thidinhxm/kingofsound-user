@@ -165,16 +165,18 @@ exports.moveToCartUser = async (user_cart_id, unauth_cart_id) => {
             },
             raw: true
         });
-
-        details.forEach(async (detail) => {
-            await this.addToCart(user_cart_id, detail.product_id, detail.quantity);
-        });
-
-        await models.detailcarts.destroy({
-            where: {
-                cart_id: unauth_cart_id
-            }
-        });
+        console.log(details);
+        if (details) {
+            details.forEach(async (detail) => {
+                await this.addToCart(user_cart_id, detail.product_id, detail.quantity);
+            });
+    
+            await models.detailcarts.destroy({
+                where: {
+                    cart_id: unauth_cart_id
+                }
+            });
+        }
 
     }
     catch(err) {
