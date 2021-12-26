@@ -16,7 +16,6 @@ const userRouter = require('./components/users/userRouter');
 const authRouter = require('./components/auth/authRouter');
 const cartRouter = require('./components/carts/cartRouter')
 const orderRouter = require('./components/orders/orderRouter')
-// const commentRouter = require('./components/comments/commentRouter');
 const passport = require('./components/auth/passport');
 const {createCart, createUnauthUser, updateCartUnauthUser} = require('./components/carts/cartService');
 const app = express();
@@ -81,7 +80,7 @@ app.use(async function(req, res, next) {
 
 app.use(function(req, res, next) {
 	res.locals.user = req.user;
-	res.locals.cart = req.user ? req.user.cart : req.session.cart;
+	res.locals.cart = req.session.cart;
 	next();
 });
 
@@ -90,7 +89,6 @@ app.use('/', authRouter);
 app.use('/products', productRouter);
 app.use('/user', userRouter);
 app.use('/cart', cartRouter);
-// app.use('/comments', commentRouter);
 app.use('/orders', orderRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

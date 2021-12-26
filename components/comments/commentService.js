@@ -12,12 +12,12 @@ exports.getComments =  async (id) => {
     });
 
     if (comments) {
-        comments.forEach(async (comment) => {
+        comments.forEach((comment) => {
             comment.created_at_string = formatDateTime(comment.created_at);
         });
     }
 
-    return comments
+    return comments;
 }
 
 exports.addComment =  (comment) => {

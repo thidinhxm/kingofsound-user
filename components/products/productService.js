@@ -1,39 +1,52 @@
 const {models} = require('../../models');
 const {Op, literal} = require('sequelize');
-
-exports.getAll = (query) => {
-    const option = {
-        offset: (query.page - 1) * query.limit,
-        limit: query.limit,
-        where: {
-            price: {
-                [Op.between]: [query.min * 1000, query.max * 1000]
+const reviewService = require('../reviews/reviewService');
+exports.getAll = async (query) => {
+    try {
+        const option = {
+            offset: (query.page - 1) * query.limit,
+            limit: query.limit,
+            where: {
+                price: {
+                    [Op.between]: [query.min * 1000, query.max * 1000]
+                },
+                is_active: 1
             },
-            is_active: 1
-        },
-        include : [{
-            model : models.images,
-            as : 'images',
-            where : {
-                image_stt: 1
-            },
-        }],
-        raw : true
-    }
-    if(query.categories) {
-        const categories = query.categories.split(',');
-        option.where.category_id = {
-            [Op.or]: categories
+            include : [{
+                model : models.images,
+                as : 'images',
+                where : {
+                    image_stt: 1
+                },
+            }],
+            raw : true
         }
-    }
-    if(query.brands) {
-        const brands = query.brands.split(',');
-        option.where.brand_id = {
-            [Op.or]: brands
+        if(query.categories) {
+            const categories = query.categories.split(',');
+            option.where.category_id = {
+                [Op.or]: categories
+            }
         }
+        if(query.brands) {
+            const brands = query.brands.split(',');
+            option.where.brand_id = {
+                [Op.or]: brands
+            }
+        }
+    
+        const products = await models.products.findAndCountAll(option);
+        if (products) {
+            products.rows.forEach(async (product) => {
+                    product.reviews = await reviewService.getReviewsProduct(product.product_id);
+                    product.average_rating = reviewService.getAverageRating(product.reviews);
+            });
+        }
+                
+        return products;
     }
-
-    return models.products.findAndCountAll(option);
+    catch(error) {
+        throw error;
+    }
 }
 
 exports.getImagesProduct = (id) => {

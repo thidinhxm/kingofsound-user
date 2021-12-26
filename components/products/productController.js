@@ -13,11 +13,6 @@ exports.getAll = async (req, res, next) => {
         req.query.brands = req.query.brands || '';
 
         const products = await productService.getAll(req.query);
-        
-        products.rows.forEach(async (product) => {
-            product.reviews = await reviewService.getReviewsProduct(product.product_id);
-            product.average_rating = reviewService.getAverageRating(product.reviews);
-        });
 
         const pagination = {
             page: req.query.page,
@@ -53,6 +48,13 @@ exports.getOne = async (req, res, next) => {
         await productService.updateViewProduct(id);
 
         product.comments = await commentService.getComments(id);
+        const paginationComment = {
+            page: 1,
+            limit: 5,
+            totalRows: product.comments ? product.comments.length: 0,
+            pages: Math.ceil((product.comments ? product.comments.length : 0) / req.query.limit)
+        }
+
         product.reviews = await reviewService.getReviewsProduct(id);
         
         product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
@@ -63,7 +65,7 @@ exports.getOne = async (req, res, next) => {
             product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
         });
         req.session.oldUrl = req.originalUrl;
-        res.render('../components/products/productViews/productDetail', {product, similarProducts});
+        res.render('../components/products/productViews/productDetail', {product, similarProducts, paginationComment});
     } 
     catch(err) {
         next(err);

@@ -188,6 +188,9 @@ const addComment = function(product_id, event) {
         success: function(data) {
             if (data) {
                 loadComments(product_id);
+                $('#name-comment').val('');
+                $('#email-comment').val('');
+                $('#content-comment').val('');
                 return true;
             }
             else {
@@ -198,9 +201,8 @@ const addComment = function(product_id, event) {
 
     function loadComments(product_id) {
         $.getJSON(`/products/${product_id}/comments`, function(data) {
-            console.log(data);
             let commentTemplate = Handlebars.compile($('#comment-list-template').html());
-            console.log($('#comment-list-template').html());
+            $('#comment-length').text(`Bình luận (${data.length})`);
             $('#comment-list').html(commentTemplate({comments: data}));
         });
     }
