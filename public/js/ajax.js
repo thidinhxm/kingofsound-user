@@ -158,39 +158,50 @@ const changeQuantity = function(product_id, quantityInput) {
 };
 
 /*------------ AJAX ADD COMMENT --------------*/
-$('#btn-add-comment').click(function(e) {
-    e.preventDefault();
-    const product_id = $(this).val();
+const addComment = function(product_id, event) {
+    event.preventDefault();
     const name = $('#name-comment').val();
     const email = $('#email-comment').val();
-    const descriptions = $('#descriptions-comment').val();
-    const error = checkInputComment(name, email, content);
-    if (error != null) {
-        $('#error-add-comment').text(error);
+    const content = $('#content-comment').val();
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (name == '' || email == '') {
+        $('#error-comment').text('Vui lòng nhập đầy đủ thông tin');
+        return false;
+    }
+    if (!emailRegex.test(email)) {
+        $('#error-comment').text('Email không hợp lệ');
+        return false;
+    }
+    if (content.trim() == '') {
+        $('#error-comment').text('Vui lòng nhập nội dung');
         return false;
     }
     $.ajax({
-        url: '/api/add-comment',
+        url: `/products/${product_id}/comment/add`,
         type: 'POST',
         data: {
             product_id: product_id,
+            content: content,
             name: name,
-            email: email,
-            content: content
+            email: email
         },
         success: function(data) {
-            if (data.success) {
-                $('#error-add-comment').text('');
-                $('#name-comment').val('');
-                $('#email-comment').val('');
-                $('#descriptions-comment').val('');
+            if (data) {
+                loadComments(product_id);
                 return true;
             }
             else {
-                $('#error-add-comment').text('Thêm bình luận thất bại');
                 return false;
             }
         }
     });
-});
-        
+
+    function loadComments(product_id) {
+        $.getJSON(`/products/${product_id}/comments`, function(data) {
+            console.log(data);
+            let commentTemplate = Handlebars.compile($('#comment-list-template').html());
+            console.log($('#comment-list-template').html());
+            $('#comment-list').html(commentTemplate({comments: data}));
+        });
+    }
+};    

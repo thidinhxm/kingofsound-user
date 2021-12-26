@@ -1,7 +1,7 @@
 const {models} = require('../../models');
-
-exports.getCommentsProduct =  (id) => {
-    return models.comments.findAll({
+const {formatDateTime} = require('../reviews/reviewHelper');
+exports.getComments =  async (id) => {
+    const comments = await models.comments.findAll({
         where : {
             product_id : id,
         },
@@ -10,9 +10,17 @@ exports.getCommentsProduct =  (id) => {
         ],
         raw : true
     });
+
+    if (comments) {
+        comments.forEach(async (comment) => {
+            comment.created_at_string = formatDateTime(comment.created_at);
+        });
+    }
+
+    return comments
 }
 
-exports.addCommentProduct =  (comment) => {
+exports.addComment =  (comment) => {
     return models.comments.create(comment);
 }
 

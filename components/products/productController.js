@@ -52,7 +52,7 @@ exports.getOne = async (req, res, next) => {
         
         await productService.updateViewProduct(id);
 
-        product.comments = await commentService.getCommentsProduct(id);
+        product.comments = await commentService.getComments(id);
         product.reviews = await reviewService.getReviewsProduct(id);
         
         product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);

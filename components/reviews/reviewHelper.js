@@ -15,5 +15,12 @@ exports.getPercentRating = (reviews, rating) => {
 
 exports.formatDateTime = (timestamp) => {
     const date = new Date(timestamp);
-    return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`;
+    return date.toLocaleDateString('en-US', {
+        day : 'numeric',
+        month : 'short',
+        year : 'numeric',
+        hour : 'numeric',
+        minute : 'numeric',
+        hour12 : false
+    });
 }

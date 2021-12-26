@@ -244,20 +244,33 @@
 							<div class="row">
 								<!-- Reviews -->
 								<div class="col-md-8">
-									<div id="reviews">
-										<ul class="reviews">
+									<div id="comment-list-block">
+										<ul class="reviews" id="comment-list">
 											{{#each comments}}
 											<li>
 												<div class="review-heading">
 													<h5 class="name">{{name}}</h5>
-													<p class="date">{{formatDateTime created_at}}</p>
+													<p class="date">{{created_at_string}}</p>
 												</div>
 												<div class="review-body">
-													<p>{{descriptions}}</p>
+													<p>{{content}}</p>
 												</div>
 											</li>
 											{{/each}}
 										</ul>
+										<script type="text/x-handlebars-template" id="comment-list-template">
+											\{{#each comments}}
+											<li>
+												<div class="review-heading">
+													<h5 class="name">\{{name}}</h5>
+													<p class="date">\{{created_at_string}}</p>
+												</div>
+												<div class="review-body">
+													<p>\{{content}}</p>
+												</div>
+											</li>
+											\{{/each}}
+										</script>
 										<ul class="reviews-pagination">
 											<li class="active">1</li>
 											<li><a href="#">2</a></li>
@@ -278,8 +291,8 @@
 											</div>
 											<input class="input" type="text" placeholder="Tên của bạn" name="name" id="name-comment">
 											<input class="input" type="email" placeholder="Email của bạn" name="email" id="email-comment">
-											<textarea class="input" placeholder="Bình luận của bạn" name="descriptions" id="descriptions-comment"></textarea>
-											<button class="primary-btn" id="btn-add-comment" name="product_id" value="{{product_id}}">Nộp</button>
+											<textarea class="input" placeholder="Bình luận của bạn" name="content" id="content-comment"></textarea>
+											<button class="primary-btn" id="btn-add-comment" onclick="addComment({{product_id}}, event)">Nộp</button>
 										</form>
 									</div>
 								</div>
