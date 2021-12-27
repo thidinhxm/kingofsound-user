@@ -35,4 +35,12 @@ router.post('/api/check-exists-account', authAPI.checkExistsAccount);
 
 router.get('/verify', authController.verify);
 
+router.get('/forgot-password', authController.forgotPassword);
+
+router.post('/forgot-password', authController.forgotPasswordPost);
+
+router.get('/reset-password', authController.resetPassword);
+
+router.post('/reset-password', authController.resetPasswordPost);
+
 module.exports = router;

@@ -224,3 +224,36 @@ const addComment = function(product_id, event) {
         });
     }
 };    
+
+
+/*------------ AJAX FORGOT PASWWORD --------------*/
+$('#button-forgot-password').click(function(e) {
+    e.preventDefault();
+    const email = $('#email-forgot-password').val();
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email == '') {
+        $('#error-forgot-password').text('Vui lòng nhập email');
+        return false;
+    }
+    if (!emailRegex.test(email)) {
+        $('#error-forgot-password').text('Email không hợp lệ');
+        return false;
+    }
+    $.ajax({
+        url: '/api/check-exists-account',
+        type: 'POST',
+        data: {
+            email: email
+        },
+        success: function(data) {
+            if (data) {
+                $('#forgot-password-form').submit();
+                return true;
+            }
+            else {
+                $('#error-forgot-password').text('Email không tồn tại');
+                return false;
+            }
+        }
+    });
+});

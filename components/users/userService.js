@@ -54,3 +54,10 @@ exports.getUserByToken = (token) => {
 		raw: true
 	});
 }
+
+exports.getUserByEmailAndToken = (email, token) => {
+	return models.users.findOne({
+		where: {email: email, token: token},
+		raw: true
+	});
+}
