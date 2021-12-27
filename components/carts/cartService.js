@@ -86,11 +86,21 @@ exports.getUserCart = async (user_id) => {
     }
 };
 
-exports.getUnauthCart = async (unauth_cart_id) => {
+exports.getUnauthCart = async (unauth_id) => {
     try {
+        const unauthUser = await models.unauthusers.findOne({
+            where: {
+                unauth_id: unauth_id
+            },
+            raw: true
+        });
+        if (!unauthUser) {
+            return null;
+        }
+
         const cart = await models.carts.findOne({ 
             where: {
-                cart_id: unauth_cart_id
+                cart_id: unauthUser.cart_id
             },
             raw: true
         });

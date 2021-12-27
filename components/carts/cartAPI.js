@@ -3,14 +3,13 @@ const cartService = require('./cartService');
 exports.addToCart = async (req, res, next) => {
     try {
         const {product_id} = req.body;
-        
         const cart_id = req.session.cart.cart_id;
         await cartService.addToCart(cart_id, product_id);
         if (req.user) {
             req.session.cart = await cartService.getUserCart(req.user.user_id);
         }
         else {
-            req.session.cart = await cartService.getUnauthCart(cart_id);
+            req.session.cart = await cartService.getUnauthCart(req.session.unauth_id);
         }
         res.json({
             success: true,
@@ -33,7 +32,7 @@ exports.removeFromCart = async (req, res, next) => {
             req.session.cart = await cartService.getUserCart(req.user.user_id);
         }
         else {
-            req.session.cart = await cartService.getUnauthCart(cart_id);
+            req.session.cart = await cartService.getUnauthCart(req.session.unauth_id);
         }
         res.json({
             success: true,
@@ -56,7 +55,7 @@ exports.changeQuantity = async (req, res, next) => {
             req.session.cart = await cartService.getUserCart(req.user.user_id);
         }
         else {
-            req.session.cart = await cartService.getUnauthCart(cart_id);
+            req.session.cart = await cartService.getUnauthCart(req.session.unauth_id);
         }
         
         res.json({

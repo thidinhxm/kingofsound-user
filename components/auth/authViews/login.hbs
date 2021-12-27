@@ -24,7 +24,11 @@
 							<input type="password" class="form-control" id="password-login" name="password" placeholder="Mật khẩu">
 						</div>
 						<div class="col-md-12 form-group err-block">
+							{{#if error}}
+							<strong class="text-danger" id="error-login">{{error}}</strong>
+							{{else}}
 							<strong class="text-danger" id="error-login"></strong>
+							{{/if}}
 						</div>
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit" class="button button-login" id="button-login">Đăng nhập</button>

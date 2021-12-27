@@ -35,7 +35,6 @@ exports.getUserById = (id) => {
 	});
 }
 exports.createUser = (user) => {
-	user.password = bcrypt.hashSync(user.password, 10);
 	return models.users.create(user);
 }
 

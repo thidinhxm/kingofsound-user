@@ -62,14 +62,31 @@ $('#button-register').click(function(e) {
     });
 });
 
+const checkInputLogin = function(email, password) {
+    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (email == '' || password == '') {
+        return 'Vui lòng nhập đầy đủ thông tin';
+    }
+    if (!emailRegex.test(email)) {
+        return 'Email không hợp lệ';
+    }
+    return null;
+}
+
 /*------------ AJAX LOGIN --------------*/
 $('#button-login').click(function(e) {
     e.preventDefault();
     const email = $('#email-login').val();
     const password = $('#password-login').val();
     
+    const error = checkInputLogin(email, password);
+    if (error != null) {
+        $('#error-login').text(error);
+        return false;
+    }
+
     $.ajax({
-        url: '/api/check-user',
+        url: '/api/check-exists-account',
         type: 'POST',
         data: {
             email: email,
@@ -81,7 +98,7 @@ $('#button-login').click(function(e) {
                 return true;
             }
             else {
-                $('#error-login').text('Email hoặc mật khẩu không đúng');
+                $('#error-login').text('Tài khoản không tồn tại');
                 return false;
             }
         }

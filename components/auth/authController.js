@@ -6,7 +6,7 @@ const userService = require('../users/userService');
 const cartService = require('../carts/cartService');
 
 exports.login = (req, res, next) => {
-    res.render('../components/auth/authViews/login', {message: req.flash('error')[0], type: 'alert-danger'});
+    res.render('../components/auth/authViews/login', {error: req.flash('error')[0]});
 }
 
 exports.register = (req, res, next) => {
@@ -18,21 +18,24 @@ exports.registerPost = async (req, res, next) => {
         const { 
             firstname, lastname, email, password, address, phone, 
         } = req.body;
-        
+        const salt = bcrypt.genSaltSync(10);
+        const passwordHash = bcrypt.hashSync(password, salt);
         const user = await userService.createUser({
             firstname: firstname, 
             lastname: lastname,
             email: email, 
             address: address, 
             phone: phone, 
-            password: bcrypt.hashSync(password, 10),
+            password: passwordHash,
             token: crypto.randomBytes(64).toString('hex'),
         });
-
+        
         await userService.createUserRole({
             role_id: 3,
             user_id: user.user_id,
         });
+
+        await cartService.createCart(user.user_id);
         
         const transporter = nodemailer.createTransport({
             service: 'Gmail',
@@ -63,12 +66,18 @@ exports.registerPost = async (req, res, next) => {
             }
         }
         );
-        res.render('../components/auth/authViews/verify');
-
+        res.render('../components/auth/authViews/notification', {
+            message: 'Vui lòng kiểm tra email để xác thực tài khoản'
+        });
+        
     }
     catch (err) {
         next(err);
     }       
+}
+
+exports.notify = (req, res, next) => {
+    res.render('../components/auth/authViews/notification');
 }
 
 exports.logout = async (req, res, next) => {
