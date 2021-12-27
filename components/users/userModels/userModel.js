@@ -31,6 +31,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING(50),
       allowNull: false
     },
+    is_verified: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
+    token: {
+      type: DataTypes.TEXT,
+      allowNull: true
+    },
     is_blocked: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

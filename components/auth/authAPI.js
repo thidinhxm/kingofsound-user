@@ -1,6 +1,5 @@
 const userService = require('../users/userService');
 const bcrypt = require('bcrypt');
-
 exports.checkExistsAccount = async (req, res, next) => {
     try {
         const {email} = req.body;

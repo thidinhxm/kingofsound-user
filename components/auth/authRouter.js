@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const nodemailer = require('nodemailer');
 
 const passport = require('./passport')
 const authController = require('./authController');
@@ -32,4 +33,9 @@ router.post('/api/check-exists-account', authAPI.checkExistsAccount);
 
 router.post('/api/check-user', authAPI.checkUser);
 
+router.get('/verify', authController.verify);
+
+router.get('/verified', (req, res) => {
+    res.render('../components/auth/authViews/verify');
+});
 module.exports = router;
