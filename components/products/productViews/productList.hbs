@@ -14,15 +14,29 @@
 					<h3 class="aside-title">Loại sản phẩm</h3>
 					<div class="checkbox-filter">
 						{{#each categories}}
-						<div class="input-checkbox" id="categories">
-							<input type="checkbox" id="{{category_id}}" value="{{category_id}}" name="categories">
-							<label for="{{category_id}}">
-								<span></span>
-								{{category_name}}
-								<small>({{length}})</small>
-							</label>
+						<div class="group-checkbox">
+							<div class="input-checkbox checkall" id="categories{{category_id}}">
+								<input type="checkbox" id="category{{category_id}}" value="{{category_id}}" name="categories">
+								<label for="category{{category_id}}">
+									<span></span>
+									{{category_name}}
+									<small>({{totalProducts}})</small>
+								</label>
+							</div>
+							{{#each subCategories}}
+							<div class="input-checkbox checksub" id="subCategories{{category_id}}">
+								<input type="checkbox" id="subCategory{{category_id}}" value="{{category_id}}" name="categories">
+								<label for="subCategory{{category_id}}"  class="subcheck">
+									<span></span>
+									{{category_name}}
+									<small>({{length}})</small>
+								</label>
+							</div>
+							{{/each}}
 						</div>
 						{{/each}}
+
+					
 					</div>
 				</div>
 				<!-- /aside Widget -->
@@ -52,9 +66,9 @@
 					<h3 class="aside-title">Thương hiệu</h3>
 					<div class="checkbox-filter">
 						{{#each brands}}
-						<div class="input-checkbox" id="brands">
-							<input type="checkbox" id="{{brand_id}}" name="brands" value="{{brand_id}}">
-							<label for="{{brand_id}}">
+						<div class="input-checkbox" id="brands{{brand_id}}">
+							<input type="checkbox" id="brand{{brand_id}}" name="brands" value="{{brand_id}}">
+							<label for="brand{{brand_id}}">
 								<span></span>
 								{{brand_name}}
 								<small>({{length}})</small>
@@ -94,17 +108,20 @@
 					<div class="store-sort">
 						<label>
 							Sắp xếp theo:
-							<select class="input-select">
+							<select class="input-select" id="sort">
+								<option value="model_year">Sản phẩm mới nhất</option>
 								<option value="name">Tên sản phẩm</option>
-								<option value="price-asc">Giá sản phẩm tăng dần</option>
-								<option value="price-desc">Giá sản phẩm giảm dần</option>
+								<option value="price_asc">Giá sản phẩm tăng dần</option>
+								<option value="price_desc">Giá sản phẩm giảm dần</option>
 							</select>
 						</label>
 
 						<label>
 							Hiển thị:
-							<select class="input-select">
+							<select class="input-select" id="limit">
+								<option value="6">6</option>
 								<option value="9">9</option>
+								<option value="12">12</option>
 								<option value="18">18</option>
 							</select>
 						</label>
@@ -170,72 +187,4 @@
 <!-- /SECTION -->
 {{> newsletter}}
 {{> footer }}
-<script>
-	
-	const urlParams = new URLSearchParams(window.location.search);
 
-	let params = {
-		page: 1,
-		min: 100,
-		max: 10000,
-		limit: 9,
-		categories: '',
-		brands: '',
-	}
-
-	for (let key in params) {
-      if (!urlParams.has(key)) {
-        urlParams.append(key, params[key])
-      }
-    }
-
-	$(document).ready(function() {
-		const checkboxes = ['categories', 'brands'];
-		for (let key of checkboxes) {
-			if (urlParams.has(key)) {
-				const values = urlParams.get(key);
-				if (values) {
-					for (let value of values.split(',')) {
-						$(`input[name=${key}][value=${value}]`).prop('checked', true);
-					}
-				}
-
-			}
-		}
-
-		const savePage = urlParams.get('page');
-		$('#pagination li a').each((index, item) => {
-			const page = $(item).attr('href').split('=')[1]
-			urlParams.set('page', page)
-			const href = '/products?' + urlParams.toString()
-			$(item).attr('href', href)
-		})
-		urlParams.set('page', savePage)
-	});
-
-	$('input[name=categories]').change(function() {
-		let categories = [];
-		$('input[name=categories]:checked').each(function() {
-			categories.push($(this).val());
-		});
-		urlParams.set('categories', categories.join(','));
-		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
-	});
-	
-	$('input[name=brands]').change(function() {
-		let brands = [];
-		$('input[name=brands]:checked').each(function() {
-			brands.push($(this).val());
-		});
-		urlParams.set('brands', brands.join(','));
-		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
-	});
-
-	function changePrice(key, value) {
-		urlParams.set(key, value)
-		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
-    }
-</script>

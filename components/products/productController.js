@@ -6,12 +6,13 @@ const commentService = require('../comments/commentService');
 exports.getAll = async (req, res, next) => {
     try {
         req.query.page = Math.max(1, parseInt(req.query.page) || 1);
-        req.query.limit = Math.max(9, parseInt(req.query.limit) || 9);
+        req.query.limit = Math.min(18, parseInt(req.query.limit) || 9);
         req.query.min = Math.max(100, parseInt(req.query.min) || 100);
         req.query.max = Math.min(10000, parseInt(req.query.max) || 10000);
         req.query.categories = req.query.categories || '';
         req.query.brands = req.query.brands || '';
-
+        req.query.sort = req.query.sort || 'name';
+        
         const products = await productService.getAll(req.query);
 
         const pagination = {
@@ -23,10 +24,13 @@ exports.getAll = async (req, res, next) => {
         const categories = await categoryService.getAll();
         const brands = await brandService.getAll();
         const newProducts = await productService.getNewProducts(3);
+
+        const categoryAll = await categoryService.getAllCategories();
+        
         req.session.oldUrl = req.originalUrl;
         res.render('../components/products/productViews/productList', {
             products: products.rows,
-            categories, 
+            categories: categoryAll, 
             brands,
             pagination,
             newProducts

@@ -46,13 +46,8 @@
                 <!-- SEARCH BAR -->
                 <div class="col-md-6">
                     <div class="header-search">
-                        <form>
-                            <select class="input-select">
-                                <option value="0">Tất cả</option>
-                                <option value="1">Loa</option>
-                                <option value="1">Tai nghe</option>
-                            </select>
-                            <input class="input" placeholder="Nhập từ khóa">
+                        <form action="/products" method="GET">
+                            <input class="input" placeholder="Nhập từ khóa" id="#search" name="search">
                             <button class="search-btn">Tìm kiếm</button>
                         </form>
                     </div>

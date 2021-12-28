@@ -1,4 +1,105 @@
 (function($) {
+
+	const checkboxes = $('.group-checkbox .checkall input').toArray();
+	checkboxes.forEach(function(item) {
+		$(item).change(function() {
+			if ($(this).prop('checked')) {
+				$(this).closest('.group-checkbox').find('input').prop('checked', true);
+			} else {
+				$(this).closest('.group-checkbox').find('input').prop('checked', false);
+			}
+		});
+	});
+	const urlParams = new URLSearchParams(window.location.search);
+
+	let params = {
+		page: 1,
+		min: 100,
+		max: 10000,
+		limit: 9,
+		categories: '',
+		brands: '',
+		sort: '',
+		search: ''
+	}
+
+	for (let key in params) {
+      if (!urlParams.has(key)) {
+        urlParams.append(key, params[key])
+      }
+    }
+
+	$(document).ready(function() {
+		const checkboxes = ['categories', 'brands'];
+		for (let key of checkboxes) {
+			if (urlParams.has(key)) {
+				const values = urlParams.get(key);
+				if (values) {
+					for (let value of values.split(',')) {
+						$(`input[name=${key}][value=${value}]`).prop('checked', true);
+					}
+				}
+
+			}
+		}
+
+		$('#limit').val(urlParams.get('limit'));
+		$('#sort').val(urlParams.get('sort'));
+
+		const savePage = urlParams.get('page');
+		$('#pagination li a').each((index, item) => {
+			const page = $(item).attr('href').split('=')[1]
+			urlParams.set('page', page)
+			const href = '/products?' + urlParams.toString()
+			$(item).attr('href', href)
+		})
+		urlParams.set('page', savePage)
+	});
+
+	$('input[name=categories]').change(function() {
+		let categories = [];
+		$('input[name=categories]:checked').each(function() {
+			categories.push($(this).val());
+		});
+		urlParams.set('categories', categories.join(','));
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+	
+	$('input[name=brands]').change(function() {
+		let brands = [];
+		$('input[name=brands]:checked').each(function() {
+			brands.push($(this).val());
+		});
+		urlParams.set('brands', brands.join(','));
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+
+	$('#sort').change(function() {
+		urlParams.set('sort', $(this).val());
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+
+	$('.search-btn').click(function() {
+		urlParams.set('search', $(this).val());
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+
+	$('#limit').change(function() {
+		urlParams.set('limit', $(this).val());
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+
+	function changePrice(key, value) {
+		urlParams.set(key, value)
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+    }
+
 	"use strict"
 
 	// Mobile Nav toggle
@@ -187,6 +288,10 @@
 			}
 		}
 	});
+
+
+
+	
 })(jQuery);
 
 

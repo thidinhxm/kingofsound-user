@@ -33,6 +33,36 @@ exports.getAll = async (query) => {
                 [Op.or]: brands
             }
         }
+
+        if (query.sort) {
+            if (query.sort === 'price_asc') {
+                option.order = [
+                    ['price', 'ASC']
+                ];
+            } 
+            else if (query.sort === 'price_desc') {
+                option.order = [
+                    ['price', 'DESC']
+                ];
+            }
+            else if (query.sort === 'model_year') {
+                option.order = [
+                    ['model_year', 'ASC']
+                ];
+            }
+           
+            else {
+                option.order = [
+                    ['product_name', 'ASC']
+                ];
+            }
+        }
+
+        if (query.search) {
+            option.where.product_name = {
+                [Op.like]: `%${query.search}%`
+            }
+        }
     
         const products = await models.products.findAndCountAll(option);
         if (products) {
