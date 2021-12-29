@@ -22,7 +22,7 @@
 						<div class="row">
 							<div class="col-sm-3 hidden-xs"><img src="/img/pagkage.jpg" alt="..." class="img-responsive"/></div>
 							<div class="col-sm-7">
-								<h4 class="nomargin">Hóa đơn #{{order_id    }}</h4>
+								<h4 class="nomargin">Hóa đơn #{{order_id}}</h4>
 								<div class="row">
 									<div class="col-md-5"><b>Ngày đặt:</b> </div>
 									<div class="col-md-6">{{create_date}}</div>
@@ -38,13 +38,13 @@
 							</div>
 						</div>
 					</td>
-					<td data-th="total">{{order_total}}</td>
+					<td data-th="total">{{formatPrice total_price}}</td>
 					<td data-th="status">
 							{{order_status}}
 					</td>
 					<td data-th="payment-status">{{payment_status}}</td>
 					<td class="actions" data-th="">
-						<a href="/order/{{order_id}}"><button class="btn btn-info btn-sm"><i class="far fa-eye"></i></i></button></a>
+						<a href="/orders/{{order_id}}"><button class="btn btn-info btn-sm"><i class="far fa-eye"></i></i></button></a>
 						<button class="btn btn-danger btn-sm"><i class="fas fa-trash"></i></button>								
 					</td>
 				</tr>

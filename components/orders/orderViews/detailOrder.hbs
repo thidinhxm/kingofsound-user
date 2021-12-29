@@ -33,20 +33,20 @@
 			<div class="quantity">
 				<input type="number" value="4" min="1" class="quantity-field" readonly>
 			</div>
-			<div class="subtotal">{{subtotal}}</div>
+			<div class="subtotal">{{formatPrice subtotal}}</div>
 		</div>
 	 {{/each}}
 	</div>
 	<div class="container order-exc">
 		<div class="row">
 				 <div class="col-md-2">
-							<a href="/order"><button class="promo-code-cta" style ="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay lại</a></button>
+							<a href="/orders"><button class="promo-code-cta" style ="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay lại</a></button>
 			</div>
 			<div class="col-md-4">
 			</div>
 			<div class="col-md-6" class="final-total">
 				<div class="total-value final-value">
-					<b class="total">Tổng tiền :</b> <i id="basket-total">{{order.order_total}}</i>
+					<b class="total">Tổng tiền :</b> <i id="basket-total">{{formatPrice order.total_price}}</i>
 				</div>
 			</div>   
 		</div>
