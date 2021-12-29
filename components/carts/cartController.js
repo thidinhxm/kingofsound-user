@@ -13,5 +13,6 @@ exports.index =  async (req, res, next) => {
 }
 
 exports.checkout = async (req, res, next) => {
-    res.render('../components/carts/cartViews/checkout');
+    const cart = req.session.cart;
+    res.render('../components/carts/cartViews/checkout', {cart});
 }
