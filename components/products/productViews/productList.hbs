@@ -46,13 +46,13 @@
 					<h3 class="aside-title">Giá (000 vnd)</h3>
 					<div class="price-filter">
 						<div id="price-slider"></div>
-						<div class="input-number price-min">
+						<div class="input-number price-min prices">
 							<input id="price-min" type="number">
 							<span class="qty-up">+</span>
 							<span class="qty-down">-</span>
 						</div>
 						<span>-</span>
-						<div class="input-number price-max">
+						<div class="input-number price-max prices">
 							<input id="price-max" type="number">
 							<span class="qty-up">+</span>
 							<span class="qty-down">-</span>
@@ -279,6 +279,18 @@
 
 	$('#limit').change(function() {
 		urlParams.set('limit', $(this).val());
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+
+	$('#price-min').change(function() {
+		urlParams.set('min', $(this).val());
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+
+	$('#price-max').change(function() {
+		urlParams.set('max', $(this).val());
 		urlParams.set('page', 1);
 		window.location.search = urlParams.toString();
 	});
