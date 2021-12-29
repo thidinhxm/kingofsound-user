@@ -12,14 +12,6 @@ exports.index =  async (req, res, next) => {
 
 }
 
-// exports.checkout = async (req, res) => {
-// const user = req.user;
-// const id = user.user_id; 
-// let total = 0;
-// const detailCart =  await cartService.getCart(id);
-// for(const detail in detailCart)
-//    {
-//     total = total + detailCart.subtotal;
-//    }
-// res.render('../components/cart/cartViews/checkout', {detailCart, total})
-// }
+exports.checkout = async (req, res, next) => {
+    res.render('../components/carts/cartViews/checkout');
+}

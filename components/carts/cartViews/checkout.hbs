@@ -52,24 +52,27 @@
 					<tr>
 						<th colspan="2">Đơn hàng của bạn</th>
 					</tr>
-					{{#each detailCart}}
+					{{#with cart}}
+					{{#each products}}
 					<tr>
 						<td>{{'product.product_name'}} x {{quantity}}(Qty)</td>
-						<td class="tt">{{subtotal}}</td>
+						<td class="tt">{{subtotalString}}</td>
 					</tr>
 					{{/each}}
 					<tr>
 						<td>Tổng tiền</td>
-						<td class="tt">20.000.000</td>
+						<td class="tt">{{totalString}}</td>
 					</tr>
+					
 					<tr>
 						<td>Phí ship</td>
 						<td>Miễn phí</td>
 					</tr>
 					<tr>
 						<td>Tổng cộng</td>
-						<td class="tt">20.000.000</td>
+						<td class="tt">{{totalString}}</td>
 					</tr>
+					{{/with}}
 				</table><br>
 				<div>
 				Hỗ trợ thanh toán 
