@@ -6,12 +6,11 @@
 	<!-- container -->
 	<div class="container">
 		<!-- row -->
-		{{#with product}}
 		<div class="row">
 			<!-- Product main img -->
 			<div class="col-md-5 col-md-push-2">
 				<div id="product-main-img">
-					{{#each images}}
+					{{#each product.images}}
 					<div class="product-preview">
 						<img src="{{image_link}}" alt="">
 					</div>
@@ -19,11 +18,11 @@
 				</div>
 			</div>
 			<!-- /Product main img -->
-
+			
 			<!-- Product thumb imgs -->
 			<div class="col-md-2  col-md-pull-5">
 				<div id="product-imgs">
-					{{#each images}}
+					{{#each product.images}}
 					<div class="product-preview">
 						<img src="{{image_link}}" alt="">
 					</div>
@@ -36,26 +35,26 @@
 			
 			<div class="col-md-5">
 				<div class="product-details">
-					<h2 class="product-name">{{product_name}}</h2>
+					<h2 class="product-name">{{product.product_name}}</h2>
 					<div>
 						<div class="product-rating">
-							{{{createRating average_rating}}}
+							{{{createRating product.average_rating}}}
 						</div>
-						<span class="review-link" href="#">{{reviews.length}} Lượt đánh giá</span>
+						<span class="review-link" href="#">{{product.reviews.length}} Lượt đánh giá</span>
 					</div>
 
 					<div>
 						<div class="product-views">
 							<i class="fa fa-eye"></i>
 							<span class="review-link">
-								{{number_of_views}} Lượt xem
+								{{product.number_of_views}} Lượt xem
 							</span>
 						</div>
 						
 					</div>
 					<div>
-						<h3 class="product-price">{{price}} VND</h3>
-						<span class="product-available">{{#if quantity}} Sẵn có {{else}} Hết hàng {{/if}}</span>
+						<h3 class="product-price">{{product.price}} VND</h3>
+						<span class="product-available">{{#if product.quantity}} Sẵn có {{else}} Hết hàng {{/if}}</span>
 					</div>
 					<div class="buy-now">
 						<div class="qty-label">
@@ -67,7 +66,7 @@
 							</div>
 						</div>
 						<div>
-							<button class="add-to-cart" onclick="addToCart({{product_id}})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
+							<button class="add-to-cart" onclick="addToCart({{product.product_id}})"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</button>
 							<button class="buy-now-btn"></i>Mua ngay</button>
 						</div>
 					</div>
@@ -75,8 +74,8 @@
 					<ul class="product-links">
 						<li>Loại:</li>
 						
-						<li><a href="#">{{categories.parent_category_name}}</a></li>
-						<li><a href="#">{{categories.category_name}}</a></li>
+						<li><a href="#">{{product.categories.parent_category_name}}</a></li>
+						<li><a href="#">{{product.categories.category_name}}</a></li>
 						
 					</ul>
 
@@ -90,7 +89,6 @@
 
 				</div>
 			</div>
-			
 			<!-- /Product details -->
 
 			<!-- Product tab -->
@@ -99,8 +97,9 @@
 					<!-- product tab nav -->
 					<ul class="tab-nav">
 						<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
-						<li><a data-toggle="tab" href="#tab2">Đánh giá ({{reviews.length}})</a></li>
-						<li><a data-toggle="tab" href="#tab3" id="comment-length">Bình luận ({{comments.length}})</a></li>
+						<li><a data-toggle="tab" href="#tab2">Đánh giá ({{product.reviews.length}})</a></li>
+						<li><a data-toggle="tab" href="#tab3" id="comment-length">Bình luận ({{product.comments.length}})</a></li>
+						
 					</ul>
 					<!-- /product tab nav -->
 
@@ -111,7 +110,7 @@
 							<div class="row">
 								<div class="col-md-2"></div>
 								<div class="col-md-8">
-									<p class="descriptions">{{descriptions}}</p>
+									<p class="descriptions">{{product.descriptions}}</p>
 								</div>
 								<div class="col-md-2"></div>
 							</div>
@@ -127,9 +126,9 @@
 								<div class="col-md-3">
 									<div id="rating">
 										<div class="rating-avg">
-											<span>{{average_rating}}</span>
+											<span>{{product.average_rating}}</span>
 											<div class="rating-stars">
-												{{{createRating average_rating}}}
+												{{{createRating product.average_rating}}}
 											</div>
 										</div>
 										<ul class="rating">
@@ -138,45 +137,45 @@
 													{{{createRating 5}}}
 												</div>
 												<div class="rating-progress">
-													<div style="width:{{getPercentRating reviews 5}}%"></div>
+													<div style="width:{{getPercentRating product.reviews 5}}%"></div>
 												</div>
-												<span class="sum">{{getNumberRating reviews 5}}</span>
+												<span class="sum">{{getNumberRating product.reviews 5}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
 													{{{createRating 4}}}
 												</div>
 												<div class="rating-progress">
-													<div style="width:{{getPercentRating reviews 4}}%"></div>
+													<div style="width:{{getPercentRating product.reviews 4}}%"></div>
 												</div>
-												<span class="sum">{{getNumberRating reviews 4}}</span>
+												<span class="sum">{{getNumberRating product.reviews 4}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
 													{{{createRating 3}}}
 												</div>
 												<div class="rating-progress">
-													<div style="width:{{getPercentRating reviews 3}}%"></div>
+													<div style="width:{{getPercentRating product.reviews 3}}%"></div>
 												</div>
-												<span class="sum">{{getNumberRating reviews 3}}</span>
+												<span class="sum">{{getNumberRating product.reviews 3}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
 													{{{createRating 2}}}
 												</div>
 												<div class="rating-progress">
-													<div style="width:{{getPercentRating reviews 2}}%"></div>
+													<div style="width:{{getPercentRating product.reviews 2}}%"></div>
 												</div>
-												<span class="sum">{{getNumberRating reviews 2}}</span>
+												<span class="sum">{{getNumberRating product.reviews 2}}</span>
 											</li>
 											<li>
 												<div class="rating-stars">
 													{{{createRating 1}}}
 												</div>
 												<div class="rating-progress">
-													<div style="width:{{getPercentRating reviews 1}}%"></div>
+													<div style="width:{{getPercentRating product.reviews 1}}%"></div>
 												</div>
-												<span class="sum">{{getNumberRating reviews 1}}</span>
+												<span class="sum">{{getNumberRating product.reviews 1}}</span>
 											</li>
 										</ul>
 									</div>
@@ -187,7 +186,7 @@
 								<div class="col-md-6">
 									<div id="reviews">
 										<ul class="reviews">
-											{{#each reviews}}
+											{{#each product.reviews}}
 											<li>
 												<div class="review-heading">
 													<h5 class="name">{{'user.lastname'}}</h5>
@@ -197,7 +196,7 @@
 													</div>
 												</div>
 												<div class="review-body">
-													<p>{{review}}</p>
+													<p>{{content}}</p>
 												</div>
 											</li>
 											{{/each}}
@@ -241,10 +240,12 @@
 
 						<!-- tab3  -->
 						<div id="tab3" class="tab-pane fade in">
+							
 							<div class="row">
 								<!-- Reviews -->
 								<div class="col-md-8">
 									<div id="comment-list-block">
+										{{#with product}}
 										<ul class="reviews" id="comment-list">
 											{{#each comments}}
 											<li>
@@ -257,7 +258,9 @@
 												</div>
 											</li>
 											{{/each}}
+											
 										</ul>
+										{{/with}}
 										<script type="text/x-handlebars-template" id="comment-list-template">
 											\{{#each comments}}
 											<li>
@@ -289,10 +292,15 @@
 											<div class="err-block">
 												<span class="text-danger about" id="error-comment"></span>
 											</div>
+											{{#if user}}
+											<input type="text" name="name" id="name-comment" value="{{user.firstname}} {{user.lastname}}" hidden>
+											<input type="text" name="email" id="email-comment" value="{{user.email}}" hidden>
+											{{else}}
 											<input class="input" type="text" placeholder="Tên của bạn" name="name" id="name-comment">
-											<input class="input" type="email" placeholder="Email của bạn" name="email" id="email-comment">
+											<input class="input" type="text" placeholder="Email của bạn" name="email" id="email-comment">
+											{{/if}}
 											<textarea class="input" placeholder="Bình luận của bạn" name="content" id="content-comment"></textarea>
-											<button class="primary-btn" id="btn-add-comment" onclick="addComment({{product_id}}, event)">Nộp</button>
+											<button class="primary-btn" id="btn-add-comment" onclick="addComment({{product.product_id}}, event)">Nộp</button>
 										</form>
 									</div>
 								</div>
@@ -306,7 +314,6 @@
 			</div>
 			<!-- /product tab -->
 		</div>
-		{{/with}}
 		<!-- /row -->
 	</div>
 	<!-- /container -->

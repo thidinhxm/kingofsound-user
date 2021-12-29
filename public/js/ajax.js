@@ -177,8 +177,8 @@ const changeQuantity = function(product_id, quantityInput) {
 /*------------ AJAX ADD COMMENT --------------*/
 const addComment = function(product_id, event) {
     event.preventDefault();
-    const name = $('#name-comment').val();
     const email = $('#email-comment').val();
+    const name = $('#name-comment').val();
     const content = $('#content-comment').val();
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (name == '' || email == '') {
@@ -205,8 +205,6 @@ const addComment = function(product_id, event) {
         success: function(data) {
             if (data) {
                 loadComments(product_id);
-                $('#name-comment').val('');
-                $('#email-comment').val('');
                 $('#content-comment').val('');
                 return true;
             }
@@ -218,9 +216,11 @@ const addComment = function(product_id, event) {
 
     function loadComments(product_id) {
         $.getJSON(`/products/${product_id}/comments`, function(data) {
+            console.log($('#comment-list-template').html());
             let commentTemplate = Handlebars.compile($('#comment-list-template').html());
             $('#comment-length').text(`Bình luận (${data.length})`);
             $('#comment-list').html(commentTemplate({comments: data}));
+            
         });
     }
 };    
