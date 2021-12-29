@@ -2,7 +2,7 @@
 {{> header }}
 {{> navigation }}
 <div class="profile">
-    <form method="PUT" action="/user/editprofile">
+    <form method="POST" action="/user/editprofile">
     <div class="container">
         <div class="row gutters">
             <div class="col-md-3 col-3">
@@ -32,26 +32,26 @@
                                     <div class="form-group">
                                         <label for="firtname">Họ</label>
                                         <input type="text" class="form-control" name="firstname"
-                                            value="{{user.firstname}}">
+                                            value="{{user.firstname}}" required="">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="lastname">Tên</label>
                                         <input type="text" class="form-control" name="lastname"
-                                            value="{{user.lastname}}">
+                                            value="{{user.lastname}}" required="">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="Email">Email</label>
-                                        <input type="text" class="form-control" name="email" value="{{user.email}}">
+                                        <input type="email" class="form-control" name="email" value="{{user.email}}" required="">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="phone">Điện thoại</label>
-                                        <input type="text" class="form-control" name="phone" value="{{user.phone}}">
+                                        <input type="text" class="form-control" name="phone" value="{{user.phone}}" required="">
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="form-group">
                                         <label for="address">Đia chỉ</label>
-                                        <input type="text" class="form-control" name="address" value="{{user.address}}">
+                                        <input type="text" class="form-control" name="address" value="{{user.address}}" required="">
                                     </div>
                                 </div>
                             </div>

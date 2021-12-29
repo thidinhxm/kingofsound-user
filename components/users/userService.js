@@ -42,12 +42,27 @@ exports.createUserRole = (role) => {
 	return models.userroles.create(role);
 }
 exports.updateUser = (user) =>{
-	return models.users.update(user, {
-		where: {user_id: user.user_id},
-		raw: true
+	return models.users.update(
+		{
+			firstname: user.firstname, 
+            lastname: user.lastname,
+            email: user.email, 
+            address: user.address, 
+            phone: user.phone,
+		}
+		, {
+		where: {user_id: user.user_id}
 	});
 }
-
+exports.updatePassword = (id,newpassword) =>
+{
+	const salt = bcrypt.genSaltSync(10);
+    const passwordHash = bcrypt.hashSync(newpassword, salt);
+	return models.users.update({
+		password:passwordHash
+	},
+	{where:{user_id:id}})
+}
 exports.getUserByToken = (token) => {
 	return models.users.findOne({
 		where: {token: token},

@@ -6,7 +6,7 @@ router.get('/', userController.isLogin, userController.profile);
 router.get('/profile', userController.isLogin, userController.profile);
 router.get('/editprofile', userController.editProfile)
 router.get('/changepassword', userController.changePassword)
-router.put('/editprofile', userController.updateUser);
-router.put('/changepassword', userController.updatePassword)
+router.post('/editprofile', userController.updateUser);
+router.post('/changepassword', userController.updatePassword)
 
 module.exports = router;

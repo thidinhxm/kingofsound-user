@@ -11,10 +11,10 @@ passport.use(new LocalStrategy({
     try {
         const user = await userService.getUserByEmail(email);
         if (!user) {
-            return done(null, false, req.flash('error', 'Không tồn tại email này'));
+            return done(null, false, req.flash('error', 'Thông tin tài khoản hoặc mật khẩu chưa chính xác'));
         }
         if (!bcrypt.compareSync(password, user.password)) {
-            return done(null, false , req.flash('error', 'Mật khẩu không đúng'));
+            return done(null, false , req.flash('error', 'Thông tin tài khoản hoặc mật khẩu chưa chính xác'));
         }
         if (!user.is_verified) {
             return done(null, false, req.flash('error', 'Tài khoản chưa được xác thực'));

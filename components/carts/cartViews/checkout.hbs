@@ -7,26 +7,26 @@
 			<h2>Thông tin giao hàng</h2>
 		</div>
 		<div class="d-flex">
-			<form action="/checkout" method="GET" id = "checkout-form">
+			<form action="/checkout" method="POST" id = "checkout-form">
 				<label>
 					<span class="fname">Họ <span class="required">*</span></span>
-					<input type="text" name="fname" value = "{{user.firstname}}"  required>
+					<input type="text" name="fname" value = "{{user.firstname}}"  required="">
 				</label>
 				<label>
 					<span class="lname">Tên <span class="required">*</span></span>
-					<input type="text" name="lname" value = "{{user.lastname}}"  required>
+					<input type="text" name="lname" value = "{{user.lastname}}"  required="">
 				</label>
 				<label>
 					<span>Địa chỉ nhận hàng <span class="required">*</span></span>
-					<input type="text" name="houseadd" value ="{{user.address}}" required value >
+					<input type="text" name="address" value ="{{user.address}}" required="" value >
 				</label>
 				<label>
 					<span>Số điện thoại <span class="required">*</span></span>
-					<input type="tel" name="phone"  value = "{{user.phone}}" required> 
+					<input type="tel" name="phone"  value = "{{user.phone}}" required=""> 
 				</label>
 				<label>
 					<span>Email <span class="required">*</span></span>
-					<input type="email" name="email" value = "{{user.email}}" required> 
+					<input type="email" name="email" value = "{{user.email}}" required="" readonly> 
 				</label>
 				<label>
 					<span>Hình thức thanh toán <span class="required">*</span></span>
