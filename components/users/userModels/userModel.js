@@ -40,6 +40,10 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.TEXT,
       allowNull: true
     },
+    expired_at: {
+      type: DataTypes.DATE,
+      allowNull: true
+    },
     is_blocked: {
       type: DataTypes.BOOLEAN,
       allowNull: false,

@@ -52,7 +52,7 @@ module.exports = function(sequelize, DataTypes) {
         key: 'voucher_id'
       }
     },
-    created_at: {
+    create_date: {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
