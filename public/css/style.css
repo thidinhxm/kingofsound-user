@@ -444,6 +444,7 @@ textarea.input {
 .header-ctn {
   float: right;
   padding: 15px 0px;
+  margin-right: 150px;
 }
 
 .header-ctn>div {
@@ -2584,4 +2585,60 @@ button:focus {
 
 .err-block{
   height: 25px;
+}
+
+.cart-box
+{
+  width: 350px;
+  border-radius: 10px;
+  font-size: 10px;
+  padding: 3px;
+}
+.cart-box div,.cart-box a
+{
+  width: 98%;
+  margin-left: 5px;
+}
+
+.item-name {
+  display: inline;
+  padding-top: 10px;
+  font-size: 10px;
+}
+
+.item-subtotal {
+  display:inline;
+  font-size: 10px;
+  font-weight: bold;
+  color: rgb(168, 54, 25);
+
+}
+.item-subtotal::after
+{
+  content: " vnđ";
+  font-size: 80%;
+}
+.clearfix tr td
+{
+  margin-left: 5px;
+}
+.cart-box .btn-primary
+{
+  width: 100px;
+  color: black;
+  margin-left: 34%;
+  margin-top: 10px;
+  background-color: #D10024;
+  padding: 7px;
+  font-weight: bolder;
+}
+
+.shopping-cart-total
+{
+  margin-top: 10px;
+}
+.cart-box hr
+{
+ color: black;
+
 }
