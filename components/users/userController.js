@@ -25,6 +25,7 @@ exports.changePassword = (req, res) => {
 }
 exports.updateUser = async (req,res) =>
 {         
+try {
  const firstname = req.body.firstname;
  const lastname = req.body.lastname;
  const email = req.body.email;
@@ -45,8 +46,13 @@ exports.updateUser = async (req,res) =>
     //req.flash('message', 'Thay đổi thông tin thành công!');
     res.redirect('/user/profile?message=success'); 
 }
+catch (error) {
+    next(error);
+}
+}
 exports.updatePassword = async (req,res) =>
 {
+    try {
     const oldpassword = req.body.oldpassword;
     const newpassword = req.body.newpassword;
     const renewpassword = req.body.renewpassword;
@@ -61,4 +67,8 @@ exports.updatePassword = async (req,res) =>
         await userService.updatePassword(id,newpassword);
         res.redirect('/user/profile?message=success');  
        }
+    }
+    catch (error) {
+        next(error);
+    }
 }
