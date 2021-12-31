@@ -1,25 +1,7 @@
 const {models} = require('../../models');
-const {Op, fn, col} = require('sequelize');
+const {fn, col} = require('sequelize');
 
-exports.getAll = () => {
-    return models.categories.findAll({
-        attributes : [ 'category_id', 'category_name', [fn('COUNT', col('*')), 'length']],
-        group: ['category_id', 'category_name'],
-        where : {
-            parent_category: {
-                [Op.ne]: null
-            }
-        },
-        include: [{
-                model: models.products,
-                as: 'products',
-                attributes: [],
-            }],
-        raw: true,
-    });
-}
-
-exports.getAllCategories = async () => {
+exports.getAll = async () => {
     const parentCategories = await models.categories.findAll({
         attributes : [ 'category_id', 'category_name'],
         group: ['category_id', 'category_name'],

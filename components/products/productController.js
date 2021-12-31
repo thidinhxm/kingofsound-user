@@ -21,16 +21,17 @@ exports.getAll = async (req, res, next) => {
             totalRows: products.count,
             pages: Math.ceil(products.count / req.query.limit)
         }
+
+        console.log(pagination);
+
         const categories = await categoryService.getAll();
         const brands = await brandService.getAll();
         const newProducts = await productService.getNewProducts(3);
 
-        const categoryAll = await categoryService.getAllCategories();
-        
         req.session.oldUrl = req.originalUrl;
         res.render('../components/products/productViews/productList', {
             products: products.rows,
-            categories: categoryAll, 
+            categories,
             brands,
             pagination,
             newProducts
@@ -51,12 +52,13 @@ exports.getOne = async (req, res, next) => {
         
         await productService.updateViewProduct(id);
 
-        product.comments = await commentService.getComments(id);
-        const paginationComment = {
+        commentsRowAndCount = await commentService.getComments(id);
+        product.comments = commentsRowAndCount.rows;
+        const pagination = {
             page: 1,
             limit: 5,
-            totalRows: product.comments ? product.comments.length: 0,
-            pages: Math.ceil((product.comments ? product.comments.length : 0) / req.query.limit)
+            totalRows: commentsRowAndCount.count,
+            pages: Math.ceil(commentsRowAndCount.count / 5)
         }
 
         product.reviews = await reviewService.getReviewsProduct(id);
@@ -64,12 +66,8 @@ exports.getOne = async (req, res, next) => {
         product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
         const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id, id);
         
-        similarProducts.forEach(async (product) => {
-            product.reviews = await reviewService.getReviewsProduct(product.product_id);
-            product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
-        });
         req.session.oldUrl = req.originalUrl;
-        res.render('../components/products/productViews/productDetail', {product, similarProducts, paginationComment});
+        res.render('../components/products/productViews/productDetail', {product, similarProducts, pagination});
     } 
     catch(err) {
         next(err);

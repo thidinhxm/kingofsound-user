@@ -11,6 +11,7 @@ const {v4: uuidv4} = require('uuid');
 
 const reviewHelper = require('./components/reviews/reviewHelper');
 const orderHelper = require('./components/orders/orderHelper');
+const productHelper = require('./components/products/productHelper');
 const indexRouter = require('./components/home/indexRouter');
 const productRouter = require('./components/products/productRouter');
 const userRouter = require('./components/users/userRouter');
@@ -35,6 +36,7 @@ app.engine('hbs', exphbs({
 		getPercentRating: reviewHelper.getPercentRating,
 		formatDateTime: reviewHelper.formatDateTime,
 		formatPrice: orderHelper.formatPrice,
+		createPaginate: productHelper.createPaginate,
 	}
 }))
 

@@ -1,7 +1,11 @@
 const {models} = require('../../models');
 const {formatDateTime} = require('../reviews/reviewHelper');
-exports.getComments =  async (id) => {
-    const comments = await models.comments.findAll({
+exports.getComments =  async (id, pageInput, limitInput) => {
+    const page = pageInput || 1;
+    const limit = limitInput || 5;
+    const commentsRowAndCount = await models.comments.findAndCountAll({
+        offset: (page - 1) * limit,
+        limit: limit,
         where : {
             product_id : id,
         },
@@ -11,16 +15,16 @@ exports.getComments =  async (id) => {
         raw : true
     });
 
-    if (comments) {
-        comments.forEach((comment) => {
+    if (commentsRowAndCount.rows) {
+        commentsRowAndCount.rows.forEach((comment) => {
             comment.created_at_string = formatDateTime(comment.created_at);
         });
     }
 
-    return comments;
+    return commentsRowAndCount;
 }
 
-exports.addComment =  (comment) => {
+exports.addComment = (comment) => {
     return models.comments.create(comment);
 }
 
