@@ -34,7 +34,7 @@ $('#button-register').click(function(e) {
     const address = $('#address').val();
     const error = checkInputRegister(email, password, comfirmPassword, firstname, lastname, phone, address);
     if (error != null) {
-        $('#error-register').text(error);
+        $('#error-register').addClass('alert-danger').text(error);
         return false;
     }
     
@@ -51,7 +51,7 @@ $('#button-register').click(function(e) {
         },
         success: function(data) {
             if (data) {
-                $('#error-register').text('Email đã tồn tại');
+                $('#error-register').addClass('alert-danger').text('Email đã tồn tại');
                 return false;
             }
             else {
@@ -81,7 +81,7 @@ $('#button-login').click(function(e) {
     
     const error = checkInputLogin(email, password);
     if (error != null) {
-        $('#error-login').text(error);
+        $('#error-login').addClass('alert-danger').text(error);
         return false;
     }
 
@@ -98,7 +98,7 @@ $('#button-login').click(function(e) {
                 return true;
             }
             else {
-                $('#error-login').text('Tài khoản không tồn tại');
+                $('#error-login').addClass('alert-danger').text('Tài khoản không tồn tại');
                 return false;
             }
         }

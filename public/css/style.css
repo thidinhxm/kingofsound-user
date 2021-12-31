@@ -2235,6 +2235,9 @@ button:focus {
 	.login_box_area .login_box_img {
 		height: 510px;
 	}
+  .login_box_area .register_box_img {
+		height: 638px;
+	}
 }
 
 @media (min-width: 991px) {
@@ -2314,7 +2317,7 @@ button:focus {
 
 @media (min-width: 1000px) {
 	.login_form_inner {
-		padding-top: 30px;
+		padding-top: 0px;
 		padding-bottom: 0px;
 	}
 }
@@ -2418,7 +2421,7 @@ button:focus {
 
 
 #login_form {
-  padding-bottom: 114px;
+  padding-bottom: 90px;
 }
 
 .descriptions {
@@ -2580,8 +2583,23 @@ button:focus {
   background-color: #3e8e41;
 }
 
+.message-block {
+  padding: 55px 30px;
+  height: 30px;
+}
 
+.message-block-register {
+  padding: 10px 20px 50px 20px;
+  height: 30px;
+}
 
-.err-block{
-  height: 25px;
+@media screen and (max-width: 600px) {
+  .message-block-register {
+    padding: 10px 20px 70px 20px;
+    height: 30px;
+  }
+}
+
+.message {
+  font-weight: bold;
 }

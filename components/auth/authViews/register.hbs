@@ -4,16 +4,33 @@
 <section class="login_box_area section-margin">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-6">
-				<div class="login_box_img">
+			<div class="col-md-6 col-ms-12">
+				<div class="login_box_img register_box_img">
 					<div class="hover">
 						<h4>Bạn đã có tài khoản?</h4>
 						<a class="button button-account" href="/login">Đăng nhập ngay</a>
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-md-6 col-ms-12">
 				<div class="login_form_inner register_form_inner">
+					<div class="row justify-content-center message-block-register">
+						{{#if error}}
+						<div class="alert alert-danger col-6">
+							<p class="text-center text-success message">{{error}}</p>
+						</div>
+						{{else}}
+							{{#if success}}
+								<div class="alert alert-success col-6">
+									<p class="text-center text-danger message">{{success}}</p>
+								</div>
+							{{else}}
+								<div class="col-6">
+									<p class="alert text-center text-danger message" id="error-register"></p>
+								</div>
+							{{/if}}
+						{{/if}}
+					</div>
 					<h3>Tạo tài khoản</h3>
 					<form class="row login_form" action="/register" id="register_form" method="POST" >
 						<div class="col-md-12 form-group">
@@ -36,9 +53,6 @@
 						</div>
 						<div class="col-md-12 form-group">
 							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại">
-						</div>
-						<div class="col-md-12 form-group err-block">
-							<strong class="text-danger" id="error-register"></strong>
 						</div>
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit" class="button button-register" id="button-register">Đăng ký</button>
