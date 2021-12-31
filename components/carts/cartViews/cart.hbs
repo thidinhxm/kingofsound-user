@@ -7,9 +7,8 @@
 		{{#if products}}
 		<div class="basket">
 			<div class="basket-module">
-				<label for="promo-code">Mã giảm giá</label>
-				<input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-				<button class="promo-code-cta">Áp dụng</button>
+				<h2 style="color: tomato;text-decoration: underline;">Giỏ hàng của bạn</h2>
+				
 			</div>
 			<div class="basket-labels">
 				<ul>
@@ -72,8 +71,10 @@
 		<div class="basket">
 			<div class="basket-module">
 				<label for="promo-code">Mã giảm giá</label>
-				<input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
-				<button class="promo-code-cta">Áp dụng</button>
+				<form action="GET" action ="/cart">
+					<input id="promo-code" type="text" name="promo-code" maxlength="5" class="promo-code-field">
+				<button class="promo-code-cta" value="submit" type ="submit">Áp dụng</button>
+				</form>
 			</div>
 			<div class="basket-labels">
 				<ul>
