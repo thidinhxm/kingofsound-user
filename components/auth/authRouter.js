@@ -33,11 +33,15 @@ router.get('/logout', authController.logout);
 
 router.post('/api/check-exists-account', authAPI.checkExistsAccount);
 
+router.get('/send', authController.sendMailToVerifyUser);
+
 router.get('/verify', authController.verify);
 
 router.get('/forgot-password', authController.forgotPassword);
 
 router.post('/forgot-password', authController.forgotPasswordPost);
+
+router.get('/forgot-password-authentication', authController.forgotPasswordAuthentication);
 
 router.get('/reset-password', authController.resetPassword);
 

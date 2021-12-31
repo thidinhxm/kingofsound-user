@@ -4,7 +4,7 @@
 <section class="login_box_area section-margin">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-6">
+			<div class="col-md-6 col-ms-12">
 				<div class="login_box_img">
 					<div class="hover">
 						<h4>Bạn chưa có tài khoản?</h4>
@@ -12,8 +12,25 @@
 					</div>
 				</div>
 			</div>
-			<div class="col-lg-6">
+			<div class="col-md-6 col-ms-12">
 				<div class="login_form_inner">
+					<div class="row justify-content-center message-block">
+						{{#if error}}
+						<div class="alert alert-danger col-12">
+							<p class="text-center message">{{error}}</p>
+						</div>
+						{{else}}
+							{{#if success}}
+								<div class="alert alert-success col-12">
+									<p class="text-center message">{{success}}</p>
+								</div>
+							{{else}}
+								<div class="col-12">
+									<p class="alert text-center message" id="error-login"></p>
+								</div>
+							{{/if}}
+						{{/if}}
+					</div>
 					<h3>Đăng nhập tài khoản</h3>
 					<form class="row login_form" action="/login" id="login_form" method="POST">
 
@@ -22,13 +39,6 @@
 						</div>
 						<div class="col-md-12 form-group">
 							<input type="password" class="form-control" id="password-login" name="password" placeholder="Mật khẩu">
-						</div>
-						<div class="col-md-12 form-group err-block">
-							{{#if error}}
-							<strong class="text-danger" id="error-login">{{error}}</strong>
-							{{else}}
-							<strong class="text-danger" id="error-login"></strong>
-							{{/if}}
 						</div>
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit" class="button button-login" id="button-login">Đăng nhập</button>

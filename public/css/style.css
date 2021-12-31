@@ -487,7 +487,7 @@ textarea.input {
 }
 
 .header-ctn .menu-toggle {
-  display: none;
+  display: none!important;
 }
 
 .cart-dropdown {
@@ -2236,6 +2236,9 @@ button:focus {
 	.login_box_area .login_box_img {
 		height: 510px;
 	}
+  .login_box_area .register_box_img {
+		height: 638px;
+	}
 }
 
 @media (min-width: 991px) {
@@ -2315,7 +2318,7 @@ button:focus {
 
 @media (min-width: 1000px) {
 	.login_form_inner {
-		padding-top: 30px;
+		padding-top: 0px;
 		padding-bottom: 0px;
 	}
 }
@@ -2419,7 +2422,7 @@ button:focus {
 
 
 #login_form {
-  padding-bottom: 114px;
+  padding-bottom: 90px;
 }
 
 .descriptions {
@@ -2581,10 +2584,9 @@ button:focus {
   background-color: #3e8e41;
 }
 
-
-
-.err-block{
-  height: 25px;
+.message-block {
+  padding: 55px 30px;
+  height: 30px;
 }
 
 .cart-box
@@ -2637,8 +2639,20 @@ button:focus {
 {
   margin-top: 10px;
 }
-.cart-box hr
-{
- color: black;
 
+
+.message-block-register {
+  padding: 10px 20px 50px 20px;
+  height: 30px;
+}
+
+@media screen and (max-width: 600px) {
+  .message-block-register {
+    padding: 10px 20px 70px 20px;
+    height: 30px;
+  }
+}
+
+.message {
+  font-weight: bold;
 }
