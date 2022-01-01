@@ -1,4 +1,5 @@
 const orderSevice = require('./orderService');
+const voucherService = require('../vouchers/voucherService')
 exports.list = async (req, res, next) => {
     try {
         const user = req.user;
@@ -15,7 +16,8 @@ exports.detail = async (req, res, next) => {
         const order_id = req.params.order_id;
         const detailOrder = await orderSevice.detailOrder(order_id);
         const order =  await orderSevice.order(order_id);
-        res.render('../components/orders/orderViews/detailOrder',{detailOrder,order});
+        const voucher = await voucherService.getVoucher(order.voucher);
+        res.render('../components/orders/orderViews/detailOrder',{detailOrder,order,voucher});
     }
     catch (error) {
         next(error);
