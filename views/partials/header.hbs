@@ -59,29 +59,27 @@
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Cart -->
+                        {{#with cart}}
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <a href="/cart">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Giỏ hàng</span>
-
-                                    {{#with cart}}
                                     {{#if products}}
                                     <div class="qty" id="cart-product-quantity">{{products.length}}</div>
                                     {{else}}
                                     <div class="qty" id="cart-product-quantity">0</div>
                                     {{/if}}
-                                    {{/with}}
+                                    
                                 </a>
                             </a>
-                             {{#with cart}}
                             <div class="dropdown-content cart-box container">
                                 <div class="container">
                                     <div class="shopping-cart">
+                                        {{#if products}}
                                         <ul class="shopping-cart-items">
                                             <li class="clearfix">
                                                 <table style="margin-top:10px;">
-                                                   
                                                     {{#each products}}
                                                     <tr>
                                                         <td>
@@ -123,34 +121,31 @@
                                             <span class="total">{{totalString}}</span>
                                         </div>
                                         <a href="/cart/checkout" class="cart-box-btn btn btn-primary">Đặt hàng</a>
-                                      
+                                        {{else}}
+                                        <div class="no-item-cart">
+                                            <span class="lighter-text"><b>Giỏ hàng chưa có sản phẩm</b></span>
+                                        </div>
+                                        {{/if}}
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <!--end shopping-cart -->
+                        {{/with}}
+                        <!-- /Cart -->
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#" class="menu-icon-text">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
                     </div>
-                    <!--end container -->
                 </div>
-
+                 <!-- /ACCOUNT -->
             </div>
-            <!-- /Cart -->
-  {{/with}}
-            <!-- Menu Toogle -->
-            <div class="menu-toggle">
-                <a href="#" class="menu-icon-text">
-                    <i class="fa fa-bars"></i>
-                    <span>Menu</span>
-                </a>
-            </div>
-            <!-- /Menu Toogle -->
         </div>
-    </div>
-    <!-- /ACCOUNT -->
-    </div>
-    <!-- row -->
-    </div>
-    <!-- container -->
+        <!--end container -->
     </div>
     <!-- /MAIN HEADER -->
 </header>
