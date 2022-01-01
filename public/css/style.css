@@ -2591,7 +2591,7 @@ button:focus {
 
 .cart-box
 {
-  width: 350px;
+  width: 370px;
   border-radius: 10px;
   font-size: 10px;
   padding: 3px;
@@ -2628,7 +2628,7 @@ button:focus {
 {
   width: 100px;
   color: black;
-  margin-left: 34%;
+  margin-left: 35%;
   margin-top: 10px;
   background-color: #D10024;
   padding: 7px;
@@ -2655,4 +2655,10 @@ button:focus {
 
 .message {
   font-weight: bold;
+}
+
+.discount::after
+{
+  content:" vnđ";
+  font-size: 80%;
 }

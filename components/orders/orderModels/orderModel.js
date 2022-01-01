@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     total_price: {
       type: DataTypes.INTEGER,
-      allowNull: true
+      allowNull: false,
+      defaultValue:0
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -25,7 +26,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     order_status: {
       type: DataTypes.STRING(30),
-      allowNull: true
+      allowNull: false,
+      defaultValue: "Đang giao hàng"
     },
     payment_status: {
       type: DataTypes.STRING(30),

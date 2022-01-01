@@ -49,3 +49,27 @@ exports.order = (id) =>
         }
     )
 }
+
+exports.create = (order) =>
+{
+  
+    return models.orders.create({
+        user_id:order.user_id,
+        receive_phone:order.receive_phone,
+        receive_address:order.receive_address,
+        voucher:order.voucher
+    });
+}
+exports.createDetail = async (detail) =>
+{
+    console.log(detail.order_id);
+    console.log(detail.product_id);
+    console.log(detail.quantity);
+    return await models.detailorders.create(
+        {
+            order_id:detail.order_id,
+            product_id:detail.product_id,
+            quantity:detail.quantity
+        }
+    );
+}

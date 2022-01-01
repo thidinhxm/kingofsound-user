@@ -7,7 +7,7 @@
 			<h2>Thông tin giao hàng</h2>
 		</div>
 		<div class="d-flex">
-			<form action="/checkout" method="GET" id = "checkout-form">
+			<form action="/cart/checkout" method="POST" id = "checkout-form">
 				<label>
 					<span class="fname">Họ <span class="required">*</span></span>
 					<input type="text" name="fname" value = "{{user.firstname}}"  required="">
@@ -18,28 +18,27 @@
 				</label>
 				<label>
 					<span>Địa chỉ nhận hàng <span class="required">*</span></span>
-					<input type="text" name="address" value ="{{user.address}}" required="" value >
+					<input type="text" name="address" value ="{{user.address}}" required="">
 				</label>
 				<label>
 					<span>Số điện thoại <span class="required">*</span></span>
-					<input type="tel" name="phone"  value = "{{user.phone}}" required=""> 
+					<input type="text" name="phone"  value = "{{user.phone}}" required=""> 
 				</label>
 				<label>
 					<span>Email <span class="required">*</span></span>
-					<input type="email" name="email" value = "{{user.email}}" required="" readonly> 
+					<input type="email" name="email" value="{{user.email}}" required="" readonly> 
 				</label>
 				<label>
 					<span>Hình thức thanh toán <span class="required">*</span></span>
-					<select select name="selection">
-					<option value="select">Chọn</option>
+					<select select name="payment">
 						<option value="COD">Thanh toán khi nhận hàng</option>
 						<option value="CK">Thanh toán chuyển khoản</option>
 					</select>
 				</label>
 				<label>
 					<span>Đơn vị vận chuyển <span class="required">*</span></span>
-					<select name="selection">
-						<option value="select">Chọn</option>
+					<select name="ship">
+					
 						<option value="GHN">Giao hàng nhanh</option>
 						<option value="VTP">Viettel Post</option>
 						<option value="NJL">Ninja Lead</option>
@@ -47,8 +46,8 @@
 					</select>
 				</label>
 				<label>
-					<span>Mã giảm giá <span></span></span>
-					<input type="text" name="promo-code" value = "" placeholder="Nhập mã giảm giá"> 
+					<span>Mã giảm giá</span>
+					<input type="text" name="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()"> 
 
 				</label>
 			</form>
@@ -74,8 +73,8 @@
 						<td>Miễn phí</td>
 					</tr>
 					<tr>
-						<td>Giảm giá - 10% </td>
-						<td>200.000</td>
+						<td>Giảm giá - 0% </td>
+						<td class = "discount">0</td>
 					</tr>
 					<tr>
 						<td>Tổng cộng</td>
