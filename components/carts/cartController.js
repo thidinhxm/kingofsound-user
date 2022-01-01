@@ -32,7 +32,6 @@ exports.createOrder = async (req, res, next) => {
             cart_id:cart.cart_id
         };
         const newOrder = await orderService.create(order);
-        const newOrder_id = newOrder.order_id;
         const detailcart = await cartService.getDetailCart(cart.cart_id);
         detailcart.forEach(element => {
           orderService.createDetail({
@@ -43,6 +42,7 @@ exports.createOrder = async (req, res, next) => {
         });
         await cartService.deleteDetailCart(cart.cart_id);
         req.session.cart = await cartService.getDetailsInCart(cart.cart_id);
+        req.session.cart.cart_id = cart.cart_id;
         req.session.save(function(err) {console.log(err);})
         res.redirect('/orders');
     }

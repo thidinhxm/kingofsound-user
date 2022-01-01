@@ -62,9 +62,6 @@ exports.create = (order) =>
 }
 exports.createDetail = async (detail) =>
 {
-    console.log(detail.order_id);
-    console.log(detail.product_id);
-    console.log(detail.quantity);
     return await models.detailorders.create(
         {
             order_id:detail.order_id,
