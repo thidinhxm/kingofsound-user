@@ -24,8 +24,3 @@ exports.getAverageRating = (reviews) => {
         return total + review.rating;
     }, 0) / reviews.length;
 }
-
-// exports.createProductRating = async (product) => {
-//     product.reviews = await this.getReviewsProduct(product.productid);
-//     product.average_rating = this.getAverageRating(product.reviews);
-// }

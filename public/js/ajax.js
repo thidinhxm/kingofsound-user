@@ -156,8 +156,6 @@ const removeFromCart = function (product_id) {
 
 // /*------------ AJAX CHANGE-QUANTITY --------------*/
 const changeQuantity = function (product_id, quantityInput) {
-    console.log(product_id);
-    console.log(quantityInput);
     $.ajax({
         url: `/cart/${product_id}/update`,
         type: 'PATCH',
@@ -274,7 +272,6 @@ const addComment = function(product_id, event) {
 
     function loadComments(product_id) {
         $.getJSON(`/products/${product_id}/comments`, function(data) {
-            console.log($('#comment-list-template').html());
             let commentTemplate = Handlebars.compile($('#comment-list-template').html());
             $('#comment-length').text(`Bình luận (${data.pagination.totalRows})`);
             $('#comment-list').html(commentTemplate({comments: data.comments}));

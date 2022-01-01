@@ -101,44 +101,68 @@ exports.getOne = (id) => {
     });
 }
 
-exports.getNewProducts = (limit = 10) => {
-    return models.products.findAll({
-        limit : limit,
-        order : [
-            ['model_year', 'DESC']
-        ],
-        where : {
-            is_active : 1
-        },
-        include : [{
-            model : models.images,
-            as : 'images',
+exports.getNewProducts = async (limit = 10) => {
+    try {
+        const newProducts = await  models.products.findAll({
+            limit : limit,
+            order : [
+                ['model_year', 'DESC']
+            ],
             where : {
-                image_stt: 1
+                is_active : 1
             },
-        }],
-        raw : true
-    });
+            include : [{
+                model : models.images,
+                as : 'images',
+                where : {
+                    image_stt: 1
+                },
+            }],
+            raw : true
+        });
+
+        if (newProducts) {
+            newProducts.forEach(async (product) => {
+                product.reviews = await reviewService.getReviewsProduct(product.product_id);
+                product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
+            });
+        }
+    }
+    catch(error) {
+        throw error;
+    }
 }
 
-exports.getHotProducts = (limit = 10) => {
-    return models.products.findAll({
-        limit : limit,
-        order : [
-            ['model_year']
-        ],
-        where : {
-            is_active : 1
-        },
-        include : [{
-            model : models.images,
-            as : 'images',
+exports.getHotProducts = async (limit = 10) => {
+    try {
+        hotProducts = await models.products.findAll({
+            limit : limit,
+            order : [
+                ['model_year']
+            ],
             where : {
-                image_stt: 1
+                is_active : 1
             },
-        }],
-        raw : true
-    });
+            include : [{
+                model : models.images,
+                as : 'images',
+                where : {
+                    image_stt: 1
+                },
+            }],
+            raw : true
+        });
+
+        if (hotProducts) {
+            hotProducts.forEach(async (product) => {
+                product.reviews = await reviewService.getReviewsProduct(product.product_id);
+                product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
+            });
+        }
+    }
+    catch(error) {
+        throw error;
+    }
 }
 
 exports.getSimilarProducts = async (category_id, brand_id, product_id, limit = 10) => {

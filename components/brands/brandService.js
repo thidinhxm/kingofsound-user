@@ -1,6 +1,6 @@
 const {models} = require('../../models');
 const sequelize = require('sequelize');
-const Op = sequelize.Op;
+
 
 exports.getAll = () => {
     return models.brands.findAll({
