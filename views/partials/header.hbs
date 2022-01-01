@@ -12,8 +12,12 @@
                 <li><a href="#"><i class="fa fa-dollar"></i> USD</a></li>
                 {{#if user}}
                 <div class="dropdown">
-                    <li><a href="/user/profile"><i class="far fa-user" style=" font-size: 15px;"></i>{{user.firstname}}
-                            {{user.lastname}} </a></li>
+                    <li>
+                        <a href="/user/profile">
+                            <i class="far fa-user" style=" font-size: 15px;"></i>
+                            {{user.firstname}}{{user.lastname}} 
+                        </a>
+                    </li>
                     <div class="dropdown-content">
                         <a href="/user/profile">Tài khoản</a>
                         <a href="/orders">Đơn hàng</a>
@@ -59,29 +63,27 @@
                 <div class="col-md-3 clearfix">
                     <div class="header-ctn">
                         <!-- Cart -->
+                        {{#with cart}}
                         <div class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <a href="/cart">
                                     <i class="fa fa-shopping-cart"></i>
                                     <span>Giỏ hàng</span>
-
-                                    {{#with cart}}
                                     {{#if products}}
                                     <div class="qty" id="cart-product-quantity">{{products.length}}</div>
                                     {{else}}
                                     <div class="qty" id="cart-product-quantity">0</div>
                                     {{/if}}
-                                    {{/with}}
+                                    
                                 </a>
                             </a>
-                             {{#with cart}}
                             <div class="dropdown-content cart-box container">
                                 <div class="container">
-                                    <div class="shopping-cart">
+                                    <div class="shopping-cart" id="cart-list-dropdown">
+                                        {{#if products}}
                                         <ul class="shopping-cart-items">
                                             <li class="clearfix">
                                                 <table style="margin-top:10px;">
-                                                   
                                                     {{#each products}}
                                                     <tr>
                                                         <td>
@@ -118,39 +120,90 @@
                                                 </table>
                                             </li>
                                         </ul>
+                                        
                                         <div class="shopping-cart-total">
                                             <span class="lighter-text"><b>Tổng tiền: </b></span>
-                                            <span class="total">{{totalString}}</span>
+                                            <span class="total" id="cart-total-dropdwon">{{totalString}}</span>
                                         </div>
                                         <a href="/cart/checkout" class="cart-box-btn btn btn-primary">Đặt hàng</a>
-                                      
+                                        {{else}}
+                                        <div class="no-item-cart">
+                                            <span class="lighter-text"><b>Giỏ hàng chưa có sản phẩm</b></span>
+                                        </div>
+                                        {{/if}}
                                     </div>
+                                    <script type="text/x-handlebars-template" id="cart-dropdown-template">
+                                        \{{#if products}}
+                                        <ul class="shopping-cart-items">
+                                            <li class="clearfix">
+                                                <table style="margin-top:10px;">
+                                                    \{{#each products}}
+                                                    <tr>
+                                                        <td>
+                                                            <span>
+                                                                <img src="\{{image}}" alt="" height="40px" width="40px"
+                                                                    style="border: 1px solid black;margin-bottom:10px;padding:5px">
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                        </td>
+                                                        <td>
+                                                            <span>
+                                                                <span class="item-name">
+                                                                    <b>\{{quantity}}</b> x \{{product_name}}
+                                                                </span>
+                                                                <br>
+                                                                <span class="item-subtotal">
+                                                                    \{{priceString}}
+                                                                </span>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            &emsp;&emsp;&emsp;
+                                                        </td>
+                                                        <td>
+                                                            <span class="item-subtotal" style="float: right;">
+                                                                \{{subtotalString}}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    \{{/each}}
+                                                </table>
+                                            </li>
+                                        </ul>
+                                        
+                                        <div class="shopping-cart-total">
+                                            <span class="lighter-text"><b>Tổng tiền: </b></span>
+                                            <span class="total">\{{totalString}}</span>
+                                        </div>
+                                        <a href="/cart/checkout" class="cart-box-btn btn btn-primary">Đặt hàng</a>
+                                        \{{else}}
+                                        <div class="no-item-cart">
+                                            <span class="lighter-text"><b>Giỏ hàng chưa có sản phẩm</b></span>
+                                        </div>
+                                        \{{/if}}
+                                    </script>
                                 </div>
                             </div>
                         </div>
-                        <!--end shopping-cart -->
+                        {{/with}}
+                        <!-- /Cart -->
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#" class="menu-icon-text">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
                     </div>
-                    <!--end container -->
                 </div>
-
+                 <!-- /ACCOUNT -->
             </div>
-            <!-- /Cart -->
-  {{/with}}
-            <!-- Menu Toogle -->
-            <div class="menu-toggle">
-                <a href="#" class="menu-icon-text">
-                    <i class="fa fa-bars"></i>
-                    <span>Menu</span>
-                </a>
-            </div>
-            <!-- /Menu Toogle -->
         </div>
-    </div>
-    <!-- /ACCOUNT -->
-    </div>
-    <!-- row -->
-    </div>
-    <!-- container -->
+        <!--end container -->
     </div>
     <!-- /MAIN HEADER -->
 </header>
