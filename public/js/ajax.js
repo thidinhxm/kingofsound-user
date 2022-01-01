@@ -118,6 +118,10 @@ const addToCart = function(product_id) {
         success: function(data) {
             if (data.success) {
                 $('#cart-product-quantity').text(data.cart.products.length);
+                let cartDropDownTemplate = Handlebars.compile($('#cart-dropdown-template').html());
+                console.log(data.cart)
+                $('#cart-list-dropdown').html(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}));
+                console.log(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}))
                 return true;
             }
             else {
