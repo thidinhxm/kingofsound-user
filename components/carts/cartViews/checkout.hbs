@@ -22,7 +22,7 @@
 				</label>
 				<label>
 					<span>Số điện thoại <span class="required">*</span></span>
-					<input type="text" name="phone"  value = "{{user.phone}}" required=""> 
+					<input type="tel" name="phone"  value = "{{user.phone}}" required=""> 
 				</label>
 				<label>
 					<span>Email <span class="required">*</span></span>
@@ -47,8 +47,10 @@
 				</label>
 				<label>
 					<span>Mã giảm giá</span>
-					<input type="text" name="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()"> 
-
+					<input type="text" name="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()" onblur="checkVoucher(this.value,{{cart.total}})"> 
+					<span></span>
+					<div id = "voucher-error" style="color:red;"></div>
+					<div id = "voucher-success" style="color:green;"></div>
 				</label>
 			</form>
 			<div class="Yorder">
@@ -73,12 +75,12 @@
 						<td>Miễn phí</td>
 					</tr>
 					<tr>
-						<td>Giảm giá - 0% </td>
-						<td class = "discount">0</td>
+						<td>Giảm giá - <span id="discount">0</span> % </td>
+						<td id="discount-total" class ="format-number">0</td>
 					</tr>
 					<tr>
 						<td>Tổng cộng</td>
-						<td class="tt">{{totalString}}</td>
+						<td class="tt" id ="total"  class ="format-number">{{totalString}}</td>
 					</tr>
 					{{/with}}
 				</table><br>

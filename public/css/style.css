@@ -2662,3 +2662,13 @@ button:focus {
   content:" vnđ";
   font-size: 80%;
 }
+#discount-total::after
+{
+  content: " vnđ";
+  font-size: 80%;
+}
+#discount-total::before
+{
+  content: "- ";
+ 
+}

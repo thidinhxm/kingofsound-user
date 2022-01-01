@@ -1,4 +1,4 @@
-const checkInputRegister = function(email, password, comfirmPassword, firstname, lastname, phone, address) {
+const checkInputRegister = function (email, password, comfirmPassword, firstname, lastname, phone, address) {
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     const phoneRegex = /^[0-9]{10,11}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
@@ -23,7 +23,7 @@ const checkInputRegister = function(email, password, comfirmPassword, firstname,
 }
 
 /*-------------AJAX REGISTER-------------*/
-$('#button-register').click(function(e) {
+$('#button-register').click(function (e) {
     e.preventDefault();
     const email = $('#email').val();
     const password = $('#password').val();
@@ -37,7 +37,7 @@ $('#button-register').click(function(e) {
         $('#error-register').addClass('alert-danger').text(error);
         return false;
     }
-    
+
     $.ajax({
         url: '/api/check-exists-account',
         type: 'POST',
@@ -49,7 +49,7 @@ $('#button-register').click(function(e) {
             phone: phone,
             address: address
         },
-        success: function(data) {
+        success: function (data) {
             if (data) {
                 $('#error-register').addClass('alert-danger').text('Email đã tồn tại');
                 return false;
@@ -62,7 +62,7 @@ $('#button-register').click(function(e) {
     });
 });
 
-const checkInputLogin = function(email, password) {
+const checkInputLogin = function (email, password) {
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (email == '' || password == '') {
         return 'Vui lòng nhập đầy đủ thông tin';
@@ -74,11 +74,11 @@ const checkInputLogin = function(email, password) {
 }
 
 /*------------ AJAX LOGIN --------------*/
-$('#button-login').click(function(e) {
+$('#button-login').click(function (e) {
     e.preventDefault();
     const email = $('#email-login').val();
     const password = $('#password-login').val();
-    
+
     const error = checkInputLogin(email, password);
     if (error != null) {
         $('#error-login').addClass('alert-danger').text(error);
@@ -92,7 +92,7 @@ $('#button-login').click(function(e) {
             email: email,
             password: password
         },
-        success: function(data) {
+        success: function (data) {
             if (data) {
                 $('#login_form').submit();
                 return true;
@@ -107,7 +107,7 @@ $('#button-login').click(function(e) {
 
 
 /*------------ AJAX ADD-TO-CART --------------*/
-const addToCart = function(product_id) {
+const addToCart = function (product_id) {
     console.log(product_id);
     $.ajax({
         url: '/cart/add',
@@ -115,7 +115,7 @@ const addToCart = function(product_id) {
         data: {
             product_id: product_id,
         },
-        success: function(data) {
+        success: function (data) {
             if (data.success) {
                 $('#cart-product-quantity').text(data.cart.products.length);
                 return true;
@@ -124,21 +124,21 @@ const addToCart = function(product_id) {
                 return false;
             }
         }
-    });    
+    });
 };
 
 /*------------ AJAX REMOVE-FROM-CART --------------*/
-const removeFromCart = function(product_id) {
+const removeFromCart = function (product_id) {
     $.ajax({
         url: `/cart/${product_id}/delete`,
         type: 'DELETE',
         data: {
             product_id: product_id,
         },
-        success: function(data) {
+        success: function (data) {
             if (data.success) {
                 let cartListTemplate = Handlebars.compile($('#cart-list-template').html());
-                $('#cart-list').html(cartListTemplate({cart: data.cart}));
+                $('#cart-list').html(cartListTemplate({ cart: data.cart }));
                 $('#cart-product-quantity').text(data.cart.products.length);
                 return true;
             }
@@ -151,7 +151,7 @@ const removeFromCart = function(product_id) {
 
 
 // /*------------ AJAX CHANGE-QUANTITY --------------*/
-const changeQuantity = function(product_id, quantityInput) {
+const changeQuantity = function (product_id, quantityInput) {
     console.log(product_id);
     console.log(quantityInput);
     $.ajax({
@@ -161,10 +161,10 @@ const changeQuantity = function(product_id, quantityInput) {
             product_id: product_id,
             quantity: quantityInput.value
         },
-        success: function(data) {
+        success: function (data) {
             if (data.success) {
                 let cartListTemplate = Handlebars.compile($('#cart-list-template').html());
-                $('#cart-list').html(cartListTemplate({cart: data.cart}));
+                $('#cart-list').html(cartListTemplate({ cart: data.cart }));
                 return true;
             }
             else {
@@ -187,7 +187,7 @@ const createPagination = function (pagination) {
 
     // ========= Previous Button ===============
     if (page === 1) {
-        n = 1;					
+        n = 1;
 
         template = template + `<li class="disabled"><a onclick="changePage(${n})">${leftText}</a></li>`;
     }
@@ -198,7 +198,7 @@ const createPagination = function (pagination) {
 
     // ========= Page Numbers Middle ======
 
-    
+
     let leftCount = Math.ceil(limit / 2) - 1;// 10 / 2 - 1 = 4
     let rightCount = limit - leftCount - 1;//5
     if (page + rightCount > pageCount) {//1 + 5 > 6
@@ -222,9 +222,9 @@ const createPagination = function (pagination) {
         i++;
     }
 
-// ========== Next Buton ===========
+    // ========== Next Buton ===========
     if (page === pageCount) {
-        n = pageCount;         
+        n = pageCount;
         template = template + `<li class="disabled"><a onclick="changePage(${n})">${rightText}</a></li>`;
     }
     else {
@@ -236,15 +236,15 @@ const createPagination = function (pagination) {
 };
 
 function loadComments(product_id) {
-    $.getJSON(`/products/${product_id}/comments`, function(data) {
+    $.getJSON(`/products/${product_id}/comments`, function (data) {
         console.log($('#comment-list-template').html());
         let commentTemplate = Handlebars.compile($('#comment-list-template').html());
         $('#comment-length').text(`Bình luận (${data.pagination.totalRows})`);
-        $('#comment-list').html(commentTemplate({comments: data.comments}));
+        $('#comment-list').html(commentTemplate({ comments: data.comments }));
         $('#pagination-comment').html(createPagination(data.pagination));
     });
 }
-const addComment = function(product_id, event) {
+const addComment = function (product_id, event) {
     event.preventDefault();
     const email = $('#email-comment').val();
     const name = $('#name-comment').val();
@@ -271,7 +271,7 @@ const addComment = function(product_id, event) {
             name: name,
             email: email
         },
-        success: function(data) {
+        success: function (data) {
             if (data) {
                 loadComments(product_id);
                 $('#content-comment').val('');
@@ -282,13 +282,13 @@ const addComment = function(product_id, event) {
             }
         }
     });
-};    
+};
 
 
 
 
 /*------------ AJAX FORGOT PASWWORD --------------*/
-$('#button-forgot-password').click(function(e) {
+$('#button-forgot-password').click(function (e) {
     e.preventDefault();
     const email = $('#email-forgot-password').val();
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -306,7 +306,7 @@ $('#button-forgot-password').click(function(e) {
         data: {
             email: email
         },
-        success: function(data) {
+        success: function (data) {
             if (data) {
                 $('#forgot-password-form').submit();
                 return true;
@@ -318,5 +318,40 @@ $('#button-forgot-password').click(function(e) {
         }
     });
 });
-
-
+/*----------------------CHECK VALID VOUCHER-----------------*/
+const checkVoucher = function (id,total) {
+    if (id != "")
+        $.ajax({
+            url: '/cart/checkout/voucher',
+            type: 'POST',
+            data: {
+                voucher_id: id,
+            },
+            success: function (data) {
+                if (data.success) {
+                    $('#discount').text(data.discount);
+                    $('#voucher-success').text("Áp dụng khuyến mại thành công");
+                    $('#voucher-error').text("");
+                    $('#discount-total').text((total*data.discount/100).toLocaleString(undefined,));
+                    $('#total').text((total-total*data.discount/100).toLocaleString(undefined,));
+                    return true;
+                }
+                else {
+                    $('#discount').text(0);
+                    $('#voucher-error').text("Mã khuyến mại không hợp lệ");
+                    $('#voucher-success').text("");
+                    $('#discount-total').text(0);
+                    $('#total').text((total).toLocaleString(undefined,));
+                    return false;
+                }
+            }
+        });
+    else
+        {
+        $('#voucher-error').text("");
+        $('#voucher-success').text("");
+        $('#discount').text(0);
+        $('#discount-total').text(0);
+        $('#total').text((total).toLocaleString(undefined,));
+        }
+};
