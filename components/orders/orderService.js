@@ -57,7 +57,8 @@ exports.create = (order) =>
         user_id:order.user_id,
         receive_phone:order.receive_phone,
         receive_address:order.receive_address,
-        voucher:order.voucher
+        voucher:order.voucher,
+        payment_status:order.payment_status
     });
 }
 exports.createDetail = async (detail) =>

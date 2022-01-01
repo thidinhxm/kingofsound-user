@@ -7,10 +7,13 @@ exports.addToCart = async (req, res, next) => {
         await cartService.addToCart(cart_id, product_id);
         if (req.user) {
             req.session.cart = await cartService.getUserCart(req.user.user_id);
+            
         }
         else {
             req.session.cart = await cartService.getUnauthCart(req.session.unauth_id);
         }
+        
+        res.locals.cart = req.session.cart;
         res.json({
             success: true,
             cart: req.session.cart

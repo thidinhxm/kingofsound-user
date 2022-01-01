@@ -118,6 +118,10 @@ const addToCart = function (product_id) {
         success: function (data) {
             if (data.success) {
                 $('#cart-product-quantity').text(data.cart.products.length);
+                let cartDropDownTemplate = Handlebars.compile($('#cart-dropdown-template').html());
+                console.log(data.cart)
+                $('#cart-list-dropdown').html(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}));
+                console.log(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}))
                 return true;
             }
             else {
@@ -175,7 +179,7 @@ const changeQuantity = function (product_id, quantityInput) {
 };
 
 /*------------ AJAX ADD COMMENT --------------*/
-const createPagination = function (pagination) {
+const paginateCommentList = function (pagination, product_id) {
     let limit = 10, n;
     let page = parseInt(pagination.page);
     let leftText = '<i class="fa fa-chevron-left"></i>';
@@ -184,67 +188,52 @@ const createPagination = function (pagination) {
 
     let pageCount = Math.ceil(pagination.totalRows / pagination.limit);
     let template = '<ul class="' + paginationClass + '">';
-
     // ========= Previous Button ===============
     if (page === 1) {
         n = 1;
 
-        template = template + `<li class="disabled"><a onclick="changePage(${n})">${leftText}</a></li>`;
+        template = template + `<li class="disabled"><a onclick="changePage(${n}, ${product_id})">${leftText}</a></li>`;
     }
     else {
         n = page - 1;
-        template = template + `<li><a onclick="changePage(${n})">${leftText}</a></li>`;
+        template = template + `<li><a onclick="changePage(${n}, ${product_id})">${leftText}</a></li>`;
     }
-
     // ========= Page Numbers Middle ======
-
-
-    let leftCount = Math.ceil(limit / 2) - 1;// 10 / 2 - 1 = 4
-    let rightCount = limit - leftCount - 1;//5
-    if (page + rightCount > pageCount) {//1 + 5 > 6
-        leftCount = limit - (pageCount - page) - 1;//10 - (6 - 2) - 1 = 5
+    let leftCount = Math.ceil(limit / 2) - 1;
+    let rightCount = limit - leftCount - 1;
+    if (page + rightCount > pageCount) {
+        leftCount = limit - (pageCount - page) - 1;
     }
-    if (page - leftCount < 1) {//1 - 4 < 1
-        leftCount = page - 1; //0
+    if (page - leftCount < 1) {
+        leftCount = page - 1;
     }
-    let start = page - leftCount;//1
+    let start = page - leftCount;
     let i = 0;
     while (i < limit && i < pageCount) {
         n = start;
         if (start === page) {
-            template = template + `<li class="active"><a onclick="changePage(${n})">${n}</a></li>`;
+            template = template + `<li class="active"><a onclick="changePage(${n}, ${product_id})">${n}</a></li>`;
 
         } else {
-            template = template + `<li><a onclick="changePage(${n})">${n}</a></li>`;
+            template = template + `<li><a onclick="changePage(${n}, ${product_id})">${n}</a></li>`;
         }
-
         start++;
         i++;
     }
-
-    // ========== Next Buton ===========
+// ========== Next Buton ===========
     if (page === pageCount) {
-        n = pageCount;
-        template = template + `<li class="disabled"><a onclick="changePage(${n})">${rightText}</a></li>`;
+        n = pageCount;         
+        template = template + `<li class="disabled"><a onclick="changePage(${n}, ${product_id})">${rightText}</a></li>`;
     }
     else {
         n = page + 1;
-        template = template + `<li><a onclick="changePage(${n})">${rightText}</a></li>`;
+        template = template + `<li><a onclick="changePage(${n}, ${product_id})">${rightText}</a></li>`;
     }
     template = template + '</ul>';
     return template;
 };
 
-function loadComments(product_id) {
-    $.getJSON(`/products/${product_id}/comments`, function (data) {
-        console.log($('#comment-list-template').html());
-        let commentTemplate = Handlebars.compile($('#comment-list-template').html());
-        $('#comment-length').text(`Bình luận (${data.pagination.totalRows})`);
-        $('#comment-list').html(commentTemplate({ comments: data.comments }));
-        $('#pagination-comment').html(createPagination(data.pagination));
-    });
-}
-const addComment = function (product_id, event) {
+const addComment = function(product_id, event) {
     event.preventDefault();
     const email = $('#email-comment').val();
     const name = $('#name-comment').val();
@@ -282,9 +271,30 @@ const addComment = function (product_id, event) {
             }
         }
     });
-};
 
+    function loadComments(product_id) {
+        $.getJSON(`/products/${product_id}/comments`, function(data) {
+            console.log($('#comment-list-template').html());
+            let commentTemplate = Handlebars.compile($('#comment-list-template').html());
+            $('#comment-length').text(`Bình luận (${data.pagination.totalRows})`);
+            $('#comment-list').html(commentTemplate({comments: data.comments}));
+            $('#pagination-comment').html(paginateCommentList(data.pagination, product_id));
+        });
+    }
+};    
 
+/*------------ AJAX CHANGE-PAGE-COMMENT-LisT --------------*/
+const changePage = (n, product_id) => {
+    $.ajax({
+        url: '/products/' + product_id + '/comments?page=' + n,
+        type: 'GET',
+        success: function(data) {
+            let commentTemplate = Handlebars.compile($('#comment-list-template').html());
+            $('#comment-list').html(commentTemplate({comments: data.comments}));
+            $('#pagination-comment').html(paginateCommentList(data.pagination, product_id));
+        }
+    });
+}
 
 
 /*------------ AJAX FORGOT PASWWORD --------------*/
