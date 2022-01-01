@@ -171,11 +171,13 @@
 				<!-- /store products -->
 
 				<!-- store bottom filter -->
+				{{#if pagination.pages}}
 				<div class="row justify-content-center">
 					<nav aria-label="Page navigation example" id="pagination">
 						{{{paginate pagination paginationClass="store-pagination"}}}
 					</nav>
 				</div>
+				{{/if}}
 				<!-- /store bottom filter -->
 			</div>
 			<!-- /STORE -->

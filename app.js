@@ -36,7 +36,7 @@ app.engine('hbs', exphbs({
 		getPercentRating: reviewHelper.getPercentRating,
 		formatDateTime: reviewHelper.formatDateTime,
 		formatPrice: orderHelper.formatPrice,
-		createPaginate: productHelper.createPaginate,
+		paginateCommentList: productHelper.paginateCommentList,
 	}
 }))
 
