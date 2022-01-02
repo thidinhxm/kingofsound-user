@@ -112,14 +112,13 @@ const addToCart = function (product_id, btn) {
     if (btn) {
         console.log(btn);
         quantity = $(btn).closest('div.buy-now').find('input[name="quantity"]').val();
-        console.log(quantity);
     }
     $.ajax({
         url: '/cart/add',
         type: 'POST',
         data: {
             product_id: product_id,
-            quantity: quantity
+            quantity: parseInt(quantity)
         },
         success: function (data) {
             if (data.success) {

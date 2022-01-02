@@ -150,7 +150,7 @@ exports.addToCart = async (cart_id, product_id, quantity = 1) => {
         });
     
         if (detailCart) {
-            await this.changeQuantity(cart_id, product_id, detailCart.quantity + quantity);
+            await this.changeQuantity(cart_id, product_id, detailCart.quantity + parseInt(quantity));
         }
         else {
             await models.detailcarts.create({
