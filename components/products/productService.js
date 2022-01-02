@@ -50,7 +50,6 @@ exports.getAll = async (query) => {
                     ['model_year', 'ASC']
                 ];
             }
-           
             else {
                 option.order = [
                     ['product_name', 'ASC']
@@ -127,6 +126,7 @@ exports.getNewProducts = async (limit = 10) => {
                 product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
             });
         }
+        return newProducts;
     }
     catch(error) {
         throw error;
@@ -159,6 +159,8 @@ exports.getHotProducts = async (limit = 10) => {
                 product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
             });
         }
+
+        return hotProducts;
     }
     catch(error) {
         throw error;

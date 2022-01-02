@@ -2572,6 +2572,12 @@ button:focus {
   font-weight: bolder;
 }
 
+.cart-box .btn-primary:hover
+{
+  background-color: #D10024;
+  color: white;
+}
+
 .shopping-cart-total
 {
   margin-top: 10px;

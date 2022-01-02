@@ -123,11 +123,12 @@
   font-size: 15px;
   font-weight: bold;
 }
+
 .checkout button:hover{
-  cursor: pointer;
-  background: #428a7d;
+  background: #960707;
 }
-.checkout ul li{
+
+checkout ul li{
     float:left;
     margin-right: 10px;
     font-size: 30px;

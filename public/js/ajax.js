@@ -107,21 +107,25 @@ $('#button-login').click(function (e) {
 
 
 /*------------ AJAX ADD-TO-CART --------------*/
-const addToCart = function (product_id) {
-    console.log(product_id);
+const addToCart = function (product_id, btn) {
+    let quantity = 1;
+    if (btn) {
+        console.log(btn);
+        quantity = $(btn).closest('div.buy-now').find('input[name="quantity"]').val();
+        console.log(quantity);
+    }
     $.ajax({
         url: '/cart/add',
         type: 'POST',
         data: {
             product_id: product_id,
+            quantity: quantity
         },
         success: function (data) {
             if (data.success) {
                 $('#cart-product-quantity').text(data.cart.products.length);
                 let cartDropDownTemplate = Handlebars.compile($('#cart-dropdown-template').html());
-                console.log(data.cart)
                 $('#cart-list-dropdown').html(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}));
-                console.log(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}))
                 return true;
             }
             else {
