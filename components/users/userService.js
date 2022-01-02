@@ -1,5 +1,4 @@
 const {models} = require('../../models');
-const bcrypt = require('bcrypt');
 
 exports.getUserByEmail = (email) => {
 	return models.users.findOne({
@@ -41,6 +40,7 @@ exports.createUser = (user) => {
 exports.createUserRole = (role) => {
 	return models.userroles.create(role);
 }
+
 exports.updateUser = (user) => {
 	return models.users.update(user, {
 		where: {
@@ -48,18 +48,16 @@ exports.updateUser = (user) => {
 		}
 	});
 }
-exports.updatePassword = (id,newpassword) =>
-{
-	const salt = bcrypt.genSaltSync(10);
-    const passwordHash = bcrypt.hashSync(newpassword, salt);
+exports.updatePassword = (id, passwordHash) => {
 	return models.users.update({
 		password: passwordHash
 	}, {
-		where:{
+		where: {
 			user_id:id
 		}
-	})
+	});
 }
+
 exports.getUserByToken = (token) => {
 	return models.users.findOne({
 		where: {token: token},

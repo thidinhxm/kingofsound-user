@@ -65,12 +65,12 @@ exports.getDetailsInCart = async (cart_id) => {
         throw err;
     }
 }
-exports.getDetailCart = (cart_id) =>
-{
+
+exports.getDetailCart = (cart_id) => {
     return models.detailcarts.findAll({where:{cart_id:cart_id},raw:true})
 }
-exports.deleteDetailCart = (id) =>
-{
+
+exports.deleteDetailCart = (id) => {
     return models.detailcarts.destroy({where:{cart_id:id}})
 }
 exports.getUserCart = async (user_id) => {
