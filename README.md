@@ -10,13 +10,12 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 ## 1. Contributors
 <details>
     <summary>Details of members</summary>
-|    ID    |      Fullname      |            Github                                                        | Role   |
-|----------|--------------------|--------------------------------------------------------------------------|--------|
+|    ID    |      Fullname      |            Github                                                        |  Role  |
+| -------- | ------------------ | ------------------------------------------------------------------------ | ------ |
 | 19120662 | Đinh Trần Xuân Thi | [https://github.com/thidinhxm](https://github.com/thidinhxm)             | Leader |
 | 19120517 | Trương Văn Hoàng   | [https://github.com/Hoangtruongvann](https://github.com/Hoangtruongvann) | Member |
 | 19120695 | Nguyễn Văn Trịnh   | [https://github.com/nvtrinh2412](https://github.com/nvtrinh2412)         | Member |
 </details>
-
 
 ## 2. Technical stack
 - Frontend: HTML5, CSS3, Bootstrap, Jquery, AJAX
@@ -26,73 +25,73 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 
 
 ## 3. Github Admin Project Link
-> ***https://github.com/thidinhxm/web-app-admin-project
+> ***https://github.com/thidinhxm/web-app-admin-project***
 
 ## 4. Features of website
 
 <details>
     <summary>1. Features when not logged in </summary>
-1.1. Contents of the homepage
-1.2. View a list of prouducts by product type/manufacturer/category
-1.3. Support to change display order, filter products
-1.4. List of products pagination
-1.5. View product details
-1.6. Show related products
-1.7. Show list of product comment
-1.8. Add a comment
-1.9. List of comments pagination
-1.10. Search
-1.11. Advanced search
-1.12. Search pagination
-1.13. Select product to cart
-1.14. Manage cart
+- 1.1. Contents of the homepage
+- 1.2. View a list of prouducts by product type/manufacturer/category
+- 1.3. Support to change display order, filter products
+- 1.4. List of products pagination
+- 1.5. View product details
+- 1.6. Show related products
+- 1.7. Show list of product comment
+- 1.8. Add a comment
+- 1.9. List of comments pagination
+- 1.10. Search
+- 1.11. Advanced search
+- 1.12. Search pagination
+- 1.13. Select product to cart
+- 1.14. Manage cart
 </details>
 
 <details>
     <summary>2. Authentication and authorization </summary>
-2.1. Use a specialized library in authentication
-2.2. Register an account
-2.3. Check constraints on username, password, confirm password,...
-2.4. Activate an account by email
-2.5. Login
-2.6. Prohibit non-logged-in users from using features that require login by authority
-2.7. Forgot password and Reset password
+- 2.1. Use a specialized library in authentication
+- 2.2. Register an account
+- 2.3. Check constraints on username, password, confirm password,...
+- 2.4. Activate an account by email
+- 2.5. Login
+- 2.6. Prohibit non-logged-in users from using features that require login by authority
+- 2.7. Forgot password and Reset password
 </details>
 
 <details>
     <summary>3. Feature when logged in </summary>
-3.1. Update personal information
-3.2. Check constraints
-3.3. Change password
-3.4. Order and payment
-3.5. Fill in shipping information
-3.6. View process history information and purchase status
+- 3.1. Update personal information
+- 3.2. Check constraints
+- 3.3. Change password
+- 3.4. Order and payment
+- 3.5. Fill in shipping information
+- 3.6. View process history information and purchase status
 </details>
 
 <details>
     <summary>4. Feature of administrator</summary>
-4.1. Update personal information
-4.2. View a list of user accounts
-4.3. User list pagination
-4.4. View user details
-4.5. Lock/Unlock a user account
-4.6. Manage store system
-4.7. Manage products on the store
-4.8. Pagination, filter products list
-4.9. Check constraints on products
-4.10. Upload product images
-4.11. Manage orders
-4.12. Statistics of sales by day, week, month, year
-4.13. Statistics on the number of top 10 sales of products
+- 4.1. Update personal information
+- 4.2. View a list of user accounts
+- 4.3. User list pagination
+- 4.4. View user details
+- 4.5. Lock/Unlock a user account
+- 4.6. Manage store system
+- 4.7. Manage products on the store
+- 4.8. Pagination, filter products list
+- 4.9. Check constraints on products
+- 4.10. Upload product images
+- 4.11. Manage orders
+- 4.12. Statistics of sales by day, week, month, year
+- 4.13. Statistics on the number of top 10 sales of products
 </details>
 
 
 <details>
     <summary>5. Some advanced feature</summary>
-5.1. Hosting webiste
-5.2. AJAX (pagination, mangage cart, check exists account,...)
-5.3. Vouchers
-5.4. Rating
+- 5.1. Hosting webiste
+- 5.2. AJAX (pagination, mangage cart, check exists account,...)
+- 5.3. Vouchers
+- 5.4. Rating
 </details>
 
 ## 5. Usage
