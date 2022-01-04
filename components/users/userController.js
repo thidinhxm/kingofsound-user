@@ -39,8 +39,9 @@ exports.updateUser = async (req,res) => {
 
         await userService.updateUser(updateUser);
         req.user = await userService.getUserById(user.user_id);
-
         res.redirect('/user/profile?message=success'); 
+
+        
     }
     catch (error) {
         next(error);

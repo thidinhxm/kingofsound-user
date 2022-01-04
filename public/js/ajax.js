@@ -11,8 +11,8 @@ const checkInputRegister = function (email, password, comfirmPassword, firstname
     if (!passwordRegex.test(password)) {
         return 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt';
     }
-    if (password != comfirmPassword) {
-        console.log(password, comfirmPassword);
+    if (password !== comfirmPassword) {
+
         return 'Mật khẩu không trùng khớp';
     }
     if (!phoneRegex.test(phone)) {
@@ -110,7 +110,6 @@ $('#button-login').click(function (e) {
 const addToCart = function (product_id, btn) {
     let quantity = 1;
     if (btn) {
-        console.log(btn);
         quantity = $(btn).closest('div.buy-now').find('input[name="quantity"]').val();
     }
     $.ajax({

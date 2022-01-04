@@ -25,7 +25,7 @@
 							</div>
 							{{#each subCategories}}
 							<div class="input-checkbox checksub" id="subCategories{{category_id}}">
-								<input type="checkbox" id="subCategory{{category_id}}" value="{{category_id}}" name="categories">
+								<input type="checkbox" id="subCategory{{category_id}}" value="{{category_id}}" name="subCategories">
 								<label for="subCategory{{category_id}}"  class="subcheck">
 									<span></span>
 									{{category_name}}
@@ -190,16 +190,6 @@
 {{> newsletter}}
 {{> footer }}
 <script>
-	const checkboxes = $('.group-checkbox .checkall input').toArray();
-	checkboxes.forEach(function(item) {
-		$(item).change(function() {
-			if ($(this).prop('checked')) {
-				$(this).closest('.group-checkbox').find('input').prop('checked', true);
-			} else {
-				$(this).closest('.group-checkbox').find('input').prop('checked', false);
-			}
-		});
-	});
 	const urlParams = new URLSearchParams(window.location.search);
 	let params = {
 		page: 1,
@@ -207,6 +197,7 @@
 		max: 10000,
 		limit: 9,
 		categories: '',
+		subCategories: '',
 		brands: '',
 		sort: 'name',
 		search: ''
@@ -219,7 +210,7 @@
     }
 
 	$(document).ready(function() {
-		const checkboxes = ['categories', 'brands'];
+		const checkboxes = ['categories', 'brands', 'subCategories'];
 		for (let key of checkboxes) {
 			if (urlParams.has(key)) {
 				const values = urlParams.get(key);
@@ -247,11 +238,34 @@
 	});
 
 	$('input[name=categories]').change(function() {
+		if ($(this).prop('checked')) {
+			$(this).closest('.group-checkbox').find('input').prop('checked', true);
+		} else {
+			$(this).closest('.group-checkbox').find('input').prop('checked', false);
+		}
 		let categories = [];
+		let subCategories = [];
 		$('input[name=categories]:checked').each(function() {
 			categories.push($(this).val());
 		});
+
+		$('input[name=subCategories]:checked').each(function() {
+			subCategories.push($(this).val());
+		});
+
 		urlParams.set('categories', categories.join(','));
+		urlParams.set('subCategories', subCategories.join(','));
+		urlParams.set('page', 1);
+		window.location.search = urlParams.toString();
+	});
+
+	$('input[name=subCategories]').change(function() {
+
+		let subCategories = [];
+		$('input[name=subCategories]:checked').each(function() {
+			subCategories.push($(this).val());
+		});
+		urlParams.set('subCategories', subCategories.join(','));
 		urlParams.set('page', 1);
 		window.location.search = urlParams.toString();
 	});
@@ -302,4 +316,7 @@
 		urlParams.set('page', 1);
 		window.location.search = urlParams.toString();
     }
+	
+
+	
 </script>
