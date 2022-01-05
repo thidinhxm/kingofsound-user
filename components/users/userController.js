@@ -23,7 +23,7 @@ exports.editProfile = (req, res) => {
 exports.changePassword = (req, res) => {
     res.render('../components/users/userViews/changePassword')
 }
-exports.updateUser = async (req,res) => {         
+exports.updateUser = async (req,res,next) => {         
     try {
         const {firstname, lastname, email, phone, address} = req.body;
         const user = req.user;
@@ -38,16 +38,22 @@ exports.updateUser = async (req,res) => {
         }
 
         await userService.updateUser(updateUser);
-        req.user = await userService.getUserById(user.user_id);
-
-        res.redirect('/user/profile?message=success'); 
+        const newUser = await userService.getUserById(user.user_id);
+        req.login(newUser, function(error) {
+            if (!error) {
+               console.log('succcessfully updated user');
+               res.redirect('/user/profile?message=success'); 
+            }
+        });
+        res.end();
+        
     }
     catch (error) {
         next(error);
     }
 }
 
-exports.updatePassword = async (req,res) => {
+exports.updatePassword = async (req,res,next) => {
     try {
         const { oldpassword, newpassword, renewpassword } = req.body.oldpassword;
         const user_id = req.user.user_id;
