@@ -22,7 +22,7 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 - Hosting: heroku.com
 
 
-## 3. Github Admin Project Link
+## 3. Admin Project
 > ***https://github.com/thidinhxm/web-app-admin-project***
 
 ## 4. Features of website
@@ -82,13 +82,13 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 
 ## 5. Usage
     
-* Workflow
-    Our website's workflow is:
-        - Users do not need to login to add products to the cart, only need to login at checkout.
-        - When a user logs in, the products in the old cart will be moved to the user's cart.
-        - If the user doesn't have an account before, the user need to register and the system will send a mail to verify your account
-        - User will select some products to add to cart and pay. If the user has a voucher, enter the voucher code and the bill will be discounted
-        - Then, wait to receive the merchandise and evaluate.
+* Our website's workflow
+    - Users do not need to login to add products to the cart, only need to login at checkout.
+    - When a user logs in, the products in the old cart will be moved to the user's cart.
+    - If the user doesn't have an account before, the user need to register and the system will send a mail to verify your account
+    - User will select some products to add to cart and pay. If the user has a voucher, enter the voucher code and the bill will be discounted
+    - Then, wait to receive the merchandise and evaluate.
+
 * Setup environment variable
     - In `.env`, fill in the `<input>` placeholders.
     - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` are API keys, that can be obtained by registering at https://cloudinary.com/
@@ -97,5 +97,10 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
     This web application use MySQL. From this point forward, we assume that you already have MySQL installed on your machine and you filled MySQL authentication information in the `.env` file.
 * Start
     Run `npm start` or `yarn start`. After this, the web app is host on `localhost:3000`.
+
+## 6. License
+
+KingOfSound is available under the [MIT license](https://opensource.org/licenses/MIT).
+
 
 
