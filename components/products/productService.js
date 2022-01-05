@@ -216,3 +216,18 @@ exports.updateViewProduct = (id) => {
         }
     });
 }
+
+exports.getProductSuggest = (search_name) =>
+{
+    return models.products.findAll({
+        attributes:['product_name','product_id'],
+        where:{
+            product_name:
+            {
+                [Op.substring]:search_name
+            }
+        },
+        raw:true,
+        limit:10
+    })
+}

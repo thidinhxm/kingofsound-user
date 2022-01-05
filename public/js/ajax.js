@@ -364,3 +364,26 @@ const checkVoucher = function (id,total) {
         $('#total').text((total).toLocaleString(undefined,));
         }
 };
+/*----------------------Search suggest-----------------*/
+const suggest = function(search){
+	$('#search-suggest').empty();
+	if (search== ""){return;}
+	$.ajax({
+        url: '/products/suggest',
+        type: 'POST',
+        data: {
+            search_name: search
+        },
+        success: function (data) {
+            if (data.success) {
+                data.products.forEach(value=>{
+                    $('#search-suggest').append(`<a href="/products/${value.product_id}"><div class="text">${value.product_name}</div></a>`);
+                })
+                return true;
+            }
+            else 
+            return false;
+        }
+    });
+
+}

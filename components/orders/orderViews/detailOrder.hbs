@@ -12,6 +12,7 @@
 				<li class="price">Đơn giá</li>
 				<li class="quantity">Số lượng</li>
 				<li class="subtotal">Thành tiền</li>
+				<li>Đánh giá</li>
 			</ul>
 		</div>
 	 {{#each detailOrder}}
@@ -19,15 +20,17 @@
 			<div class="item">
 				<a href="/products/{{'product.product_id'}}">
 				<div class="product-image">
-					<img src="{{'product.images.image_link'}}" alt="Placholder Image 2" class="product-frame" height="100px"
+					<img src="{{'product.images.image_link'}}" alt="Placholder Image" class="product-frame" height="100px"
 						width="100px">
 				</div>
 				<div class="product-details">
 					<h1><strong><span class="item-quantity">{{quantity}}</span> x {{'product.product_name'}}</strong></h1>
 					<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
 					<p>Phiên bản - {{'product.model_year'}}</p>
-				</div>
 				</a>
+					<div class="reviews reviews-btn"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="far fa-comment-alt" ></i></div>
+				</div>
+				
 			</div>
 			<div class="price">{{'product.price'}}</div>
 			<div class="quantity">
@@ -35,6 +38,7 @@
 			</div>
 			<div class="subtotal">{{formatPrice subtotal}}</div>
 		</div>
+				
 	 {{/each}}
 	</div>
 	<div class="container order-exc">

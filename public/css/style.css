@@ -2621,3 +2621,26 @@ button:focus {
   line-height: 200px;  
   height: 200px;
 }
+
+#search-suggest{
+	position: absolute;
+	top: 50px;
+  left: 50px;
+	cursor: pointer;
+	background-color:white;
+	width:413px;
+	z-index: 10;
+}
+
+#search-suggest .text{
+	padding: 7px 10px;
+	border: solid 1px #ccc;
+
+}
+#search-suggest  a{
+	text-decoration: none;
+	color:black;
+}
+#search-suggest .text:hover{
+	background-color: #eee;
+}
