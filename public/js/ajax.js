@@ -11,8 +11,8 @@ const checkInputRegister = function (email, password, comfirmPassword, firstname
     if (!passwordRegex.test(password)) {
         return 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt';
     }
-    if (password != comfirmPassword) {
-        console.log(password, comfirmPassword);
+    if (password !== comfirmPassword) {
+
         return 'Mật khẩu không trùng khớp';
     }
     if (!phoneRegex.test(phone)) {
@@ -107,21 +107,23 @@ $('#button-login').click(function (e) {
 
 
 /*------------ AJAX ADD-TO-CART --------------*/
-const addToCart = function (product_id) {
-    console.log(product_id);
+const addToCart = function (product_id, btn) {
+    let quantity = 1;
+    if (btn) {
+        quantity = $(btn).closest('div.buy-now').find('input[name="quantity"]').val();
+    }
     $.ajax({
         url: '/cart/add',
         type: 'POST',
         data: {
             product_id: product_id,
+            quantity: parseInt(quantity)
         },
         success: function (data) {
             if (data.success) {
                 $('#cart-product-quantity').text(data.cart.products.length);
                 let cartDropDownTemplate = Handlebars.compile($('#cart-dropdown-template').html());
-                console.log(data.cart)
                 $('#cart-list-dropdown').html(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}));
-                console.log(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}))
                 return true;
             }
             else {

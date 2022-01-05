@@ -22,8 +22,6 @@ exports.getAll = async (req, res, next) => {
             pages: Math.ceil(products.count / req.query.limit)
         }
 
-        console.log(pagination);
-
         const categories = await categoryService.getAll();
         const brands = await brandService.getAll();
         const newProducts = await productService.getNewProducts(3);

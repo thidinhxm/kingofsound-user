@@ -2,9 +2,9 @@ const cartService = require('./cartService');
 
 exports.addToCart = async (req, res, next) => {
     try {
-        const {product_id} = req.body;
+        const {product_id, quantity} = req.body;
         const cart_id = req.session.cart.cart_id;
-        await cartService.addToCart(cart_id, product_id);
+        await cartService.addToCart(cart_id, product_id, quantity);
         if (req.user) {
             req.session.cart = await cartService.getUserCart(req.user.user_id);
             

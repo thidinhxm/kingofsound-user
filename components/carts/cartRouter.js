@@ -9,7 +9,7 @@ const userController = require('../users/userController');
 router.get('/', cartController.index);
 router.get('/checkout', userController.isLogin, cartController.checkout);
 
-router.post('/checkout',cartController.createOrder);
+router.post('/checkout', userController.isLogin, cartController.createOrder);
 router.post('/add', cartAPI.addToCart);
 router.delete('/:id/delete', cartAPI.removeFromCart);
 router.patch('/:id/update', cartAPI.changeQuantity);

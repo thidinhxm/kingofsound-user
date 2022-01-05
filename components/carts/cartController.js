@@ -36,10 +36,10 @@ exports.createOrder = async (req, res, next) => {
         const newOrder = await orderService.create(order);
         const detailcart = await cartService.getDetailCart(cart.cart_id);
         detailcart.forEach(element => {
-          orderService.createDetail({
-              product_id:element.product_id,
-              order_id:newOrder.order_id,
-              quantity:element.quantity,
+            orderService.createDetail({
+                product_id:element.product_id,
+                order_id:newOrder.order_id,
+                quantity:element.quantity,
             })
         });
         await cartService.deleteDetailCart(cart.cart_id);
