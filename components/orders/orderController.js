@@ -2,10 +2,11 @@ const orderSevice = require('./orderService');
 const voucherService = require('../vouchers/voucherService')
 exports.list = async (req, res, next) => {
     try {
+        const message = req.query.message;
         const user = req.user;
         const user_id = user.user_id;
         const listOrder =  await orderSevice.listOrder(user_id); 
-        res.render('../components/orders/orderViews/listOrder',{ listOrder });
+        res.render('../components/orders/orderViews/listOrder',{ listOrder,message });
     }
     catch (error) {
         next(error);

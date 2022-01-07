@@ -6,6 +6,10 @@ exports.listOrder= (id) => {
             where:{
                 user_id:id
             },
+            order:[
+                ['create_date', 'DESC'],
+            ]
+            ,
             raw:true
         }
     )

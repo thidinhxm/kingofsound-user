@@ -15,7 +15,7 @@
                     <li>
                         <a href="/user/profile">
                             <i class="far fa-user" style=" font-size: 15px;"></i>
-                            {{user.firstname}} {{user.lastname}} 
+                            {{user.firstname}} {{user.lastname}}
                         </a>
                     </li>
                     <div class="dropdown-content">
@@ -52,10 +52,11 @@
                 <div class="col-md-6">
                     <div class="header-search">
                         <form method="GET" action='/products' id="search-form">
-                            <input class="input" placeholder="Nhập từ khóa" id="search" name="search" onkeyup="suggest(this.value)" autocomplete="off">
+                            <input class="input" placeholder="Nhập từ khóa" id="search" name="search"
+                                onkeyup="suggest(this.value)" autocomplete="off">
                             <button class="search-btn" id="search-btn">Tìm kiếm</button>
                         </form>
-                        <div id = "search-suggest">
+                        <div id="search-suggest">
 
                         </div>
                     </div>
@@ -77,7 +78,7 @@
                                     {{else}}
                                     <div class="qty" id="cart-product-quantity">0</div>
                                     {{/if}}
-                                    
+
                                 </a>
                             </a>
                             <div class="dropdown-content cart-box container">
@@ -123,7 +124,7 @@
                                                 </table>
                                             </li>
                                         </ul>
-                                        
+
                                         <div class="shopping-cart-total">
                                             <span class="lighter-text"><b>Tổng tiền: </b></span>
                                             <span class="total" id="cart-total-dropdwon">{{totalString}}</span>
@@ -193,6 +194,7 @@
                         </div>
                         {{/with}}
                         <!-- /Cart -->
+                        <!-- add to cart modal -->
                         <!-- Menu Toogle -->
                         <div class="menu-toggle">
                             <a href="#" class="menu-icon-text">
@@ -201,9 +203,25 @@
                             </a>
                         </div>
                         <!-- /Menu Toogle -->
+                        <div class="modal">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title" style="color:tomato;"><b>Thành công</b></h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><h5>Thêm sản phẩm vào giỏ hàng thành công!</h5></p>
+                                </div>
+                                <div class="modal-footer">
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
-                 <!-- /ACCOUNT -->
+                <!-- /ACCOUNT -->
             </div>
         </div>
         <!--end container -->

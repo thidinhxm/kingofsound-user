@@ -106,6 +106,17 @@ $('#button-login').click(function (e) {
 });
 
 
+const modal = document.querySelector(".modal");
+function toggleModal() {
+    modal.classList.toggle("show-modal");
+    setTimeout(()=>{modal.classList.toggle("show-modal");},800);
+}
+
+function windowOnClick(event) {
+    if (event.target === modal) {
+        toggleModal();
+    }
+}
 /*------------ AJAX ADD-TO-CART --------------*/
 const addToCart = function (product_id, btn) {
     let quantity = 1;
@@ -121,9 +132,11 @@ const addToCart = function (product_id, btn) {
         },
         success: function (data) {
             if (data.success) {
+
                 $('#cart-product-quantity').text(data.cart.products.length);
                 let cartDropDownTemplate = Handlebars.compile($('#cart-dropdown-template').html());
                 $('#cart-list-dropdown').html(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}));
+                toggleModal();
                 return true;
             }
             else {

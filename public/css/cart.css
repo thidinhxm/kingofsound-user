@@ -371,3 +371,10 @@ li.subtotal:after {
   font-size: 30px!important;
   font-weight: bolder!important;
 }
+
+.payment-method li
+{
+ float: left;
+ font-size: 40px;
+ margin-right: 5px;
+}

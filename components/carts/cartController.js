@@ -46,7 +46,7 @@ exports.createOrder = async (req, res, next) => {
         req.session.cart = await cartService.getDetailsInCart(cart.cart_id);
         req.session.cart.cart_id = cart.cart_id;
         req.session.save(function(err) {console.log(err);})
-        res.redirect('/orders');
+        res.redirect('/orders?message=true');
     }
     catch (err) {
         next(err);
