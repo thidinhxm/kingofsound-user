@@ -231,7 +231,10 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <div class="star">
+                                       <form action="/orders/review" method="POST">
+                                           <input type="hidden" name="order_id" id="order_id">
+                                            <input type="hidden" name="product_id" id="product_id">
+                                            <div class="star">
                                             <span>
                                              <label>Số sao&ensp; &ensp;  </label>   <i class="fas fa-star" ></i>
                                             </span>
@@ -262,8 +265,9 @@
                                         <label style ="margin-top:20px;">
                                             <span class="review" style = "margin-top:2px;">Đánh giá</span>
                                         
-                                            <input type="text" name="review" class="form-control" style = "width:80%;margin-left:10px;">
+                                            <input type="text" name="review" id ="review" class="form-control" style = "width:80%;margin-left:10px;">
                                         </label>
+                                         
                                         
                                     </div>
                                         </div>
@@ -274,8 +278,9 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                             onclick="closemodal()">Hủy</button>
-                                        <button type="button" class="btn btn-primary">Xác nhận</button>
+                                        <button type="submit"  value = "submit" class="btn btn-primary">Xác nhận</button>
                                     </div>
+                                  </form>
                                 </div>
                             </div>
                         </div>

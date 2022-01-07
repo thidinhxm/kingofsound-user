@@ -398,16 +398,20 @@ const suggest = function(search){
 
 
 // modal review
-const modal_review = document.querySelector(".modal-review");
-const closeButton = document.querySelector(".close");
+
 function toggleModal_review() {
+    const modal_review = document.querySelector(".modal-review");
     modal_review.classList.toggle("show-modal");
 }
 
 
-const addreviews = function()
+const addreviews = function(order_id,product_id)
 {
- toggleModal_review();
+    console.log(order_id,product_id);
+    document.querySelector("#order_id").value = order_id;
+    document.querySelector("#product_id").value = product_id;
+    $("#5").prop("checked", true);
+    toggleModal_review();
 }
 
 const closemodal = function()

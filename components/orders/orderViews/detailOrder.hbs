@@ -28,8 +28,8 @@
 						<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
 						<p>Phiên bản - {{'product.model_year'}}</p>
 				</a>
-				{{#if is_reviewed}}Sản phẩm đã được đánh giá{{else}}<div class="reviews reviews-btn" style ="margin-top:5px;"
-					onclick="addreviews()"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="fas fa-comments-dollar"></i></div>
+				{{#if is_reviewed}}<b style ="color: rgb(79, 153, 4);">Sản phẩm đã được đánh giá</b>{{else}}<div class="reviews reviews-btn" style ="margin-top:5px;"
+					onclick="addreviews({{order_id}},{{product_id}})"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="fas fa-comments-dollar"></i></div>
 				{{/if}}
 			</div>
 

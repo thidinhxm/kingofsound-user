@@ -63,3 +63,17 @@ exports.createDetail = async (detail) => {
         quantity:detail.quantity
     });
 }
+
+exports.reviewDetailOrder = (order_id,product_id) =>
+{
+    return models.detailorders.update({
+        is_reviewed : 1,
+        
+    },
+    {
+        where:{
+            order_id:order_id,
+            product_id:product_id
+        }
+    })
+}

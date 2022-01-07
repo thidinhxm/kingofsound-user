@@ -1,5 +1,6 @@
 const orderSevice = require('./orderService');
-const voucherService = require('../vouchers/voucherService')
+const voucherService = require('../vouchers/voucherService');
+const reviewService = require('../reviews/reviewService')
 exports.list = async (req, res, next) => {
     try {
         const message = req.query.message;
@@ -22,5 +23,23 @@ exports.detail = async (req, res, next) => {
     }
     catch (error) {
         next(error);
+    }
+}
+
+exports.review = async (req,res,next) =>
+{
+    try
+    {
+    const product_id = req.body.product_id;
+    const order_id = req.body.order_id;
+    const content = req.body.review;
+    const rating = req.body.star;
+    console.log({product_id:product_id,content:content,rating:rating,user_id:req.user.user_id});
+    await reviewService.addReview({product_id:product_id,content:content,rating:rating,user_id:req.user.user_id});
+    await orderSevice.reviewDetailOrder(order_id,product_id);
+    res.redirect('/orders/' + order_id);
+    }
+    catch (error) {
+    next(error);
     }
 }

@@ -24,3 +24,15 @@ exports.getAverageRating = (reviews) => {
         return total + review.rating;
     }, 0) / reviews.length;
 }
+
+exports.addReview = (review) =>
+{
+    return models.reviews.create(
+        {
+            product_id:review.product_id,
+            content:review.content,
+            rating:review.rating,
+            user_id:review.user_id
+        }
+    );
+}
