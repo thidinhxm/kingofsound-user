@@ -94,9 +94,9 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
     - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` are API keys, that can be obtained by registering at https://cloudinary.com/
     - `EMAIL_USER`, `EMAIL_PASS` is your email and password to send email to the user's email
 * Database connection
-    This web application use MySQL. From this point forward, we assume that you already have MySQL installed on your machine and you filled MySQL authentication information in the `.env` file.
+    - This web application use MySQL. From this point forward, we assume that you already have MySQL installed on your machine and you filled MySQL authentication information in the `.env` file.
 * Start
-    Run `npm start` or `yarn start`. After this, the web app is host on `localhost:3000`.
+    - Run `npm start` or `yarn start`. After this, the web app is host on `localhost:3000`.
 
 ## 6. License
 
