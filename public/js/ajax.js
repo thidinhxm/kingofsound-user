@@ -106,17 +106,12 @@ $('#button-login').click(function (e) {
 });
 
 
-const modal = document.querySelector(".modal");
-function toggleModal() {
-    modal.classList.toggle("show-modal");
-    setTimeout(()=>{modal.classList.toggle("show-modal");},800);
+const modal_cart = document.querySelector(".modal-add-to-cart");
+function toggleModal_cart() {
+    modal_cart.classList.toggle("show-modal");
+    setTimeout(()=>{modal_cart.classList.toggle("show-modal");},800);
 }
 
-function windowOnClick(event) {
-    if (event.target === modal) {
-        toggleModal();
-    }
-}
 /*------------ AJAX ADD-TO-CART --------------*/
 const addToCart = function (product_id, btn) {
     let quantity = 1;
@@ -136,7 +131,7 @@ const addToCart = function (product_id, btn) {
                 $('#cart-product-quantity').text(data.cart.products.length);
                 let cartDropDownTemplate = Handlebars.compile($('#cart-dropdown-template').html());
                 $('#cart-list-dropdown').html(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}));
-                toggleModal();
+                toggleModal_cart();
                 return true;
             }
             else {
@@ -399,4 +394,23 @@ const suggest = function(search){
         }
     });
 
+}
+
+
+// modal review
+const modal_review = document.querySelector(".modal-review");
+const closeButton = document.querySelector(".close");
+function toggleModal_review() {
+    modal_review.classList.toggle("show-modal");
+}
+
+
+const addreviews = function()
+{
+ toggleModal_review();
+}
+
+const closemodal = function()
+{
+ toggleModal_review();
 }

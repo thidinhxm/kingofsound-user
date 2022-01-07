@@ -55,5 +55,33 @@
 .reviews-btn i
 {
 	font-size: 20px;
-	color: blue;
+	color: black;
+}
+
+.reviews-btn:hover
+{
+	color:blue;
+}
+
+.star label, .star input
+{
+	display: inline;
+	font-size: 20px;
+}
+.star span
+{
+	float: left;
+	margin-left: 10px;
+}
+.star i
+{
+	font-size: 30px;
+	color: yellow;
+}
+
+.star input
+{
+	font-size: 15px;
+	color: black;
+	font-weight: 300;
 }

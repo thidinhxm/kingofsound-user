@@ -1,4 +1,4 @@
-.modal {
+.modal-add-to-cart,.modal-review {
     position: fixed;
     left: 0;
     top: 0;
@@ -11,7 +11,8 @@
     transition: visibility 0s linear 0.25s, opacity 0.25s 0s, transform 0.25s;
 }
 
-.modal-content {
+
+.modal-add-to-cart .modal-content {
     position: absolute;
     top: 20%;
     left: 50%;
@@ -22,6 +23,11 @@
     border-radius: 0.5rem;
 }
 
+
+ .modal-dialog
+{
+    width: 70%;
+}
 .close-button {
     float: right;
     width: 1.5rem;

@@ -1,10 +1,9 @@
-
 {{> header }}
 {{> navigation }}
 <div class="cart">
 	<div class="basket">
 		<div class="order">
-				<h3 class ="title">Đơn hàng #{{order.order_id}}</h3>
+			<h3 class="title">Đơn hàng #{{order.order_id}}</h3>
 		</div>
 		<div class="basket-labels">
 			<ul>
@@ -15,47 +14,53 @@
 				<li>Đánh giá</li>
 			</ul>
 		</div>
-	 {{#each detailOrder}}
+		{{#each detailOrder}}
 		<div class="basket-product">
 			<div class="item">
 				<a href="/products/{{'product.product_id'}}">
-				<div class="product-image">
-					<img src="{{'product.images.image_link'}}" alt="Placholder Image" class="product-frame" height="100px"
-						width="100px">
-				</div>
-				<div class="product-details">
-					<h1><strong><span class="item-quantity">{{quantity}}</span> x {{'product.product_name'}}</strong></h1>
-					<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
-					<p>Phiên bản - {{'product.model_year'}}</p>
+					<div class="product-image">
+						<img src="{{'product.images.image_link'}}" alt="Placholder Image" class="product-frame"
+							height="100px" width="100px">
+					</div>
+					<div class="product-details">
+						<h1><strong><span class="item-quantity">{{quantity}}</span> x
+								{{'product.product_name'}}</strong></h1>
+						<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
+						<p>Phiên bản - {{'product.model_year'}}</p>
 				</a>
-					<div class="reviews reviews-btn"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="far fa-comment-alt" ></i></div>
-				</div>
-				
+				{{#if is_reviewed}}Sản phẩm đã được đánh giá{{else}}<div class="reviews reviews-btn" style ="margin-top:5px;"
+					onclick="addreviews()"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="fas fa-comments-dollar"></i></div>
+				{{/if}}
 			</div>
-			<div class="price">{{'product.price'}}</div>
-			<div class="quantity">
-				<input type="number" value="{{quantity}}" min="1" class="quantity-field" readonly>
-			</div>
-			<div class="subtotal">{{formatPrice subtotal}}</div>
+
 		</div>
-				
-	 {{/each}}
+		<div class="price">{{'product.price'}}</div>
+		<div class="quantity">
+			<input type="number" value="{{quantity}}" min="1" class="quantity-field" readonly>
+		</div>
+		<div class="subtotal">{{formatPrice subtotal}}</div>
 	</div>
-	<div class="container order-exc">
-		<div class="row">
-				 <div class="col-md-2">
-							<a href="/orders"><button class="promo-code-cta" style ="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay lại</a></button>
+
+	{{/each}}
+</div>
+<div class="container order-exc">
+	<div class="row">
+		<div class="col-md-2">
+			<a href="/orders"><button class="promo-code-cta"
+					style="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay
+					lại</a></button>
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-6" class="final-total">
+			<div style="text-align:right;margin-right:15%"><b>Đã giảm giá - {{#if
+					voucher}}{{voucher.discount}}{{else}}0{{/if}}%</b></div>
+			<div class="total-value final-value">
+				<b class="total">Thanh toán :</b> <i id="basket-total">{{formatPrice order.total_price}}</i>
 			</div>
-			<div class="col-md-4">
-			</div>
-			<div class="col-md-6" class="final-total">
-				<div style="text-align:right;margin-right:15%"><b>Đã giảm giá - {{#if voucher}}{{voucher.discount}}{{else}}0{{/if}}%</b></div>
-				<div class="total-value final-value">
-					<b class="total">Thanh toán :</b> <i id="basket-total">{{formatPrice order.total_price}}</i>
-				</div>
-			</div>   
 		</div>
 	</div>
+</div>
 </div>
 {{> newsletter}}
 {{> footer }}

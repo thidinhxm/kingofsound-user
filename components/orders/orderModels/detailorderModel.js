@@ -28,7 +28,12 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
-    }
+    },
+    is_reviewed: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: 0
+    },
   }, {
     sequelize,
     tableName: 'detailorders',
