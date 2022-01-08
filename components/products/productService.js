@@ -21,8 +21,8 @@ exports.getAll = async (query) => {
             }],
             raw : true
         }
-        if(query.categories) {
-            const categories = query.categories.split(',');
+        if(query.subCategories) {
+            const categories = query.subCategories.split(',');
             option.where.category_id = {
                 [Op.or]: categories
             }
@@ -35,25 +35,32 @@ exports.getAll = async (query) => {
         }
 
         if (query.sort) {
-            if (query.sort === 'price_asc') {
-                option.order = [
-                    ['price', 'ASC']
-                ];
-            } 
-            else if (query.sort === 'price_desc') {
-                option.order = [
-                    ['price', 'DESC']
-                ];
-            }
-            else if (query.sort === 'model_year') {
-                option.order = [
-                    ['model_year', 'ASC']
-                ];
-            }
-            else {
-                option.order = [
-                    ['product_name', 'ASC']
-                ];
+            switch (query.sort) {
+                case 'price_asc':
+                    option.order = [
+                        ['price', 'ASC']
+                    ];
+                    break;
+                case 'price_desc':
+                    option.order = [
+                        ['price', 'DESC']
+                    ];
+                    break;
+                case 'model_year':
+                    option.order = [
+                        ['model_year', 'ASC']
+                    ];
+                    break;
+                case 'name_asc':
+                    option.order = [
+                        ['product_name', 'ASC']
+                    ];
+                    break;
+                default:
+                    option.order = [
+                        ['model_year', 'DESC']
+                    ];
+                    break;
             }
         }
 

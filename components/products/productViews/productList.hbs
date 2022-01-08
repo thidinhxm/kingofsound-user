@@ -25,7 +25,7 @@
 							</div>
 							{{#each subCategories}}
 							<div class="input-checkbox checksub" id="subCategories{{category_id}}">
-								<input type="checkbox" id="subCategory{{category_id}}" value="{{category_id}}" name="subCategories">
+								<input type="checkbox" id="subCategory{{category_id}}" value="{{category_id}}" name="subCategories" class="category_{{../category_id}}">
 								<label for="subCategory{{category_id}}"  class="subcheck">
 									<span></span>
 									{{category_name}}
@@ -192,15 +192,15 @@
 <script>
 	const urlParams = new URLSearchParams(window.location.search);
 	let params = {
-		page: 1,
-		min: 100,
-		max: 10000,
-		limit: 9,
+		page: '',
+		min: '',
+		max: '',
+		limit: '',
 		categories: '',
 		subCategories: '',
 		brands: '',
-		sort: 'name',
-		search: ''
+		sort: '',
+		search: '',
 	}
 
 	for (let key in params) {
@@ -208,7 +208,6 @@
         urlParams.append(key, params[key])
       }
     }
-
 	$(document).ready(function() {
 		const checkboxes = ['categories', 'brands', 'subCategories'];
 		for (let key of checkboxes) {
@@ -231,8 +230,9 @@
 		$('#pagination li a').each((index, item) => {
 			const page = $(item).attr('href').split('=')[1]
 			urlParams.set('page', page)
-			const href = '/products?' + urlParams.toString()
-			$(item).attr('href', href)
+			const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+			const href = '/products?' + urlRemoved;
+			$(item).attr('href', href);
 		})
 		urlParams.set('page', savePage)
 	});
@@ -256,18 +256,43 @@
 		urlParams.set('categories', categories.join(','));
 		urlParams.set('subCategories', subCategories.join(','));
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 
 	$('input[name=subCategories]').change(function() {
 
 		let subCategories = [];
+		let partSubCategories = [];
+		let categories = [];
 		$('input[name=subCategories]:checked').each(function() {
 			subCategories.push($(this).val());
 		});
+		
+		const className = $(this).attr('class');
+		$('input[name=subCategories]').each(function() {
+			if ($(this).attr('class') == className && $(this).prop('checked')) {
+				partSubCategories.push($(this).val());
+			}
+		});
+		const category_id = className.split('_')[1];
+		if (partSubCategories.length > 0) {
+			$(`input[name=categories][value=${category_id}]`).prop('checked', true);
+		} else {
+			$(`input[name=categories][value=${category_id}]`).prop('checked', false);
+		}
+		
+		$('input[name=categories]:checked').each(function() {
+			categories.push($(this).val());
+		});
+		
 		urlParams.set('subCategories', subCategories.join(','));
+		urlParams.set('categories', categories.join(','));
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 	
 	$('input[name=brands]').change(function() {
@@ -277,46 +302,56 @@
 		});
 		urlParams.set('brands', brands.join(','));
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 
 	$('#sort').change(function() {
 		urlParams.set('sort', $(this).val());
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 
 	$('#search-btn').click(function(event) {
 		event.preventDefault();
 		urlParams.set('search', $('input[name=search]').val());
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 
 	$('#limit').change(function() {
 		urlParams.set('limit', $(this).val());
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 
 	$('#price-min').change(function() {
 		urlParams.set('min', $(this).val());
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 
 	$('#price-max').change(function() {
 		urlParams.set('max', $(this).val());
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
 	});
 
 	function changePrice(key, value) {
 		urlParams.set(key, value)
 		urlParams.set('page', 1);
-		window.location.search = urlParams.toString();
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
     }
-	
-
-	
 </script>
