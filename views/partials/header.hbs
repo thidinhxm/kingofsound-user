@@ -203,21 +203,16 @@
                             </a>
                         </div>
                         <!-- /Menu Toogle -->
-                        <div class="modal-add-to-cart modal">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h3 class="modal-title" style="color:tomato;"><b>Thành công</b></h3>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    <p>
-                                    <h5>Thêm sản phẩm vào giỏ hàng thành công!</h5>
-                                    </p>
-                                </div>
-                                <div class="modal-footer">
-                                </div>
+                        <div id="toast"  role="alert" aria-live="assertive" aria-atomic="true" 
+                             class="alert alert-success" >
+                            <div class="toast-header">
+                                <img src="https://flyclipart.com/thumb2/verify-success-success-tick-icon-with-png-and-vector-format-372259.png"
+                                    width="20px" class="rounded mr-2" alt="...">
+                                <strong class="mr-auto">Thành công</strong>
+                                <small>vừa xong</small>
+                            </div>
+                            <div class="toast-body">
+                                Đã thêm sản phẩm vào giỏ hàng
                             </div>
                         </div>
                         <div class="modal-review modal">
@@ -231,56 +226,57 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                       <form action="/orders/review" method="POST">
-                                           <input type="hidden" name="order_id" id="order_id">
+                                        <form action="/orders/review" method="POST">
+                                            <input type="hidden" name="order_id" id="order_id">
                                             <input type="hidden" name="product_id" id="product_id">
                                             <div class="star">
-                                            <span>
-                                             <label>Số sao&ensp; &ensp;  </label>   <i class="fas fa-star" ></i>
-                                            </span>
-                                            <span>
-                                                <input type="radio" id="1" name="star" value="1">
-                                                <label for="1">1</label><br>
-                                            </span>
-                                            <span>
-                                                <input type="radio" id="2" name="star" value="2">
-                                                <label for="2">2</label><br>
-                                            </span>
-                                            <span>
-                                                <input type="radio" id="3" name="star" value="3">
-                                                <label for="3">3</label><br>
-                                            </span>
-                                            <span>
-                                                <input type="radio" id="4" name="star" value="4">
-                                                <label for="4">4</label><br>
-                                            </span>
-                                            <span>
-                                                <input type="radio" id="5" name="star" value="5" checked>
-                                                <label for="5">5</label><br>
-                                            </span>
-                                            <div>
-                                                <br>
-                                                <br>
-                                                <br>
-                                        <label style ="margin-top:20px;">
-                                            <span class="review" style = "margin-top:2px;">Đánh giá</span>
-                                        
-                                            <input type="text" name="review" id ="review" class="form-control" style = "width:80%;margin-left:10px;">
-                                        </label>
-                                         
-                                        
+                                                <span>
+                                                    <label>Số sao&ensp; &ensp; </label> <i class="fas fa-star"></i>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" id="1" name="star" value="1">
+                                                    <label for="1">1</label><br>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" id="2" name="star" value="2">
+                                                    <label for="2">2</label><br>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" id="3" name="star" value="3">
+                                                    <label for="3">3</label><br>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" id="4" name="star" value="4">
+                                                    <label for="4">4</label><br>
+                                                </span>
+                                                <span>
+                                                    <input type="radio" id="5" name="star" value="5" checked>
+                                                    <label for="5">5</label><br>
+                                                </span>
+                                                <div>
+                                                    <br>
+                                                    <br>
+                                                    <br>
+                                                    <label style="margin-top:20px;">
+                                                        <span class="review" style="margin-top:2px;">Đánh giá</span>
+
+                                                        <input type="text" name="review" id="review"
+                                                            class="form-control" style="width:80%;margin-left:10px;">
+                                                    </label>
+
+
+                                                </div>
+                                            </div>
+
                                     </div>
-                                        </div>
-                                        
-                                    </div>
-                  
-                                    
+
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal"
                                             onclick="closemodal()">Hủy</button>
-                                        <button type="submit"  value = "submit" class="btn btn-primary">Xác nhận</button>
+                                        <button type="submit" value="submit" class="btn btn-primary">Xác nhận</button>
                                     </div>
-                                  </form>
+                                    </form>
                                 </div>
                             </div>
                         </div>
