@@ -10,9 +10,11 @@ exports.getAll = async (req, res, next) => {
         req.query.min = Math.max(100, parseInt(req.query.min) || 100);
         req.query.max = Math.min(10000, parseInt(req.query.max) || 10000);
         req.query.categories = req.query.categories || '';
+        req.query.subCategories = req.query.subCategories || '';
         req.query.brands = req.query.brands || '';
-        req.query.sort = req.query.sort || 'name';
+        req.query.sort = req.query.sort || 'model_year';
         
+        console.log(req.query)
         const products = await productService.getAll(req.query);
 
         const pagination = {

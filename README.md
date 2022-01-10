@@ -90,7 +90,7 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
     - Then, wait to receive the merchandise and evaluate.
 
 * Setup environment variable
-    - In `.env`, fill in the `<input>` placeholders.
+    - Clone `.env.` from `.env.example` and fill in the `<input>` placeholders.
     - `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, `CLOUDINARY_API_SECRET` are API keys, that can be obtained by registering at https://cloudinary.com/
     - `EMAIL_USER`, `EMAIL_PASS` is your email and password to send email to the user's email
 * Database connection
