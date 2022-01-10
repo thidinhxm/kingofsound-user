@@ -2644,3 +2644,7 @@ button:focus {
 #search-suggest .text:hover{
 	background-color: #eee;
 }
+.check-review:hover
+{
+  transform: scale(1.05);
+}

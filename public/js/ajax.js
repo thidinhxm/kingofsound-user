@@ -409,14 +409,48 @@ function toggleModal_review() {
 
 const addreviews = function(order_id,product_id)
 {
-    console.log(order_id,product_id);
     document.querySelector("#order_id").value = order_id;
     document.querySelector("#product_id").value = product_id;
-    $("#5").prop("checked", true);
+    $("#1").prop("checked", true);
     toggleModal_review();
 }
 
 const closemodal = function()
 {
  toggleModal_review();
+}
+
+
+// check review
+function toggleModal_check_review() {
+    const modal_check_review = document.querySelector(".modal-check-review");
+    modal_check_review.classList.toggle("show-modal");
+}
+const closemodal_check = function()
+{
+ toggleModal_check_review();
+}
+
+const checkReview = function(review_id)
+{
+    $.ajax({
+        url: '/orders/getreview',
+        type: 'POST',
+        data: {
+            review_id: review_id
+        },
+        success: function (data) {
+            if (data.success) {
+                toggleModal_check_review() ;
+                $('#my-review').text(data.content);
+            
+                $("#star" + data.rating).prop("checked", true);
+            
+                return true;
+            }
+            else 
+            return false;
+        }
+    });
+
 }

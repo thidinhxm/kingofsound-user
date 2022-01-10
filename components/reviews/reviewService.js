@@ -11,6 +11,9 @@ exports.getReviewsProduct = (product_id) => {
             as : 'user',
             attributes : ['lastname']
         }],
+        order:[
+            ['created_at', 'DESC'],
+        ],
         raw : true
     });
 }
@@ -35,4 +38,16 @@ exports.addReview = (review) =>
             user_id:review.user_id
         }
     );
+}
+exports.getReview = (review_id) =>
+{
+    return models.reviews.findOne(
+        {
+            where : {
+                review_id : review_id
+            },
+            raw:true
+        }
+    )
+    
 }

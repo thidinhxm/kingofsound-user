@@ -11,7 +11,7 @@
 				<li class="price">Đơn giá</li>
 				<li class="quantity">Số lượng</li>
 				<li class="subtotal">Thành tiền</li>
-				<li>Đánh giá</li>
+	
 			</ul>
 		</div>
 		{{#each detailOrder}}
@@ -28,7 +28,9 @@
 						<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
 						<p>Phiên bản - {{'product.model_year'}}</p>
 				</a>
-				{{#if is_reviewed}}<b style ="color: rgb(79, 153, 4);">Sản phẩm đã được đánh giá</b>{{else}}<div class="reviews reviews-btn" style ="margin-top:5px;"
+				{{#if review_id}}<b style ="color: rgb(79, 153, 4);" >
+				<div onclick="checkReview({{review_id}})" class = "check-review">Xem đánh giá</div>
+				</b>{{else}}<div class="reviews reviews-btn" style ="margin-top:5px;"
 					onclick="addreviews({{order_id}},{{product_id}})"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="fas fa-comments-dollar"></i></div>
 				{{/if}}
 			</div>

@@ -35,8 +35,9 @@ exports.review = async (req,res,next) =>
     const content = req.body.review;
     const rating = req.body.star;
     console.log({product_id:product_id,content:content,rating:rating,user_id:req.user.user_id});
-    await reviewService.addReview({product_id:product_id,content:content,rating:rating,user_id:req.user.user_id});
-    await orderSevice.reviewDetailOrder(order_id,product_id);
+    const review = await reviewService.addReview({product_id:product_id,content:content,rating:rating,user_id:req.user.user_id});
+    const review_id = review.review_id;
+    await orderSevice.reviewDetailOrder(order_id,product_id, review_id);
     res.redirect('/orders/' + order_id);
     }
     catch (error) {

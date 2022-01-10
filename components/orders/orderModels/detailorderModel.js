@@ -29,10 +29,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       defaultValue: 0
     },
-    is_reviewed: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: 0
+    review_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: null
     },
   }, {
     sequelize,

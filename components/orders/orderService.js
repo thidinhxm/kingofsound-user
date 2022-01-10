@@ -64,10 +64,10 @@ exports.createDetail = async (detail) => {
     });
 }
 
-exports.reviewDetailOrder = (order_id,product_id) =>
+exports.reviewDetailOrder = (order_id,product_id,review_id) =>
 {
     return models.detailorders.update({
-        is_reviewed : 1,
+        review_id : review_id,
         
     },
     {
