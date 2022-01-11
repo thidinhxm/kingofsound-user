@@ -52,6 +52,11 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.INTEGER,
       allowNull: false,
       defaultValue: 0
+    },
+    average_rating: {
+      type: DataTypes.FLOAT,
+      allowNull: false,
+      defaultValue: 0
     }
   }, {
     sequelize,

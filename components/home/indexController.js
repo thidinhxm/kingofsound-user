@@ -6,7 +6,6 @@ exports.index = async (req, res, next) => {
         const hotProducts = await productService.getHotProducts();
         req.session.oldUrl = req.originalUrl;
 
-        console.log(newProducts);
         res.render('../components/home/homeViews/index', { newProducts, hotProducts });
     }
     catch (err) {
@@ -14,4 +13,7 @@ exports.index = async (req, res, next) => {
     }
 }
 
+exports.about = (req, res, next) => {
+    res.render('../components/home/homeViews/about');
+}
 
