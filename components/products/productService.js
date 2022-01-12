@@ -5,19 +5,27 @@ exports.getAll = async (query) => {
         const option = {
             offset: (query.page - 1) * query.limit,
             limit: query.limit,
+            subQuery: false,
+            include : [{
+                model : models.images,
+                as : 'images',
+            }, {
+                model : models.brands,
+                as : 'brand',
+                attributes : ['brand_name'],
+                subQuery : false,
+            }, {
+                model : models.categories,
+                as : 'category',
+                attributes : ['category_name'],
+            }],
             where: {
                 price: {
                     [Op.between]: [query.min * 1000, query.max * 1000]
                 },
-                is_active: 1
+                '$images.image_stt$': 1,
+                is_active: 1,
             },
-            include : [{
-                model : models.images,
-                as : 'images',
-                where : {
-                    image_stt: 1
-                },
-            }],
             raw : true
         }
         if(query.subCategories) {
@@ -64,8 +72,16 @@ exports.getAll = async (query) => {
         }
 
         if (query.search) {
-            option.where.product_name = {
-                [Op.like]: `%${query.search}%`
+            option.where = {
+                ...option.where,
+                [Op.or]: [
+                    {product_name: {[Op.like]: `%${query.search}%`}},
+                    {'$category.category_name$': {[Op.like]: `%${query.search}%`}},
+                    {'$brand.brand_name$': {[Op.like]: `%${query.search}%`}},
+                    {price: {[Op.like]: `%${query.search}%`}},
+                    {model_year: {[Op.like]: `%${query.search}%`}},
+                    {descriptions: {[Op.like]: `%${query.search}%`}},
+                ]
             }
         }
     

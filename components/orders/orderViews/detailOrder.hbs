@@ -28,9 +28,12 @@
 						<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
 						<p>Phiên bản - {{'product.model_year'}}</p>
 				</a>
-				{{#if review_id}}<b style ="color: rgb(79, 153, 4);" >
-				<div onclick="checkReview({{review_id}})" class = "check-review">Xem đánh giá</div>
-				</b>{{else}}<div class="reviews reviews-btn" style ="margin-top:5px;"
+				{{#if review_id}}
+				<b style ="color: rgb(79, 153, 4); cursor: pointer;" >
+					<div onclick="checkReview({{review_id}})" class = "check-review">Xem đánh giá</div>
+				</b>
+				{{else}}
+				<div class="reviews reviews-btn" style ="margin-top:5px; cursor: pointer;"
 					onclick="addreviews({{order_id}},{{product_id}})"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="fas fa-comments-dollar"></i></div>
 				{{/if}}
 			</div>
@@ -55,8 +58,9 @@
 		<div class="col-md-4">
 		</div>
 		<div class="col-md-6" class="final-total">
-			<div style="text-align:right;margin-right:15%"><b>Đã giảm giá - {{#if
-					voucher}}{{voucher.discount}}{{else}}0{{/if}}%</b></div>
+			<div style="text-align:right;margin-right:15%">
+				<b>Đã giảm giá - {{#if voucher}}{{voucher.discount}}{{else}}0{{/if}}%</b>
+			</div>
 			<div class="total-value final-value">
 				<b class="total">Thanh toán :</b> <i id="basket-total">{{formatPrice order.total_price}}</i>
 			</div>

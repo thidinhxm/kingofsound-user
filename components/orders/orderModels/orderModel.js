@@ -7,14 +7,10 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    send_date: {
-      type: DataTypes.DATE,
-      allowNull: true
-    },
     total_price: {
       type: DataTypes.INTEGER,
-      allowNull: false,
-      defaultValue:0
+      allowNull: true,
+      defaultValue: 0
     },
     user_id: {
       type: DataTypes.INTEGER,
@@ -25,18 +21,14 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     order_status: {
-      type: DataTypes.STRING(30),
-      allowNull: false,
-      defaultValue: "Đang giao hàng"
+      type: DataTypes.ENUM('Đang chờ xử lý','Đang giao','Đã giao'),
+      allowNull: true,
+      defaultValue: "Đang chờ xử lý"
     },
     payment_status: {
-      type: DataTypes.STRING(30),
+      type: DataTypes.ENUM('Chưa thanh toán','Đã thanh toán'),
       allowNull: false,
       defaultValue: "Chưa thanh toán"
-    },
-    receive_date: {
-      type: DataTypes.DATE,
-      allowNull: true
     },
     receive_address: {
       type: DataTypes.STRING(50),
@@ -58,6 +50,15 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.DATE,
       allowNull: false,
       defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    send_date: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: Sequelize.Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    receive_date: {
+      type: DataTypes.DATE,
+      allowNull: true
     }
   }, {
     sequelize,

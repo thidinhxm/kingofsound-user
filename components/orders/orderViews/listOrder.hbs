@@ -29,16 +29,22 @@
 							<div class="col-sm-7">
 								<h4 class="nomargin">Hóa đơn #{{order_id}}</h4>
 								<div class="row">
-									<div class="col-md-5"><b>Ngày đặt:</b> </div>
-									<div class="col-md-6">{{create_date}}</div>
+									<div class="col-md-6"><b>Thời gian đặt:</b> </div>
+									<div class="col-md-6">{{formatDateTime create_date}}</div>
 								</div>
 								<div class="row">
-									<div class="col-md-5"><b>Ngày gửi: </b></div>
-									<div class="col-md-6">{{send_date}}</div>
+									<div class="col-md-6"><b>Thời gian vận chuyển: </b></div>
+									<div class="col-md-6">Dự kiến {{formatDateTime send_date}}</div>
 								</div>
 								<div class="row">
-									<div class="col-md-5"><b>Ngày nhận: </b></div>
-									<div class="col-md-6">{{receive_date}}</div>
+									<div class="col-md-6"><b>Thời gian nhận: </b></div>
+									<div class="col-md-6">
+										{{#if receive_date}}
+										Dự kiến {{formatDateTime receive_date}}
+										{{else}}
+										Dự kiến trong vòng 2 tuần
+										{{/if}}
+									</div>
 								</div>
 							</div>
 						</div>
