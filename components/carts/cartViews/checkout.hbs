@@ -10,19 +10,19 @@
 			<form action="/cart/checkout" method="POST" id = "checkout-form">
 				<label>
 					<span class="fname">Họ <span class="required">*</span></span>
-					<input type="text" name="fname" value = "{{user.firstname}}"  required="">
+					<input type="text" name="fname" value = "{{user.firstname}}"  required="" readonly>
 				</label>
 				<label>
 					<span class="lname">Tên <span class="required">*</span></span>
-					<input type="text" name="lname" value = "{{user.lastname}}"  required="">
+					<input type="text" name="lname" value = "{{user.lastname}}"  required="" readonly>
 				</label>
 				<label>
 					<span>Địa chỉ nhận hàng <span class="required">*</span></span>
-					<input type="text" name="address" value ="{{user.address}}" required="">
+					<input type="text" name="address" value ="{{user.address}}" required="" maxlength="65000">
 				</label>
 				<label>
 					<span>Số điện thoại <span class="required">*</span></span>
-					<input type="tel" name="phone"  value = "{{user.phone}}" required=""> 
+					<input type="tel" name="phone"  value = "{{user.phone}}" required="" maxlength="11"> 
 				</label>
 				<label>
 					<span>Email <span class="required">*</span></span>
@@ -46,7 +46,7 @@
 				</label>
 				<label>
 					<span>Mã giảm giá</span>
-					<input type="text" name="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()" onblur="checkVoucher(this.value,{{cart.total}})"> 
+					<input type="text" maxlength="10" name="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()" onblur="checkVoucher(this.value,{{cart.total}})"> 
 					<span></span>
 					<div id = "voucher-error" style="color:red;"></div>
 					<div id = "voucher-success" style="color:green;"></div>
