@@ -40,7 +40,7 @@
 									<div class="col-md-6"><b>Thời gian nhận: </b></div>
 									<div class="col-md-6">
 										{{#if receive_date}}
-										Dự kiến {{formatDateTime receive_date}}
+										{{formatDateTime receive_date}}
 										{{else}}
 										Dự kiến trong vòng 2 tuần
 										{{/if}}
@@ -50,7 +50,7 @@
 						</div>
 					</td>
 					<td data-th="total">{{formatPrice total_price}}</td>
-					<td data-th="status">
+					<td data-th="status" style = "color:{{#if is_complete}}green{{else}}tomato{{/if}}">
 						{{order_status}}
 					</td>
 					<td data-th="payment-status">{{payment_status}}</td>

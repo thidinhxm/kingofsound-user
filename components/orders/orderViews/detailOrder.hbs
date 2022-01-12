@@ -28,6 +28,7 @@
 						<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
 						<p>Phiên bản - {{'product.model_year'}}</p>
 				</a>
+				{{#if is_complete}}
 				{{#if review_id}}
 				<b style ="color: rgb(79, 153, 4); cursor: pointer;" >
 					<div onclick="checkReview({{review_id}})" class = "check-review">Xem đánh giá</div>
@@ -35,6 +36,7 @@
 				{{else}}
 				<div class="reviews reviews-btn" style ="margin-top:5px; cursor: pointer;"
 					onclick="addreviews({{order_id}},{{product_id}})"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="fas fa-comments-dollar"></i></div>
+				{{/if}}
 				{{/if}}
 			</div>
 
