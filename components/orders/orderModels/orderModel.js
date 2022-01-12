@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       }
     },
     order_status: {
-      type: DataTypes.ENUM('Đang chờ xử lý','Đang giao','Đã giao'),
+      type: DataTypes.ENUM('Đang chờ xử lý','Đang giao','Đã giao', 'Đã hủy'),
       allowNull: true,
       defaultValue: "Đang chờ xử lý"
     },
