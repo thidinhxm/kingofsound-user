@@ -14,7 +14,6 @@ exports.getAll = async (req, res, next) => {
         req.query.brands = req.query.brands || '';
         req.query.sort = req.query.sort || 'model_year';
         
-        console.log(req.query)
         const products = await productService.getAll(req.query);
 
         const pagination = {
@@ -54,20 +53,28 @@ exports.getOne = async (req, res, next) => {
 
         commentsRowAndCount = await commentService.getComments(id);
         product.comments = commentsRowAndCount.rows;
-        const pagination = {
+        const paginationComment = {
             page: 1,
             limit: 5,
             totalRows: commentsRowAndCount.count,
-            pages: Math.ceil(commentsRowAndCount.count / 5)
+            pages: Math.ceil(commentsRowAndCount.count / 5) || 1
         }
 
-        product.reviews = await reviewService.getReviewsProduct(id);
+        const reviewsRowAndCount = await reviewService.getReviews(id);
+
+        product.reviews = reviewsRowAndCount.rows;
         
-        product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
+        const paginationReview = {
+            page: 1,
+            limit: 5,
+            totalRows: reviewsRowAndCount.count,
+            pages: Math.ceil(reviewsRowAndCount.count / 5) || 1
+        }
+
         const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id, id);
         
         req.session.oldUrl = req.originalUrl;
-        res.render('../components/products/productViews/productDetail', {product, similarProducts, pagination});
+        res.render('../components/products/productViews/productDetail', {product, similarProducts, paginationComment, paginationReview});
     } 
     catch(err) {
         next(err);

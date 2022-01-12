@@ -1,6 +1,5 @@
 exports.createRating = (rating = 5) => {
     return  '<i class="fa fa-star"></i>'.repeat(parseInt(rating)) + '<i class="fa fa-star disabled-star"></i>'.repeat(5 - parseInt(rating));
-           
 }
 
 exports.getNumberRating = (reviews, rating) => {

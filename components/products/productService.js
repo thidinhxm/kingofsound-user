@@ -1,6 +1,5 @@
 const {models} = require('../../models');
 const {Op, literal} = require('sequelize');
-const reviewService = require('../reviews/reviewService');
 exports.getAll = async (query) => {
     try {
         const option = {
@@ -71,12 +70,6 @@ exports.getAll = async (query) => {
         }
     
         const products = await models.products.findAndCountAll(option);
-        if (products) {
-            products.rows.forEach(async (product) => {
-                    product.reviews = await reviewService.getReviewsProduct(product.product_id);
-                    product.average_rating = reviewService.getAverageRating(product.reviews);
-            });
-        }
                 
         return products;
     }
@@ -94,8 +87,6 @@ exports.getImagesProduct = (id) => {
         raw : true
     });
 }
-
-
 
 exports.getOne = (id) => {
     return models.products.findOne({
@@ -127,12 +118,6 @@ exports.getNewProducts = async (limit = 10) => {
             raw : true
         });
 
-        if (newProducts) {
-            newProducts.forEach(async (product) => {
-                product.reviews = await reviewService.getReviewsProduct(product.product_id);
-                product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
-            });
-        }
         return newProducts;
     }
     catch(error) {
@@ -140,78 +125,71 @@ exports.getNewProducts = async (limit = 10) => {
     }
 }
 
-exports.getHotProducts = async (limit = 10) => {
-    try {
-        hotProducts = await models.products.findAll({
-            limit : limit,
-            order : [
-                ['model_year']
-            ],
+exports.getHotProducts = (limit = 10) => {
+    return models.products.findAll({
+        limit : limit,
+        order : [
+            ['number_of_views', 'DESC']
+        ],
+        where : {
+            is_active : 1
+        },
+        include : [{
+            model : models.images,
+            as : 'images',
             where : {
-                is_active : 1
+                image_stt: 1
             },
-            include : [{
-                model : models.images,
-                as : 'images',
-                where : {
-                    image_stt: 1
-                },
-            }],
-            raw : true
-        });
-
-        if (hotProducts) {
-            hotProducts.forEach(async (product) => {
-                product.reviews = await reviewService.getReviewsProduct(product.product_id);
-                product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
-            });
-        }
-
-        return hotProducts;
-    }
-    catch(error) {
-        throw error;
-    }
+        }],
+        raw : true
+    });
 }
 
-exports.getSimilarProducts = async (category_id, brand_id, product_id, limit = 10) => {
-    try {
-        const products = await models.products.findAll({
-            limit : limit,
+exports.getHighRatingProducts = (limit = 10) => {
+    return models.products.findAll({
+        limit : limit,
+        order : [
+            ['rating', 'DESC']
+        ],
+        where : {
+            is_active : 1
+        },
+        include : [{
+            model : models.images,
+            as : 'images',
             where : {
-                [Op.or] : [
-                    { category_id : category_id },
-                    { brand_id : brand_id },
-                ],
-                product_id : {
-                    [Op.ne] : product_id,
-                },
-                is_active : 1
+                image_stt: 1
             },
-            order : [
-                ['model_year', 'DESC']
+        }],
+        raw : true
+    });
+}
+
+exports.getSimilarProducts = (category_id, brand_id, product_id, limit = 10) => {
+    return models.products.findAll({
+        limit : limit,
+        where : {
+            [Op.or] : [
+                { category_id : category_id },
+                { brand_id : brand_id },
             ],
-            include : [{
-                model : models.images,
-                as : 'images',
-                where : {
-                    image_stt: 1
-                },
-            }],
-            raw : true
-        });
-        
-        if (products) {
-            products.forEach(async (product) => {
-                product.reviews = await reviewService.getReviewsProduct(product.product_id);
-                product.average_rating = reviewService.getAverageRating(product.reviews).toFixed(1);
-            });
-        }
-        return products;
-    }
-    catch(error) {
-        throw error;
-    }
+            product_id : {
+                [Op.ne] : product_id,
+            },
+            is_active : 1
+        },
+        order : [
+            ['model_year', 'DESC']
+        ],
+        include : [{
+            model : models.images,
+            as : 'images',
+            where : {
+                image_stt: 1
+            },
+        }],
+        raw : true
+    });
 }
 
 exports.updateViewProduct = (id) => {
@@ -224,17 +202,15 @@ exports.updateViewProduct = (id) => {
     });
 }
 
-exports.getProductSuggest = (search_name) =>
-{
+exports.getProductSuggest = (search_name) =>{
     return models.products.findAll({
-        attributes:['product_name','product_id'],
-        where:{
-            product_name:
-            {
-                [Op.substring]:search_name
+        attributes : ['product_name','product_id'],
+        where : {
+            product_name : {
+                [Op.substring] : search_name
             }
         },
-        raw:true,
-        limit:10
+        raw : true,
+        limit : 10
     })
 }

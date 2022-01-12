@@ -97,8 +97,8 @@
 					<!-- product tab nav -->
 					<ul class="tab-nav">
 						<li class="active"><a data-toggle="tab" href="#tab1">Mô tả</a></li>
-						<li><a data-toggle="tab" href="#tab2">Đánh giá ({{product.reviews.length}})</a></li>
-						<li><a data-toggle="tab" href="#tab3" id="comment-length">Bình luận ({{pagination.totalRows}})</a></li>
+						<li><a data-toggle="tab" href="#tab2">Đánh giá ({{paginationReview.totalRows}})</a></li>
+						<li><a data-toggle="tab" href="#tab3" id="comment-length">Bình luận ({{paginationComment.totalRows}})</a></li>
 						
 					</ul>
 					<!-- /product tab nav -->
@@ -122,8 +122,39 @@
 						<!-- tab2  -->
 						<div id="tab2" class="tab-pane fade in">
 							<div class="row">
+								<!-- Reviews -->
+								<div class="col-md-8">
+									<div id="reviews">
+										<ul class="reviews">
+											{{#each product.reviews}}
+											<li>
+												<div class="review-heading">
+													<h5 class="name">{{'user.lastname'}}</h5>
+													<p class="date">{{formatDateTime created_at}}</p>
+													<div class="review-rating">
+														{{{createRating rating}}}
+													</div>
+												</div>
+												<div class="review-body">
+													<p>{{content}}</p>
+												</div>
+											</li>
+											{{/each}}
+										</ul>
+										
+										{{#if paginationReview.pages}}
+										<div class="row justify-content-center">
+											<nav aria-label="Page navigation example" id="pagination-review">
+												{{{paginateCommentList paginationReview product.product_id }}}
+											</nav>
+										</div>
+										{{/if}}
+									</div>
+								</div>
+								<!-- /Reviews -->
+
 								<!-- Rating -->
-								<div class="col-md-3">
+								<div class="col-md-4">
 									<div id="rating">
 										<div class="rating-avg">
 											<span>{{product.average_rating}}</span>
@@ -181,59 +212,6 @@
 									</div>
 								</div>
 								<!-- /Rating -->
-
-								<!-- Reviews -->
-								<div class="col-md-6">
-									<div id="reviews">
-										<ul class="reviews">
-											{{#each product.reviews}}
-											<li>
-												<div class="review-heading">
-													<h5 class="name">{{'user.lastname'}}</h5>
-													<p class="date">{{formatDateTime created_at}}</p>
-													<div class="review-rating">
-														{{{createRating rating}}}
-													</div>
-												</div>
-												<div class="review-body">
-													<p>{{content}}</p>
-												</div>
-											</li>
-											{{/each}}
-										</ul>
-										<ul class="reviews-pagination">
-											<li class="active">1</li>
-											<li><a href="#">2</a></li>
-											<li><a href="#">3</a></li>
-											<li><a href="#">4</a></li>
-											<li><a href="#"><i class="fa fa-angle-right"></i></a></li>
-										</ul>
-									</div>
-								</div>
-								<!-- /Reviews -->
-
-								<!-- Review Form -->
-								<div class="col-md-3">
-									<div id="review-form">
-										<form class="review-form">
-											<input class="input" type="text" placeholder="Tên của bạn">
-											<input class="input" type="email" placeholder="Email của bạn">
-											<textarea class="input" placeholder="Đánh giá của bạn"></textarea>
-											<div class="input-rating">
-												<span>Đánh giá của bạn: </span>
-												<div class="stars">
-													<input id="star5" name="rating" value="5" type="radio"><label for="star5"></label>
-													<input id="star4" name="rating" value="4" type="radio"><label for="star4"></label>
-													<input id="star3" name="rating" value="3" type="radio"><label for="star3"></label>
-													<input id="star2" name="rating" value="2" type="radio"><label for="star2"></label>
-													<input id="star1" name="rating" value="1" type="radio"><label for="star1"></label>
-												</div>
-											</div>
-											<button class="primary-btn">Nộp</button>
-										</form>
-									</div>
-								</div>
-								<!-- /Review Form -->
 							</div>
 						</div>
 						<!-- /tab2  -->
@@ -274,11 +252,11 @@
 											</li>
 											\{{/each}}
 										</script>
-							
-										{{#if pagination.pages}}
+
+										{{#if paginationComment.pages}}
 										<div class="row justify-content-center">
 											<nav aria-label="Page navigation example" id="pagination-comment">
-												{{{paginateCommentList pagination product.product_id }}}
+												{{{paginateCommentList paginationComment product.product_id }}}
 											</nav>
 										</div>
 										{{/if}}

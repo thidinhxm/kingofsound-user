@@ -5,7 +5,7 @@ exports.paginateCommentList = function (pagination, product_id) {
     let rightText = '<i class="fa fa-chevron-right"></i>';
     let paginationClass = 'store-pagination';
 
-    let pageCount = Math.ceil(pagination.totalRows / pagination.limit);
+    let pageCount = pagination.pages || Math.ceil(pagination.totalRows / pagination.limit);
     let template = '<ul class="' + paginationClass + '">';
 
     // ========= Previous Button ===============
