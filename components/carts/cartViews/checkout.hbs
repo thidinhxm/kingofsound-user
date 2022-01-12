@@ -46,7 +46,7 @@
 				</label>
 				<label>
 					<span>Mã giảm giá</span>
-					<input type="text" maxlength="10" name="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()" onblur="checkVoucher(this.value,{{cart.total}})"> 
+					<input type="text" maxlength="10" name="voucher" id ="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()" onblur="checkVoucher(this.value,{{cart.total}})"> 
 					<span></span>
 					<div id = "voucher-error" style="color:red;"></div>
 					<div id = "voucher-success" style="color:green;"></div>

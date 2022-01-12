@@ -357,10 +357,11 @@ const checkVoucher = function (id,total) {
                 }
                 else {
                     $('#discount').text(0);
-                    $('#voucher-error').text("Mã khuyến mại không hợp lệ");
+                    $('#voucher-error').text('Mã khuyến mại "' +  $('#voucher').val() +'" không hợp lệ hoặc hết hạn dùng!');
                     $('#voucher-success').text("");
                     $('#discount-total').text(0);
                     $('#total').text((total).toLocaleString(undefined,));
+                    $('#voucher').val("");
                     return false;
                 }
             }
