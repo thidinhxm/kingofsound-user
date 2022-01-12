@@ -58,8 +58,8 @@
 		<div class="col-md-4">
 		</div>
 		<div class="col-md-6" class="final-total">
-			<div style="text-align:right;margin-right:15%">
-				<b>Đã giảm giá - {{#if voucher}}{{voucher.discount}}{{else}}0{{/if}}%</b>
+			<div style="text-align:right;margin-right:20%">
+				<b>{{#if voucher}}Giảm giá - {{voucher.discount}}%{{/if}}</b>
 			</div>
 			<div class="total-value final-value">
 				<b class="total">Thanh toán :</b> <i id="basket-total">{{formatPrice order.total_price}}</i>
