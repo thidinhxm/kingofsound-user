@@ -1,21 +1,33 @@
-const checkInputRegister = function (email, password, comfirmPassword, firstname, lastname, phone, address) {
+const checkValidEmail = function (email) {
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return emailRegex.test(email);
+}
+
+const checkValidPhone = function (phone) {
     const phoneRegex = /^[0-9]{10,11}$/;
+    return phoneRegex.test(phone);
+}
+
+const checkValidPassword = function (password) {
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    return passwordRegex.test(password);
+}
+
+const checkInputRegister = function (email, password, comfirmPassword, firstname, lastname, phone, address) {
     if (email == '' || password == '' || comfirmPassword == '' || firstname == '' || lastname == '' || phone == '' || address == '') {
         return 'Vui lòng nhập đầy đủ thông tin';
     }
-    if (!emailRegex.test(email)) {
+    if (!checkValidEmail(email)) {
         return 'Email không hợp lệ';
     }
-    if (!passwordRegex.test(password)) {
+    if (!checkValidPassword(password)) {
         return 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt';
     }
     if (password !== comfirmPassword) {
 
         return 'Mật khẩu không trùng khớp';
     }
-    if (!phoneRegex.test(phone)) {
+    if (!checkValidPhone(phone)) {
         return 'Số điện thoại không hợp lệ';
     }
 
@@ -63,11 +75,10 @@ $('#button-register').click(function (e) {
 });
 
 const checkInputLogin = function (email, password) {
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (email == '' || password == '') {
         return 'Vui lòng nhập đầy đủ thông tin';
     }
-    if (!emailRegex.test(email)) {
+    if (!checkValidEmail(email)) {
         return 'Email không hợp lệ';
     }
     return null;
@@ -93,20 +104,58 @@ $('#button-login').click(function (e) {
             password: password
         },
         success: function (data) {
-            if (data) {
-                $('#login_form').submit();
-                return true;
-            }
-            else {
+            if (!data) {
                 $('#error-login').addClass('alert-danger').text('Tài khoản không tồn tại');
                 return false;
+                
+            }
+            else if (data === 'admin') {
+                $('#error-login').addClass('alert-danger').text('Không thể đăng nhập bằng tài khoản này');
+                return false;
+            }
+            else {
+                $('#login_form').submit();
+                return true;
             }
         }
     });
 });
 
+/*------------ AJAX CHECK EMAIL FORGOT PASSWORD --------------*/
+$('#button-forgot-password').click(function (e) {
+    e.preventDefault();
+    const email = $('#email-forgot-password').val();
+    if (email == '') {
+        $('#error-forgot-password').text('Vui lòng nhập email');
+        return false;
+    }
+    if (!checkValidEmail(email)) {
+        $('#error-forgot-password').text('Email không hợp lệ');
+        return false;
+    }
 
-
+    $.ajax({
+        url: '/api/check-exists-account',
+        type: 'POST',
+        data: {
+            email: email
+        },
+        success: function (data) {
+            if (!data) {
+                $('#error-forgot-password').addClass('alert-danger').text('Tài khoản không tồn tại');
+                return false;
+            }
+            else if (data === 'admin') {
+                $('#error-forgot-password').addClass('alert-danger').text('Tài khoản này không thể đổi mật');
+                return false;
+            }
+            else {
+                $('#forgot-password-form').submit();
+                return true;
+            }
+        }
+    });
+});
 
 /*------------ AJAX ADD-TO-CART --------------*/
 const addToCart = function (product_id, btn) {
@@ -306,37 +355,7 @@ const changePage = (n, product_id) => {
 }
 
 
-/*------------ AJAX FORGOT PASWWORD --------------*/
-$('#button-forgot-password').click(function (e) {
-    e.preventDefault();
-    const email = $('#email-forgot-password').val();
-    const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    if (email == '') {
-        $('#error-forgot-password').text('Vui lòng nhập email');
-        return false;
-    }
-    if (!emailRegex.test(email)) {
-        $('#error-forgot-password').text('Email không hợp lệ');
-        return false;
-    }
-    $.ajax({
-        url: '/api/check-exists-account',
-        type: 'POST',
-        data: {
-            email: email
-        },
-        success: function (data) {
-            if (data) {
-                $('#forgot-password-form').submit();
-                return true;
-            }
-            else {
-                $('#error-forgot-password').text('Email không tồn tại');
-                return false;
-            }
-        }
-    });
-});
+
 /*----------------------CHECK VALID VOUCHER-----------------*/
 const checkVoucher = function (id,total) {
     if (id != "")
