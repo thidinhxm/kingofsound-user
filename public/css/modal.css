@@ -1,4 +1,4 @@
-.modal-add-to-cart,.modal-review, .modal-check-review{
+.modal-add-to-cart,.modal-review, .modal-check-review,.modal-delete-order,.modal-delete-alert{
     position: fixed;
     left: 0;
     top: 0;
@@ -12,7 +12,7 @@
 }
 
 
-.modal-review .modal-content,.modal-check-review .modal-content {
+ .modal-content {
     position: absolute;
     top: 50%;
     left: 50%;

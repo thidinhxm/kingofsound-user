@@ -151,7 +151,6 @@
                                                         </td>
                                                         <td>
                                                             &nbsp;&nbsp;&nbsp;&nbsp;
-
                                                         </td>
                                                         <td>
                                                             <span>
@@ -219,21 +218,22 @@
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                      
+
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"
                                             onclick="closemodal()">
                                             <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
                                         </button>
-                                          <h5 class="modal-title">Đánh giá</h5>
+                                        <h5 class="modal-title">Đánh giá</h5>
                                     </div>
                                     <div class="modal-body">
                                         <div id="review-form">
-                                            <form class="review-form" action="/orders/review" method="POST">
+                                            <form class="review-form" action="/orders/review" id="review-form"
+                                                method="POST">
                                                 <input type="hidden" name="order_id" id="order_id">
                                                 <input type="hidden" name="product_id" id="product_id">
 
-                                                <input class="input" placeholder="Đánh giá của bạn"
-                                                    name="review"></input>
+                                                <textarea class="input" form_id="review-form"
+                                                    placeholder="Đánh giá của bạn" name="review"></textarea>
                                                 <div class="input-rating">
                                                     <span>Đánh giá của bạn: </span>
                                                     <div class="stars">
@@ -258,52 +258,117 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-check-review modal">
-                                <div class="modal-dialog" role="document">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                           
-                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                                onclick="closemodal_check()">
-                                                <span aria-hidden="true"  style="font-size: 30px;color:red">&times;</span>
-                                            </button>
-                                             <h5 class="modal-title">Đánh giá</h5>
-                                        </div>
-                                        <div class="modal-body">
-                                            <div id="review-form">
-                                                <form class="review-form" action="/orders/review" method="POST">
-                                                    <input type="hidden" name="order_id" id="order_id">
-                                                    <input type="hidden" name="product_id" id="product_id">
 
-                                                    <textarea class="input" id ="my-review" readonly></textarea>
-                                                    <div class="input-rating">
-                                                        <span>Đánh giá của bạn: </span>
-                                                        <div class="stars">
-                                                            <input id="star5" name="star" value="5" type="radio" readonly><label
-                                                                for="star5"></label>
-                                                            <input id="star4" name="star" value="4" type="radio" readonly><label
-                                                                for="star4"></label>
-                                                            <input id="star3" name="star" value="3" type="radio" readonly><label
-                                                                for="star3"></label>
-                                                            <input id="star2" name="star" value="2" type="radio" readonly><label
-                                                                for="star2"></label>
-                                                            <input id="star1" name="star" value="1" type="radio" readonly><label
-                                                                for="star1"></label>
-                                                        </div>
+                        <div class="modal-check-review modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="closemodal_check()">
+                                            <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
+                                        </button>
+                                        <h5 class="modal-title">Đánh giá</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="review-form">
+                                            <form class="review-form" action="/orders/review" method="POST">
+                                                <input type="hidden" name="order_id" id="order_id">
+                                                <input type="hidden" name="product_id" id="product_id">
+                                                <textarea class="input" id="my-review" readonly></textarea>
+                                                <div class="input-rating">
+                                                    <span>Đánh giá của bạn: </span>
+                                                    <div class="stars">
+                                                        <input id="star5" name="star" value="5" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star5"></label>
+                                                        <input id="star4" name="star" value="4" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star4"></label>
+                                                        <input id="star3" name="star" value="3" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star3"></label>
+                                                        <input id="star2" name="star" value="2" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star2"></label>
+                                                        <input id="star1" name="star" value="1" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star1"></label>
                                                     </div>
-                
-                                                </form>
-                                            </div>
+                                                </div>
+
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
-
+                            </div>
                         </div>
-                        <!-- /ACCOUNT -->
+
+                        <div class="modal-delete-order modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="closemodal_delete()">
+                                            <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" style="color:red">Hủy đơn hàng</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div style="font-size: 18px;" class="alert alert-danger" role="alert">
+                                            <div>
+                                            Đơn hàng hủy sẽ không được tiến hành giao tới bạn
+                                            <br>
+                                            Bạn có thực sự muốn xóa đơn hàng này?
+                                            <br>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                                <form action="/orders/delete" method ="POST">
+                                                    <input type="hidden" name="order_id" id="id">
+                                                    <button type="submit" value="submit" class="btn btn-danger">Xác nhận</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closemodal_delete()">Hủy</button>
+                                                </form>
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-delete-alert modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="closemodal_alert()">
+                                            <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" style="color:red">Đơn hàng không thể hủy</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div style="font-size: 18px;" class="alert alert-danger" role="alert">
+                                            <div>
+                                            Đơn hàng đang được tiến hành hoặc đã giao tới bạn!
+                                            <br>
+                                          
+                                            <br>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                              
+                    
+                                                    <button type="button" class="btn btn-danger" onclick="closemodal_alert()">Xác nhận</button>
+                                               
+                                               
+                                            </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <!-- /ACCOUNT -->
                 </div>
-                <!--end container -->
             </div>
-            <!-- /MAIN HEADER -->
+            <!--end container -->
+        </div>
+        <!-- /MAIN HEADER -->
 </header>
 <!-- /HEADER -->

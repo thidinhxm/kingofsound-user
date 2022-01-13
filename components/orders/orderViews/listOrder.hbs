@@ -57,6 +57,7 @@
 					<td class="actions" data-th="">
 						<a href="/orders/{{order_id}}"><button class="btn btn-info btn-sm"><i
 									class="far fa-eye"></i></i></button></a>
+						<button class="btn btn-info btn-sm" style="background-color:red" onclick= {{#if can_delete}}"openModal_delete({{order_id}})" {{else}} "closemodal_alert()"{{/if}}><i class="fas fa-trash"></i></button>
 					</td>
 				</tr>
 				{{/each}}

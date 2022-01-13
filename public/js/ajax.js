@@ -514,3 +514,21 @@ const checkReview = function (review_id) {
     });
 
 }
+
+// modal delete order
+const  toggleModal_delete= function () {
+    const modal_delete = document.querySelector(".modal-delete-order");
+    modal_delete.classList.toggle("show-modal");
+}
+const closemodal_delete = function () {
+    toggleModal_delete();
+}
+const  openModal_delete= function (order_id) {
+    document.querySelector("#id").value = order_id;
+    toggleModal_delete(); 
+}
+
+const  closemodal_alert= function () {
+    const modal_delete = document.querySelector(".modal-delete-alert");
+    modal_delete.classList.toggle("show-modal");
+}

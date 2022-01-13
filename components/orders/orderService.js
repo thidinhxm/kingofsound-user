@@ -1,10 +1,14 @@
 const {models} = require('../../models');
+const {Op} = require('sequelize');
 
 exports.listOrder= (id) => {
     return models.orders.findAll(
         {
             where:{
-                user_id:id
+                user_id:id,
+                order_status:{
+                    [Op.ne]:"Đã hủy"
+                }
             },
             order:[
                 ['create_date', 'DESC'],
@@ -76,4 +80,8 @@ exports.reviewDetailOrder = (order_id,product_id,review_id) =>
             product_id:product_id
         }
     })
+}
+exports.delete = (order_id) =>
+{
+    return models.orders.update({order_status:"Đã hủy"},{where:{order_id:order_id}})
 }

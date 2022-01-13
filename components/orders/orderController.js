@@ -10,6 +10,8 @@ exports.list = async (req, res, next) => {
         listOrder.forEach(element => {
             if(element.order_status == "Đã giao")
             element.is_complete = 1;
+            if(element.order_status != "Đã giao" && element.order_status!="Đang giao")
+                element.can_delete = 1;
         });
         res.render('../components/orders/orderViews/listOrder', { listOrder, message });
     }
@@ -46,6 +48,17 @@ exports.review = async (req, res, next) => {
         const review_id = review.review_id;
         await orderSevice.reviewDetailOrder(order_id, product_id, review_id);
         res.redirect('/orders/' + order_id);
+    }
+    catch (error) {
+        next(error);
+    }
+}
+exports.delete = async (req,res,next) =>
+{
+    try{
+        const order_id = req.body.order_id;
+        await orderSevice.delete(order_id);
+        res.redirect('/orders');
     }
     catch (error) {
         next(error);

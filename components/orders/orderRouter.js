@@ -7,7 +7,8 @@ const reviewAPI = require('../reviews/reviewAPI')
 
 router.get('/:order_id', userController.isLogin, orderController.detail);
 router.get('/', userController.isLogin, orderController.list);
-router.post('/review',orderController.review);
-router.post('/getreview',reviewAPI.getReview)
+router.post('/review',userController.isLogin,orderController.review);
+router.post('/getreview',userController.isLogin,reviewAPI.getReview);
+router.post('/delete',userController.isLogin,orderController.delete);
 
 module.exports = router;

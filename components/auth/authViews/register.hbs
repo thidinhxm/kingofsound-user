@@ -34,25 +34,25 @@
 					<h3>Tạo tài khoản</h3>
 					<form class="row login_form" action="/register" id="register_form" method="POST" >
 						<div class="col-md-12 form-group">
-							<input type="email" class="form-control" id="email" name="email" placeholder="Email">
+							<input type="email" class="form-control" id="email" name="email" placeholder="Email"maxlength="50">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu">
+							<input type="password" class="form-control" id="password" name="password" placeholder="Mật khẩu" maxlength="16">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu">
+							<input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu" maxlength="16">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Họ" >
+							<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Họ" maxlength="40">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Tên">
+							<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Tên" maxlength="20">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ">
+							<input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" maxlength="65000">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại">
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" maxlength="11">
 						</div>
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit" class="button button-register" id="button-register">Đăng ký</button>
