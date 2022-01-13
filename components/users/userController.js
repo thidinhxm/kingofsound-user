@@ -46,7 +46,6 @@ exports.updateUser = async (req,res,next) => {
             }
         });
         res.end();
-        
     }
     catch (error) {
         next(error);

@@ -21,5 +21,5 @@ exports.formatDateTime = (timestamp) => {
         hour: 'numeric',
         minute: 'numeric',
         hour12: false
-        });
+    });
 }

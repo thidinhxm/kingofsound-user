@@ -15,7 +15,8 @@ router.post('/login', passport.authenticate('local', {
     try {
         const cartUser = await cartService.getUserCart(req.user.user_id);
         await cartService.moveToCartUser(cartUser.cart_id, req.session.cart.cart_id);
-        req.session.cart = await cartService.getUserCart(req.user.user_id);
+        const cart = await cartService.getUserCart(req.user.user_id);
+        req.session.cart = cart;
         res.locals.cart = req.session.cart;
         res.redirect(req.session.oldUrl || '/');
     }

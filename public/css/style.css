@@ -2358,7 +2358,7 @@ button:focus {
 
 
 /* profile */
-.emp-profile{
+.emp-profile {
   background: -webkit-linear-gradient(left, #970c0c, #838080)!important;
   padding: 5%;
   margin-top: 3%;
@@ -2369,14 +2369,13 @@ button:focus {
   min-width: 90%!important;
   color:whitesmoke;
 }
-.emp-profile h3
-{
+.emp-profile h3 {
   color: white!important;
 }
 .profile-img{
   text-align: center;
 }
-.profile-img img{
+.profile-img img {
   width: 90%;
   height: 100%;
   margin-top: 20%;
@@ -2401,10 +2400,10 @@ button:focus {
 .profile-head h5{
   color: #333;
 }
-.profile-head h6{
+.profile-head h6 {
   color: #0062cc;
 }
-.profile-edit-btn{
+.profile-edit-btn {
   border: none;
   border-radius: 1.5rem;
   width: 70%;
@@ -2424,7 +2423,7 @@ button:focus {
   font-size: 15px;
   font-weight: 600;
 }
-.profile-head .nav-tabs{
+.profile-head .nav-tabs {
   margin-bottom:5%;
 }
 .profile-head .nav-tabs .nav-link{
@@ -2435,7 +2434,7 @@ button:focus {
   border: none;
   border-bottom:2px solid #0062cc;
 }
-.profile-work{
+.profile-work {
   padding: 14%;
   margin-top: -15%;
 }
@@ -2454,7 +2453,8 @@ button:focus {
 .profile-work ul{
   list-style: none;
 }
-.profile-tab label{
+
+.profile-tab label {
   font-weight: 600;
 }
 .profile-tab p{
@@ -2514,10 +2514,9 @@ button:focus {
   height: 30px;
 }
 
-.cart-box
-{
+.cart-box {
   position: absolute;
-  width: 300px;
+  width: 350px;
   border-radius: 10px;
   font-size: 1rem;
   padding: 3px;
@@ -2528,13 +2527,12 @@ button:focus {
 
 @media screen and (max-width: 600px) {
   .cart-box {
-    left: -100px;
+    left: -150px;
   }
 }
   
 
-.cart-box div,.cart-box a
-{
+.cart-box div,.cart-box a {
   width: 98%;
   margin-left: 5px;
 }
@@ -2552,35 +2550,38 @@ button:focus {
   color: rgb(168, 54, 25);
 
 }
-.item-subtotal::after
-{
+
+.item-subtotal::after{
   content: " vnđ";
   font-size: 80%;
 }
-.clearfix tr td
-{
+
+.clearfix tr td {
   margin-left: 5px;
 }
-.cart-box .btn-primary
-{
+
+.cart-box .btn-primary {
   width: 100px;
   color: black;
-  margin-left: 28%;
+  margin-left: 30%;
   margin-top: 10px;
   background-color: #D10024;
   padding: 7px;
   font-weight: bolder;
 }
 
-.cart-box .btn-primary:hover
-{
+.cart-box .btn-primary:hove{
   background-color: #D10024;
   color: white;
 }
 
-.shopping-cart-total
-{
+.shopping-cart-total {
   margin-top: 10px;
+}
+
+.shopping-cart-total .total::after {
+  content: " vnđ";
+  font-size: 80%;
 }
 
 
