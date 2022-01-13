@@ -3,12 +3,15 @@ const userService = require('../users/userService');
 exports.checkExistsAccount = async (req, res, next) => {
     try {
         const {email} = req.body;
-        const account = await userService.getAccountByEmail(email);
-        if (account) {
-            res.json(true);
+        const account = await userService.getUserByEmail(email);
+        if (!account) {
+            res.json(false);
+        }
+        else if (account === 'admin') {
+            res.json(account);
         }
         else {
-            res.json(false);
+            res.json(true);
         }
     }
     catch (err) {

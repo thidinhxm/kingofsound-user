@@ -154,6 +154,10 @@ exports.forgotPasswordPost = async (req, res, next) => {
             req.flash('error', 'Tài khoản không tồn tại');
             res.redirect('/forgot-password');
         }
+        else if (user === 'admin') {
+            req.flash('error', 'Tài khoản này không thể đổi mật khẩu');
+            res.redirect('/forgot-password');
+        }
         else {
             user.token = crypto.randomBytes(64).toString('hex');
             user.expired_at = new Date(Date.now() + 5 * 60 * 1000);
@@ -245,8 +249,20 @@ exports.resetPassword = (req, res, next) => {
 exports.resetPasswordPost = async (req, res, next) => {
     try {
         const { password, confirmPassword, token, email } = req.body;
-        
-        if (password !== confirmPassword) {
+        const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+        if (!password || !confirmPassword) {
+            req.flash('error', 'Vui lòng nhập đầy đủ thông tin');
+            req.flash('email', email);
+            req.flash('token', token);
+            res.redirect('/reset-password');
+        }
+        else if (!regexPassword.test(password)) {
+            req.flash('error', 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt');
+            req.flash('email', email);
+            req.flash('token', token);
+            res.redirect('/reset-password');
+        }
+        else if (password !== confirmPassword) {
             req.flash('error', 'Mật khẩu không khớp');
             req.flash('email', email);
             req.flash('token', token);
