@@ -314,7 +314,7 @@
                                         <h4 class="modal-title" style="color:red">Hủy đơn hàng</h4>
                                     </div>
                                     <div class="modal-body">
-                                        <div style="font-size: 18px;" class="alert alert-danger" role="alert">
+                                        <div style="font-size: 18px;" class="alert alert-warning" role="alert">
                                             <div>
                                             Đơn hàng hủy sẽ không được tiến hành giao tới bạn
                                             <br>
@@ -323,7 +323,7 @@
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                                <form action="/orders/delete" method ="POST">
+                                                <form action="/orders/cancel" method ="POST">
                                                     <input type="hidden" name="order_id" id="id">
                                                     <button type="submit" value="submit" class="btn btn-danger">Xác nhận</button>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closemodal_delete()">Hủy</button>
