@@ -25,7 +25,7 @@ exports.getAll = async (req, res, next) => {
 
         const categories = await categoryService.getAll();
         const brands = await brandService.getAll();
-        const newProducts = await productService.getNewProducts(3);
+        const bestSalesProducts = await productService.getBestSalesProducts(5);
 
         req.session.oldUrl = req.originalUrl;
         res.render('../components/products/productViews/productList', {
@@ -33,7 +33,7 @@ exports.getAll = async (req, res, next) => {
             categories,
             brands,
             pagination,
-            newProducts
+            bestSalesProducts
         });
     } 
     catch(err) {
