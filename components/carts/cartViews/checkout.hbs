@@ -46,7 +46,7 @@
 				</label>
 				<label>
 					<span>Mã giảm giá</span>
-					<input type="text" maxlength="10" name="voucher" id ="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()" onkeyup="checkVoucher_on(this.value,{{cart.total}})" onblur="checkVoucher(this.value,{{cart.total}})"> 
+					<input type="text" maxlength="10" name="voucher" id ="voucher" value="" placeholder="Nhập mã giảm giá" oninput="this.value = this.value.toUpperCase()"  onkeyup="checkVoucher(this.value,{{cart.total}})" onblur="checkVoucher(this.value,{{cart.total}})"> 
 					<span></span>
 					<div id = "voucher-error" style="color:red;"></div>
 					<div id = "voucher-success" style="color:green;"></div>
@@ -92,7 +92,7 @@
 						<li><i class="fab fa-cc-jcb"></i></li>
 				</ul>
 				</div>
-				<button form ="checkout-form" type ="submit" value ="submit">Đặt hàng</button>
+				<button form ="checkout-form" type ="submit" id = "submit-checkout">Đặt hàng</button>
 			</div><!-- Yorder -->
 		</div>
 	</div>

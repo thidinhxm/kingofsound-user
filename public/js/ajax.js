@@ -126,13 +126,13 @@ const addToCart = function (product_id, btn) {
 
                 $('#cart-product-quantity').text(data.cart.products.length);
                 let cartDropDownTemplate = Handlebars.compile($('#cart-dropdown-template').html());
-                $('#cart-list-dropdown').html(cartDropDownTemplate({products: data.cart.products, totalString: data.cart.totalString}));
-                $('#toast').css({"visibility":  "hidden"});
+                $('#cart-list-dropdown').html(cartDropDownTemplate({ products: data.cart.products, totalString: data.cart.totalString }));
+                $('#toast').css({ "visibility": "hidden" });
                 setTimeout(() => {
-                    $('#toast').css({"visibility":  "visible"})
+                    $('#toast').css({ "visibility": "visible" })
                 }, 100);
                 setTimeout(() => {
-                    $('#toast').css({"visibility":  "hidden","opacity": "1"})
+                    $('#toast').css({ "visibility": "hidden", "opacity": "1" })
                 }, 2000);
                 return true;
             }
@@ -230,9 +230,9 @@ const paginateCommentList = function (pagination, product_id) {
         start++;
         i++;
     }
-// ========== Next Buton ===========
+    // ========== Next Buton ===========
     if (page === pageCount) {
-        n = pageCount;         
+        n = pageCount;
         template = template + `<li class="disabled"><a onclick="changePage(${n}, ${product_id})">${rightText}</a></li>`;
     }
     else {
@@ -243,7 +243,7 @@ const paginateCommentList = function (pagination, product_id) {
     return template;
 };
 
-const addComment = function(product_id, event) {
+const addComment = function (product_id, event) {
     event.preventDefault();
     const email = $('#email-comment').val();
     const name = $('#name-comment').val();
@@ -283,23 +283,23 @@ const addComment = function(product_id, event) {
     });
 
     function loadComments(product_id) {
-        $.getJSON(`/products/${product_id}/comments`, function(data) {
+        $.getJSON(`/products/${product_id}/comments`, function (data) {
             let commentTemplate = Handlebars.compile($('#comment-list-template').html());
             $('#comment-length').text(`Bình luận (${data.pagination.totalRows})`);
-            $('#comment-list').html(commentTemplate({comments: data.comments}));
+            $('#comment-list').html(commentTemplate({ comments: data.comments }));
             $('#pagination-comment').html(paginateCommentList(data.pagination, product_id));
         });
     }
-};    
+};
 
 /*------------ AJAX CHANGE-PAGE-COMMENT-LisT --------------*/
 const changePage = (n, product_id) => {
     $.ajax({
         url: '/products/' + product_id + '/comments?page=' + n,
         type: 'GET',
-        success: function(data) {
+        success: function (data) {
             let commentTemplate = Handlebars.compile($('#comment-list-template').html());
-            $('#comment-list').html(commentTemplate({comments: data.comments}));
+            $('#comment-list').html(commentTemplate({ comments: data.comments }));
             $('#pagination-comment').html(paginateCommentList(data.pagination, product_id));
         }
     });
@@ -338,7 +338,7 @@ $('#button-forgot-password').click(function (e) {
     });
 });
 /*----------------------CHECK VALID VOUCHER-----------------*/
-const checkVoucher = function (id,total) {
+const checkVoucher = function (id, total) {
     if (id != "")
         $.ajax({
             url: '/cart/checkout/voucher',
@@ -351,72 +351,75 @@ const checkVoucher = function (id,total) {
                     $('#discount').text(data.discount);
                     $('#voucher-success').text("Áp dụng khuyến mại thành công");
                     $('#voucher-error').text("");
-                    $('#discount-total').text((total*data.discount/100).toLocaleString(undefined,));
-                    $('#total').text((total-total*data.discount/100).toLocaleString(undefined,));
+                    $('#discount-total').text((total * data.discount / 100).toLocaleString(undefined,));
+                    $('#total').text((total - total * data.discount / 100).toLocaleString(undefined,));
+                    $('#submit-checkout').removeAttr('form');
+                    $('#submit-checkout').attr('form', 'checkout-form');
                     return true;
                 }
                 else {
                     $('#discount').text(0);
-                    $('#voucher-error').text('Mã khuyến mại "' +  $('#voucher').val() +'" không hợp lệ hoặc hết hạn dùng!');
+                    $('#voucher-error').text('Mã khuyến mại "' + $('#voucher').val() + '" không hợp lệ hoặc hết hạn dùng!');
                     $('#voucher-success').text("");
                     $('#discount-total').text(0);
                     $('#total').text((total).toLocaleString(undefined,));
-                    $('#voucher').val("");
+                    $('#submit-checkout').removeAttr('form');
+       
                     return false;
                 }
             }
         });
-    else
-        {
+    else {
         $('#voucher-error').text("");
         $('#voucher-success').text("");
         $('#discount').text(0);
         $('#discount-total').text(0);
         $('#total').text((total).toLocaleString(undefined,));
-        }
+        $('#submit-checkout').removeAttr('form');
+        $('#submit-checkout').attr('form', 'checkout-form');
+    }
 };
 
-const checkVoucher_on = function (id,total) {
-    if (id != "")
-        $.ajax({
-            url: '/cart/checkout/voucher',
-            type: 'POST',
-            data: {
-                voucher_id: id,
-            },
-            success: function (data) {
-                if (data.success) {
-                    $('#discount').text(data.discount);
-                    $('#voucher-success').text("Áp dụng khuyến mại thành công");
-                    $('#voucher-error').text("");
-                    $('#discount-total').text((total*data.discount/100).toLocaleString(undefined,));
-                    $('#total').text((total-total*data.discount/100).toLocaleString(undefined,));
-                    return true;
-                }
-                else {
-                    $('#discount').text(0);
-                    $('#voucher-error').text('Mã khuyến mại "' +  $('#voucher').val() +'" không hợp lệ hoặc hết hạn dùng!');
-                    $('#voucher-success').text("");
-                    $('#discount-total').text(0);
-                    $('#total').text((total).toLocaleString(undefined,));
-                    return false;
-                }
-            }
-        });
-    else
-        {
-        $('#voucher-error').text("");
-        $('#voucher-success').text("");
-        $('#discount').text(0);
-        $('#discount-total').text(0);
-        $('#total').text((total).toLocaleString(undefined,));
-        }
-};
+// const checkVoucher_on = function (id, total) {
+//     if (id != "")
+//         $.ajax({
+//             url: '/cart/checkout/voucher',
+//             type: 'POST',
+//             data: {
+//                 voucher_id: id,
+//             },
+//             success: function (data) {
+//                 if (data.success) {
+//                     $('#discount').text(data.discount);
+//                     $('#voucher-success').text("Áp dụng khuyến mại thành công");
+//                     $('#voucher-error').text("");
+//                     $('#discount-total').text((total * data.discount / 100).toLocaleString(undefined,));
+//                     $('#total').text((total - total * data.discount / 100).toLocaleString(undefined,));
+//                     return true;
+//                 }
+//                 else {
+//                     $('#discount').text(0);
+//                     $('#voucher-error').text('Mã khuyến mại "' + $('#voucher').val() + '" không hợp lệ hoặc hết hạn dùng!');
+//                     $('#voucher-success').text("");
+//                     $('#discount-total').text(0);
+//                     $('#total').text((total).toLocaleString(undefined,));
+//                     return false;
+//                 }
+//             }
+//         });
+//     else {
+//         $('#voucher-error').text("");
+//         $('#voucher-success').text("");
+//         $('#discount').text(0);
+//         $('#discount-total').text(0);
+//         $('#total').text((total).toLocaleString(undefined,));
+//     }
+// };
 /*----------------------Search suggest-----------------*/
-const suggest = function(search){
-	$('#search-suggest').empty();
-	if (search== ""){return;}
-	$.ajax({
+const suggest = function (search) {
+    $('#search-suggest').empty();
+    if (search == "") { return; }
+    $.ajax({
         url: '/products/suggest',
         type: 'POST',
         data: {
@@ -424,13 +427,13 @@ const suggest = function(search){
         },
         success: function (data) {
             if (data.success) {
-                data.products.forEach(value=>{
+                data.products.forEach(value => {
                     $('#search-suggest').append(`<a href="/products/${value.product_id}"><div class="text">${value.product_name}</div></a>`);
                 })
                 return true;
             }
-            else 
-            return false;
+            else
+                return false;
         }
     });
 
@@ -445,17 +448,15 @@ function toggleModal_review() {
 }
 
 
-const addreviews = function(order_id,product_id)
-{
+const addreviews = function (order_id, product_id) {
     document.querySelector("#order_id").value = order_id;
     document.querySelector("#product_id").value = product_id;
     $("#1").prop("checked", true);
     toggleModal_review();
 }
 
-const closemodal = function()
-{
- toggleModal_review();
+const closemodal = function () {
+    toggleModal_review();
 }
 
 
@@ -464,13 +465,11 @@ function toggleModal_check_review() {
     const modal_check_review = document.querySelector(".modal-check-review");
     modal_check_review.classList.toggle("show-modal");
 }
-const closemodal_check = function()
-{
- toggleModal_check_review();
+const closemodal_check = function () {
+    toggleModal_check_review();
 }
 
-const checkReview = function(review_id)
-{
+const checkReview = function (review_id) {
     $.ajax({
         url: '/orders/getreview',
         type: 'POST',
@@ -479,15 +478,15 @@ const checkReview = function(review_id)
         },
         success: function (data) {
             if (data.success) {
-                toggleModal_check_review() ;
+                toggleModal_check_review();
                 $('#my-review').text(data.content);
-            
+
                 $("#star" + data.rating).prop("checked", true);
-            
+
                 return true;
             }
-            else 
-            return false;
+            else
+                return false;
         }
     });
 
