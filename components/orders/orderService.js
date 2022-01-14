@@ -6,9 +6,6 @@ exports.listOrder= (id) => {
         {
             where:{
                 user_id:id,
-                order_status:{
-                    [Op.ne]:"Đã hủy"
-                }
             },
             order:[
                 ['create_date', 'DESC'],

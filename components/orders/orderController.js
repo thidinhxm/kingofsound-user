@@ -10,9 +10,9 @@ exports.list = async (req, res, next) => {
         listOrder.forEach(element => {
             if(element.order_status == "Đã giao")
             element.is_complete = 1;
-            if(element.order_status != "Đã giao" && element.order_status!="Đang giao")
+            if(element.order_status != "Đã giao" && element.order_status!="Đang giao" && element.order_status!="Đã hủy" )
                 element.can_cancel = 1;
-                if(element.order_status != "Đã hủy" && element.order_status!="Đang giao")
+            if(element.order_status == "Đã hủy")
                 element.is_cancel = 1;
         });
         res.render('../components/orders/orderViews/listOrder', { listOrder, message });

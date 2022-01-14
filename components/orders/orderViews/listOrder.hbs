@@ -57,7 +57,9 @@
 					<td class="actions" data-th="">
 						<a href="/orders/{{order_id}}"><button class="btn btn-info btn-sm"><i
 									class="far fa-eye"></i></i></button></a>
-						<button class="btn btn-info btn-sm" style="background-color:red" onclick= {{#if can_cancel}}"openModal_delete({{order_id}})" {{else}} "closemodal_alert()"{{/if}}><i class="fas fa-window-close"></i></i></button>
+						
+						<button class="btn btn-info btn-sm" style="background-color:red" onclick= {{#if can_cancel}}"openModal_delete({{order_id}})" {{else}}{{#if is_cancel}}"closemodal_alert_2()" {{else}} "closemodal_alert()"{{/if}}{{/if}}><i class="fas fa-window-close"></i></i></button>
+					
 					</td>
 				</tr>
 				{{/each}}

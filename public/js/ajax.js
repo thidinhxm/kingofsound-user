@@ -528,7 +528,14 @@ const  openModal_delete= function (order_id) {
     toggleModal_delete(); 
 }
 
-const  closemodal_alert= function () {
+const closemodal_alert= function (tittle) {
     const modal_delete = document.querySelector(".modal-delete-alert");
+    $("#cancel_tittle").text("Đơn hàng đang được vận chuyển hoặc đã giao tới bạn!");
+    modal_delete.classList.toggle("show-modal");
+}
+
+const closemodal_alert_2= function (tittle) {
+    const modal_delete = document.querySelector(".modal-delete-alert");
+    $("#cancel_tittle").text("Đơn hàng đã được hủy trước đó!");
     modal_delete.classList.toggle("show-modal");
 }
