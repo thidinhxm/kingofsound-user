@@ -1,11 +1,12 @@
 const {models} = require('../../models');
 const {Op} = require('sequelize');
 
-exports.listOrder= (id) => {
+exports.listOrder= (id,status) => {
     return models.orders.findAll(
         {
             where:{
                 user_id:id,
+                order_status:status
             },
             order:[
                 ['create_date', 'DESC'],

@@ -3,11 +3,12 @@
 <div class="order">
 	<div class="container">
 		{{#if message}}
-		<div class="alert alert-success">
+		<div class="alert alert-success" style="margin-top:8px;margin-bottom:-2px">
 			Đơn hàng đã được tạo thành công!
 		</div>
 		{{/if}}
-		<h3 class="title">Thông tin đơn hàng</h3>
+		<h3 class="title" style="display:inline;float:left">Danh sách đơn hàng</h3>
+
 		<table id="cart" class="table table-hover table-condensed">
 			<thead>
 				<tr>
@@ -32,6 +33,8 @@
 									<div class="col-md-6"><b>Thời gian đặt:</b> </div>
 									<div class="col-md-6">{{formatDateTime create_date}}</div>
 								</div>
+								{{#if is_cancel}}
+								{{else}}
 								<div class="row">
 									<div class="col-md-6"><b>Thời gian vận chuyển: </b></div>
 									<div class="col-md-6">Dự kiến {{formatDateTime send_date}}</div>
@@ -42,24 +45,27 @@
 										{{#if receive_date}}
 										{{formatDateTime receive_date}}
 										{{else}}
-										Dự kiến trong vòng 2 tuần
+										Dự kiến 2 tuần
 										{{/if}}
 									</div>
 								</div>
+								{{/if}}
 							</div>
 						</div>
 					</td>
 					<td data-th="total">{{formatPrice total_price}}</td>
-					<td data-th="status" style = "color:{{#if is_complete}}green{{else}}tomato{{/if}}">
+					<td data-th="status" style="color:{{#if is_complete}}green{{else}}tomato{{/if}}">
 						{{order_status}}
 					</td>
 					<td data-th="payment-status">{{payment_status}}</td>
 					<td class="actions" data-th="">
 						<a href="/orders/{{order_id}}"><button class="btn btn-info btn-sm"><i
 									class="far fa-eye"></i></i></button></a>
-						
-						<button class="btn btn-info btn-sm" style="background-color:red" onclick= {{#if can_cancel}}"openModal_delete({{order_id}})" {{else}}{{#if is_cancel}}"closemodal_alert_2()" {{else}} "closemodal_alert()"{{/if}}{{/if}}><i class="fas fa-window-close"></i></i></button>
-					
+
+						{{#if can_cancel}}<button class="btn btn-info btn-sm" style="background-color:red"
+							onclick="openModal_cancel({{order_id}})"><i
+								class="fas fa-window-close"></i></i></button>{{/if}}
+
 					</td>
 				</tr>
 				{{/each}}
@@ -70,13 +76,14 @@
 					</td>
 				</tr>
 				{{/if}}
+
 			</tbody>
 			<tfoot>
 
 				<tr>
+
 					<td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại mua sắm</a></td>
-					<td colspan="2" class="hidden-xs"></td>
-					<td colspan="2" class="hidden-xs"></td>
+
 				</tr>
 			</tfoot>
 		</table>

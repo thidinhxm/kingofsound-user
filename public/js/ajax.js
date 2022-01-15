@@ -516,26 +516,15 @@ const checkReview = function (review_id) {
 }
 
 // modal delete order
-const  toggleModal_delete= function () {
-    const modal_delete = document.querySelector(".modal-delete-order");
-    modal_delete.classList.toggle("show-modal");
+const  toggleModal_cancel= function () {
+    const modal_cancel= document.querySelector(".modal-cancel-order");
+    modal_cancel.classList.toggle("show-modal");
 }
-const closemodal_delete = function () {
-    toggleModal_delete();
+const closemodal_cancel= function () {
+    toggleModal_cancel();
 }
-const  openModal_delete= function (order_id) {
+const  openModal_cancel= function (order_id) {
     document.querySelector("#id").value = order_id;
-    toggleModal_delete(); 
+    toggleModal_cancel(); 
 }
 
-const closemodal_alert= function (tittle) {
-    const modal_delete = document.querySelector(".modal-delete-alert");
-    $("#cancel_tittle").text("Đơn hàng đang được vận chuyển hoặc đã giao tới bạn!");
-    modal_delete.classList.toggle("show-modal");
-}
-
-const closemodal_alert_2= function (tittle) {
-    const modal_delete = document.querySelector(".modal-delete-alert");
-    $("#cancel_tittle").text("Đơn hàng đã được hủy trước đó!");
-    modal_delete.classList.toggle("show-modal");
-}

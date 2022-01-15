@@ -20,7 +20,6 @@
                     </li>
                     <div class="dropdown-content">
                         <a href="/user/profile">Tài khoản</a>
-                        <a href="/orders">Đơn hàng</a>
                         <a href="/logout">Đăng xuất</a>
                     </div>
                 </div>
@@ -81,6 +80,7 @@
 
                                 </a>
                             </a>
+
                             <div class="dropdown-content cart-box container">
                                 <div class="container">
                                     <div class="shopping-cart" id="cart-list-dropdown">
@@ -192,6 +192,20 @@
                             </div>
                         </div>
                         {{/with}}
+                        <div class="dropdown" style ="margin-left: -10%;margin-right:-19%;" >
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <a>
+                                    <i class="fas fa-shipping-fast"></i>
+                                    <span>Đơn hàng</span>
+                                </a>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="/orders?status=Đang+chờ+xử+lý">Chờ xử lý</a>
+                                <a href="/orders?status=Đang+giao">Vận chuyển</a>
+                                <a href="/orders?status=Đã+giao">Đã nhận</a>
+                                <a href="/orders?status=Đã+hủy">Đã hủy</a>
+                            </div>
+                        </div>
                         <!-- /Cart -->
                         <!-- add to cart modal -->
                         <!-- Menu Toogle -->
@@ -303,7 +317,7 @@
                             </div>
                         </div>
 
-                        <div class="modal-delete-order modal">
+                        <div class="modal-cancel-order modal">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -316,53 +330,27 @@
                                     <div class="modal-body">
                                         <div style="font-size: 18px;" class="alert alert-warning" role="alert">
                                             <div>
-                                            Đơn hàng hủy sẽ không được tiến hành giao tới bạn
-                                            <br>
-                                            Bạn có thực sự muốn xóa đơn hàng này?
-                                            <br>
+                                                Đơn hàng hủy sẽ không được tiến hành giao tới bạn
+                                                <br>
+                                                Bạn có thực sự muốn xóa đơn hàng này?
+                                                <br>
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                                <form action="/orders/cancel" method ="POST">
-                                                    <input type="hidden" name="order_id" id="id">
-                                                    <button type="submit" value="submit" class="btn btn-danger">Xác nhận</button>
-                                                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="closemodal_delete()">Hủy</button>
-                                                </form>
-                                            </div>
+                                            <form action="/orders/cancel" method="POST">
+                                                <input type="hidden" name="order_id" id="id">
+                                                <button type="submit" value="submit" class="btn btn-danger">Xác
+                                                    nhận</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                    onclick="closemodal_delete()">Hủy</button>
+                                            </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="modal-delete-alert modal">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
-                                            onclick="closemodal_alert()">
-                                            <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
-                                        </button>
-                                        <h4 class="modal-title" style="color:red">Đơn hàng không thể hủy</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div style="font-size: 18px;" class="alert alert-danger" role="alert">
-                                            <div id="cancel_tittle">
-                                            
-                                            <br>
-                                          
-                                            <br>
-                                            </div>
-                                        </div>
-                                        <div class="modal-footer">
-                                              
-                    
-                                                    <button type="button" class="btn btn-danger" onclick="closemodal_alert()">Xác nhận</button>
-                                               
-                                               
-                                            </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                       
+                        
                     </div>
                     <!-- /ACCOUNT -->
                 </div>

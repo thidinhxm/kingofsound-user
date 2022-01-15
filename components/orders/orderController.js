@@ -3,15 +3,15 @@ const voucherService = require('../vouchers/voucherService');
 const reviewService = require('../reviews/reviewService')
 exports.list = async (req, res, next) => {
     try {
+        const status = req.query.status?req.query.status:"Đang chờ xử lý";
+       
         const message = req.query.message;
         const user = req.user;
         const user_id = user.user_id;
-        const listOrder = await orderSevice.listOrder(user_id);
+        const listOrder = await orderSevice.listOrder(user_id,status);
         listOrder.forEach(element => {
-            if(element.order_status == "Đã giao")
-            element.is_complete = 1;
-            if(element.order_status != "Đã giao" && element.order_status!="Đang giao" && element.order_status!="Đã hủy" )
-                element.can_cancel = 1;
+            if(element.order_status == "Đang chờ xử lý")
+            element.can_cancel = 1;
             if(element.order_status == "Đã hủy")
                 element.is_cancel = 1;
         });
@@ -60,7 +60,7 @@ exports.delete = async (req,res,next) =>
     try{
         const order_id = req.body.order_id;
         await orderSevice.delete(order_id);
-        res.redirect('/orders');
+        res.redirect('/orders?status=Đã+hủy');
     }
     catch (error) {
         next(error);
