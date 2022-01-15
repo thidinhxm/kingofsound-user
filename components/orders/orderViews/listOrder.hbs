@@ -69,6 +69,26 @@
 					</td>
 				</tr>
 				{{/each}}
+
+				<tr>
+						<td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại mua sắm</a></td>
+
+					<td colspan="6">
+							<div class="row justify-content-center">
+					<nav aria-label="Page navigation example" id="pagination" >
+						<ul class="store-pagination" >
+							<li ><a{{#if prev}} href="/orders?status={{status}}&page={{prev}}" {{/if}}><i class="fa fa-chevron-left"></i></a></li>
+							{{#pages pages page status}}
+										<li><a  {{#if active}}style="background-color: #D10024; color:white"{{/if}}  href="/orders?status={{status}}&page={{index}}">{{index}}</a></li>
+							{{/pages}}
+							<li><a {{#if next}}href="/orders?status={{status}}&page={{next}}" {{/if}}><i class="fa fa-chevron-right"></i></a></li>
+							</ul>
+					</nav>
+					
+				</div>
+				
+					</td>
+				</tr>
 				{{else}}
 				<tr>
 					<td colspan="5">
@@ -78,15 +98,13 @@
 				{{/if}}
 
 			</tbody>
-			<tfoot>
+			
 
-				<tr>
-
-					<td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại mua sắm</a></td>
-
-				</tr>
-			</tfoot>
+				
+			
 		</table>
+		
+				
 	</div>
 </div>
 {{> newsletter}}

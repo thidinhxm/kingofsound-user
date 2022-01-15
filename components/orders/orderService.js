@@ -1,8 +1,8 @@
 const {models} = require('../../models');
 const {Op} = require('sequelize');
 
-exports.listOrder= (id,status) => {
-    return models.orders.findAll(
+exports.listOrder= (id,status,page,itemPerPage) => {
+    return models.orders.findAndCountAll(
         {
             where:{
                 user_id:id,
@@ -12,7 +12,9 @@ exports.listOrder= (id,status) => {
                 ['create_date', 'DESC'],
             ]
             ,
-            raw:true
+            raw:true, 
+            offset: page * itemPerPage,
+            limit: itemPerPage,
         }
     )
 }

@@ -1,21 +1,25 @@
 const orderSevice = require('./orderService');
 const voucherService = require('../vouchers/voucherService');
 const reviewService = require('../reviews/reviewService')
+const itemPerPage = 5
 exports.list = async (req, res, next) => {
     try {
-        const status = req.query.status?req.query.status:"Đang chờ xử lý";
-       
-        const message = req.query.message;
         const user = req.user;
         const user_id = user.user_id;
-        const listOrder = await orderSevice.listOrder(user_id,status);
-        listOrder.forEach(element => {
+        const status = req.query.status?req.query.status:"Đang chờ xử lý";
+        const page = !isNaN(req.query.page) && req.query.page > 0 ? req.query.page - 1 : 0;
+        const listOrder = await orderSevice.listOrder(user_id,status,page,itemPerPage);
+        const pages = Math.ceil(listOrder.count / itemPerPage);
+        let next =page < pages - 1?page+2:"";
+		let prev =page>0?page:"";
+        const message = req.query.message;
+        listOrder.rows.forEach(element => {
             if(element.order_status == "Đang chờ xử lý")
             element.can_cancel = 1;
             if(element.order_status == "Đã hủy")
                 element.is_cancel = 1;
         });
-        res.render('../components/orders/orderViews/listOrder', { listOrder, message });
+        res.render('../components/orders/orderViews/listOrder', { listOrder:listOrder.rows, message,status,pages,page,next,prev});
     }
     catch (error) {
         next(error);

@@ -2649,3 +2649,8 @@ button:focus {
 {
   transform: scale(1.05);
 }
+.page-active 
+{
+  background-color: #D10024;
+  color: white;
+}

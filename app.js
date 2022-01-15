@@ -37,6 +37,17 @@ app.engine('hbs', exphbs({
 		formatDateTime: reviewHelper.formatDateTime,
 		formatPrice: orderHelper.formatPrice,
 		paginateCommentList: productHelper.paginateCommentList,
+		'pages': function(pages,page,status,block) {
+			var accum = '';
+			console.log(page);
+			for(var i = 1; i < pages+1; ++i)
+			if(i!=page+1)
+				accum += block.fn({index:i,status:status,active:""});
+			else
+				accum += block.fn({index:i,status:status,active:"active"});
+			return accum;
+		},
+
 	}
 }))
 
