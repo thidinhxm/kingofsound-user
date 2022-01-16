@@ -8,7 +8,13 @@ exports.index = async (req, res, next) => {
         const bestSalesProducts = await productService.getBestSalesProducts(12);
         req.session.oldUrl = req.originalUrl;
 
-        res.render('../components/home/homeViews/index', { newProducts, hotProducts, highRatingProducts, bestSalesProducts });
+        res.render('../components/home/homeViews/index', { 
+            newProducts, 
+            hotProducts, 
+            highRatingProducts, 
+            bestSalesProducts,
+            homeActive: 'active'
+        });
     }
     catch (err) {
         next(err);
@@ -16,6 +22,6 @@ exports.index = async (req, res, next) => {
 }
 
 exports.about = (req, res, next) => {
-    res.render('../components/home/homeViews/about');
+    res.render('../components/home/homeViews/about', { aboutActive: 'active' });
 }
 
