@@ -28,12 +28,18 @@ exports.getAll = async (req, res, next) => {
         const bestSalesProducts = await productService.getBestSalesProducts(5);
 
         req.session.oldUrl = req.originalUrl;
+        const speakerActive = (req.query.search === 'loa') ? 'active' : '';
+        const headphoneActive = (req.query.search === 'tai nghe') ? 'active' : '';
+        const productActive = !(speakerActive || headphoneActive) ? 'active' : '';
         res.render('../components/products/productViews/productList', {
             products: products.rows,
             categories,
             brands,
             pagination,
-            bestSalesProducts
+            bestSalesProducts,
+            productActive: productActive,
+            speakerActive: speakerActive,
+            headphoneActive: headphoneActive,
         });
     } 
     catch(err) {
@@ -74,7 +80,13 @@ exports.getOne = async (req, res, next) => {
         const similarProducts = await productService.getSimilarProducts(product.category_id, product.brand_id, id);
         
         req.session.oldUrl = req.originalUrl;
-        res.render('../components/products/productViews/productDetail', {product, similarProducts, paginationComment, paginationReview});
+        res.render('../components/products/productViews/productDetail', {
+            product, 
+            similarProducts, 
+            paginationComment, 
+            paginationReview,
+            productActive: 'active'
+        });
     } 
     catch(err) {
         next(err);
