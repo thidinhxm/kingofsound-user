@@ -18,7 +18,7 @@
 				</label>
 				<label>
 					<span>Địa chỉ nhận hàng <span class="required">*</span></span>
-					<input type="text" name="address" value ="{{user.address}}" required="" maxlength="65000">
+					<input type="text" name="address" value ="{{user.address}}" required="" maxlength="65000" oninput="while(this.value[0] == ' ') {this.value = this.value.slice(1) };">
 				</label>
 				<label>
 					<span>Số điện thoại <span class="required">*</span></span>
