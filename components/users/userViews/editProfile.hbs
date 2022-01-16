@@ -51,7 +51,7 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="phone">Điện thoại</label>
-                                        <input type="text" class="form-control" name="phone" value="{{user.phone}}" required="" maxlength="11">
+                                        <input type="text" class="form-control" name="phone" value="{{user.phone}}" required="" maxlength="10"   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
                                     </div>
                                 </div>
                             </div>

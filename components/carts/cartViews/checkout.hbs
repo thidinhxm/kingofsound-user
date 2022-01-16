@@ -22,7 +22,7 @@
 				</label>
 				<label>
 					<span>Số điện thoại <span class="required">*</span></span>
-					<input type="tel" name="phone"  value = "{{user.phone}}" required="" maxlength="11"> 
+					<input type="tel" name="phone"  value = "{{user.phone}}" required="" maxlength="10"   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"> 
 				</label>
 				<label>
 					<span>Email <span class="required">*</span></span>
