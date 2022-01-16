@@ -7,6 +7,11 @@
 			Đơn hàng đã được tạo thành công!
 		</div>
 		{{/if}}
+		{{#if cancel}}
+		<div class="alert alert-success" style="margin-top:8px;margin-bottom:-2px">
+			Đơn hàng đã được hủy!
+		</div>
+		{{/if}}
 		<h3 class="title" style="display:inline;float:left">Danh sách đơn hàng</h3>
 
 		<table id="cart" class="table table-hover table-condensed">
@@ -71,22 +76,27 @@
 				{{/each}}
 
 				<tr>
-						<td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại mua sắm</a></td>
+					<td><a href="/" class="btn btn-warning"><i class="fa fa-angle-left"></i> Quay lại mua sắm</a></td>
 
 					<td colspan="6">
-							<div class="row justify-content-center">
-					<nav aria-label="Page navigation example" id="pagination" >
-						<ul class="store-pagination" >
-							<li ><a{{#if prev}} href="/orders?status={{status}}&page={{prev}}" {{/if}}><i class="fa fa-chevron-left"></i></a></li>
-							{{#pages pages page status}}
-										<li><a  {{#if active}}style="background-color: #D10024; color:white"{{/if}}  href="/orders?status={{status}}&page={{index}}">{{index}}</a></li>
-							{{/pages}}
-							<li><a {{#if next}}href="/orders?status={{status}}&page={{next}}" {{/if}}><i class="fa fa-chevron-right"></i></a></li>
-							</ul>
-					</nav>
-					
-				</div>
-				
+						<div class="row justify-content-center">
+							<nav aria-label="Page navigation example" id="pagination">
+								<ul class="store-pagination">
+									<li>
+										<a{{#if prev}} href="/orders?status={{status}}&page={{prev}}" {{/if}}><i
+												class="fa fa-chevron-left"></i></a>
+									</li>
+									{{#pages pages page status}}
+									<li><a {{#if active}}style="background-color: #D10024; color:white" {{/if}}
+											href="/orders?status={{status}}&page={{index}}">{{index}}</a></li>
+									{{/pages}}
+									<li><a {{#if next}}href="/orders?status={{status}}&page={{next}}" {{/if}}><i
+												class="fa fa-chevron-right"></i></a></li>
+								</ul>
+							</nav>
+
+						</div>
+
 					</td>
 				</tr>
 				{{else}}
@@ -98,13 +108,13 @@
 				{{/if}}
 
 			</tbody>
-			
 
-				
-			
+
+
+
 		</table>
-		
-				
+
+
 	</div>
 </div>
 {{> newsletter}}

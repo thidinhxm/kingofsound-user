@@ -1880,10 +1880,10 @@ i.disabled-star {
   height: 40px;
   text-align: center;
   line-height: 40px;
-  border: 1px solid #E4E7ED;
   background-color: #FFF;
   -webkit-transition: 0.2s all;
   transition: 0.2s all;
+  font-size: 30px;
 }
 
 .newsletter .newsletter-follow li a:hover, .newsletter .newsletter-follow li a:focus {

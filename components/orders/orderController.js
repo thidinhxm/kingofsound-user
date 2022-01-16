@@ -5,6 +5,7 @@ const itemPerPage = 5
 exports.list = async (req, res, next) => {
     try {
         const user = req.user;
+        const cancel = req.query.cancel;
         const user_id = user.user_id;
         const status = req.query.status?req.query.status:"Đang chờ xử lý";
         const page = !isNaN(req.query.page) && req.query.page > 0 ? req.query.page - 1 : 0;
@@ -19,7 +20,7 @@ exports.list = async (req, res, next) => {
             if(element.order_status == "Đã hủy")
                 element.is_cancel = 1;
         });
-        res.render('../components/orders/orderViews/listOrder', { listOrder:listOrder.rows, message,status,pages,page,next,prev});
+        res.render('../components/orders/orderViews/listOrder', { listOrder:listOrder.rows, message,cancel,status,pages,page,next,prev});
     }
     catch (error) {
         next(error);
@@ -64,7 +65,7 @@ exports.delete = async (req,res,next) =>
     try{
         const order_id = req.body.order_id;
         await orderSevice.delete(order_id);
-        res.redirect('/orders?status=Đã+hủy');
+        res.redirect('/orders?status=Đã+hủy&cancel=success');
     }
     catch (error) {
         next(error);
