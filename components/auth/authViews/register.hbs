@@ -52,7 +52,7 @@
 							<input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" maxlength="65000">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" maxlength="11">
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại" maxlength="10"   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
 						</div>
 						<div class="col-md-12 form-group">
 							<button type="submit" value="submit" class="button button-register" id="button-register">Đăng ký</button>

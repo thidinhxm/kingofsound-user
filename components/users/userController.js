@@ -54,7 +54,8 @@ exports.updateUser = async (req,res,next) => {
 
 exports.updatePassword = async (req,res,next) => {
     try {
-        const { oldpassword, newpassword, renewpassword } = req.body.oldpassword;
+        const { oldpassword, newpassword, renewpassword } = req.body;
+        const user = req.user;
         const user_id = req.user.user_id;
 
         if (!bcrypt.compareSync(oldpassword, user.password)) {

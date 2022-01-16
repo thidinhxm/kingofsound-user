@@ -528,3 +528,32 @@ const  openModal_cancel= function (order_id) {
     toggleModal_cancel(); 
 }
 
+const changePassword = function()
+{
+    const password =  $("#change-oldpassword").val();
+    const newpassword =  $("#change-newpassword").val();
+    const renewpassword =  $("#change-renewpassword").val();
+    if(!newpassword || !password || !renewpassword)
+        {
+        $("#change-password-error").removeAttr('class');
+         $("#change-password-error").attr('class', 'alert alert-danger');
+          $("#change-password-error").text("Vui lòng nhập đầy đủ thông tin!");
+        }
+    else if(newpassword != renewpassword)
+    {
+        $("#change-password-error").removeAttr('class');
+        $("#change-password-error").attr('class', 'alert alert-danger');
+         $("#change-password-error").text("Mật khẩu mới không khớp!");
+    }
+    else if (!checkValidPassword(newpassword)) {
+        $("#change-password-error").removeAttr('class');
+        $("#change-password-error").attr('class', 'alert alert-danger');
+        $("#change-password-error").text('Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt');
+    }
+    else 
+    {
+        $("#change-password-error").removeAttr('class');
+        $("#change-password-form").submit();
+    }
+}
+
