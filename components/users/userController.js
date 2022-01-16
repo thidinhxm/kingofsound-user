@@ -60,10 +60,7 @@ exports.updatePassword = async (req,res,next) => {
 
         if (!bcrypt.compareSync(oldpassword, user.password)) {
             res.render('../components/users/userViews/changePassword', {error :"Mật khẩu chưa chính xác!"})
-        }
-        else if(newpassword!=renewpassword) {
-            res.render('../components/users/userViews/changePassword',{error :"Mật khẩu mới không khớp!"})
-        }    
+        }   
         else {
             const salt = bcrypt.genSaltSync(10);
             const passwordHash = bcrypt.hashSync(newpassword, salt);

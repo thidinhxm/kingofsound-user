@@ -43,10 +43,10 @@
 							<input type="password" class="form-control" id="confirm-password" name="confirm-password" placeholder="Xác nhận mật khẩu" maxlength="16">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Họ" maxlength="40">
+							<input type="text" class="form-control" id="firstname" name="firstname" placeholder="Họ" maxlength="40" oninput="while(this.value[0] == ' ') {this.value = this.value.slice(1) };">
 						</div>
 						<div class="col-md-12 form-group">
-							<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Tên" maxlength="20">
+							<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Tên" maxlength="20" oninput="while(this.value[0] == ' ') {this.value = this.value.slice(1) };">
 						</div>
 						<div class="col-md-12 form-group">
 							<input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ" maxlength="65000">

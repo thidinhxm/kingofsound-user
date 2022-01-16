@@ -32,14 +32,14 @@
                                     <div class="form-group">
                                         <label for="firtname">Họ</label>
                                         <input type="text" class="form-control" name="firstname"
-                                            value="{{user.firstname}}" required="" maxlength="40">
+                                            value="{{user.firstname}}" required="" maxlength="40" oninput="while(this.value[0] == ' ') {this.value = this.value.slice(1) }; ">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="lastname">Tên</label>
                                         <input type="text" class="form-control" name="lastname"
-                                            value="{{user.lastname}}" required="" maxlength="20">
+                                            value="{{user.lastname}}" required="" maxlength="20" oninput="while(this.value[0] == ' ') {this.value = this.value.slice(1) }; ">
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
