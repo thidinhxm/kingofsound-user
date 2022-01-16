@@ -20,7 +20,7 @@ exports.list = async (req, res, next) => {
             if(element.order_status == "Đã hủy")
                 element.is_cancel = 1;
         });
-        res.render('../components/orders/orderViews/listOrder', { listOrder:listOrder.rows, message,cancel,status,pages,page,next,prev});
+        res.render('../components/orders/orderViews/listOrder', { listOrder:listOrder.rows, message,cancel,status:status.toLowerCase(),pages,page,next,prev});
     }
     catch (error) {
         next(error);
