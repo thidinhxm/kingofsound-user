@@ -50,7 +50,7 @@ exports.review = async (req, res, next) => {
         const order_id = req.body.order_id;
         const content = req.body.review;
         const rating = req.body.star;
-        console.log({ product_id: product_id, content: content, rating: rating, user_id: req.user.user_id });
+        
         const review = await reviewService.addReview({ product_id: product_id, content: content, rating: rating, user_id: req.user.user_id });
         const review_id = review.review_id;
         await orderSevice.reviewDetailOrder(order_id, product_id, review_id);
@@ -60,11 +60,11 @@ exports.review = async (req, res, next) => {
         next(error);
     }
 }
-exports.delete = async (req,res,next) =>
-{
+
+exports.cancelOrder = async (req,res,next) => {
     try{
         const order_id = req.body.order_id;
-        await orderSevice.delete(order_id);
+        await orderSevice.cancelOrder(order_id);
         res.redirect('/orders?status=Đã+hủy&cancel=success');
     }
     catch (error) {

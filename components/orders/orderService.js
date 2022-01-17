@@ -1,6 +1,7 @@
 const {models} = require('../../models');
-const {Op} = require('sequelize');
-
+const {updateNubmerOfSales} = require('../products/productService');
+const {getVoucher} = require('../vouchers/voucherService');
+const {literal} = require('sequelize');
 exports.listOrder= (id,status,page,itemPerPage) => {
     return models.orders.findAndCountAll(
         {
@@ -60,28 +61,75 @@ exports.create = (order) => {
     });
 }
 
-exports.createDetail = async (detail) => {
-    return await models.detailorders.create({
-        order_id:detail.order_id,
-        product_id:detail.product_id,
-        quantity:detail.quantity
+exports.updateTotalOrder = (order_id, subtotal) => {
+    return models.orders.update({
+        total_order: literal(`total_order + ${subtotal}`)
+    }, {
+        where: {
+            order_id: order_id
+        }
     });
 }
 
-exports.reviewDetailOrder = (order_id,product_id,review_id) =>
-{
+exports.createDetail = async (detail) => {
+    try {
+        await models.detailorders.create({
+            order_id : detail.order_id,
+            product_id : detail.product_id,
+            quantity : detail.quantity,
+            subtotal : (detail.quantity * detail.price)
+        });
+
+        const order = await exports.order(detail.order_id);
+        if (order.voucher) {
+            const voucher = await getVoucher(order.voucher);
+            await exports.updateTotalOrder(detail.order_id, subtotal*(1 - voucher.discount / 100));
+        }
+        else {
+            await exports.updateTotalOrder(detail.order_id, subtotal);
+        }
+    
+        await updateNubmerOfSales(detail.product_id, detail.quantity);
+    }
+    catch(error) {
+        throw error;
+    }
+}
+
+exports.reviewDetailOrder = (order_id,product_id,review_id) => {
     return models.detailorders.update({
         review_id : review_id,
         
-    },
-    {
+    }, {
         where:{
             order_id:order_id,
             product_id:product_id
         }
     })
 }
-exports.delete = (order_id) =>
-{
-    return models.orders.update({order_status:"Đã hủy"},{where:{order_id:order_id}})
+
+exports.cancelOrder = async (order_id) => {
+    try {
+        await models.orders.update({
+            order_status : "Đã hủy"
+        },{
+            where:{
+                order_id: order_id
+            }
+        })
+    
+        const detail = await models.detailorders.findAll({
+            where:{
+                order_id:order_id
+            },
+            raw:true
+        })
+    
+        Promise.all(detail.map(async (item) => {
+            await updateNubmerOfSales(item.product_id,-item.quantity);
+        }))
+    }
+    catch(error) {
+        throw error;
+    }
 }

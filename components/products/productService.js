@@ -250,3 +250,23 @@ exports.getProductSuggest = (search_name) =>{
         limit : 10
     })
 }
+
+exports.updateAverageRating = (id, rating) => {
+    return models.products.update({
+        average_rating : rating,
+    }, {
+        where : {
+            product_id : id
+        }
+    });
+}
+
+exports.updateNumberOfSales = (id, qty) => {
+    return models.products.update({
+        number_of_sales : literal('number_of_sales + ' + qty),
+    }, {
+        where : {
+            product_id : id
+        }
+    });
+}
