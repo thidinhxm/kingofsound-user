@@ -270,3 +270,13 @@ exports.updateNumberOfSales = (id, qty) => {
         }
     });
 }
+
+exports.updateQuantity = (id, qty) => {
+    return models.products.update({
+        quantity : literal('quantity + ' + qty),
+    }, {
+        where : {
+            product_id : id
+        }
+    });
+}

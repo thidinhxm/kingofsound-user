@@ -1,5 +1,5 @@
 const {models} = require('../../models');
-const {updateNubmerOfSales} = require('../products/productService');
+const {updateNumberOfSales, updateQuantity} = require('../products/productService');
 const {getVoucher} = require('../vouchers/voucherService');
 const {literal} = require('sequelize');
 exports.listOrder= (id,status,page,itemPerPage) => {
@@ -53,17 +53,17 @@ exports.order = (id) => {
 
 exports.create = (order) => {
     return models.orders.create({
-        user_id:order.user_id,
-        receive_phone:order.receive_phone,
-        receive_address:order.receive_address,
-        voucher:order.voucher,
-        payment_status:order.payment_status
+        user_id : order.user_id,
+        receive_phone : order.receive_phone,
+        receive_address : order.receive_address,
+        voucher : order.voucher,
+        payment_status : order.payment_status
     });
 }
 
 exports.updateTotalOrder = (order_id, subtotal) => {
     return models.orders.update({
-        total_order: literal(`total_order + ${subtotal}`)
+        total_price: literal(`total_price + ${subtotal}`)
     }, {
         where: {
             order_id: order_id
@@ -77,19 +77,25 @@ exports.createDetail = async (detail) => {
             order_id : detail.order_id,
             product_id : detail.product_id,
             quantity : detail.quantity,
-            subtotal : (detail.quantity * detail.price)
+            subtotal : detail.subtotal
         });
 
-        const order = await exports.order(detail.order_id);
-        if (order.voucher) {
-            const voucher = await getVoucher(order.voucher);
-            await exports.updateTotalOrder(detail.order_id, subtotal*(1 - voucher.discount / 100));
+        if (detail.voucher) {
+            const voucher = await getVoucher(detail.voucher);
+            await Promise.all([
+                this.updateTotalOrder(detail.order_id, detail.subtotal*(1 - voucher.discount / 100)), 
+                updateNumberOfSales(detail.product_id, detail.quantity),
+                
+            ]);
         }
         else {
-            await exports.updateTotalOrder(detail.order_id, subtotal);
+            await Promise.all([
+                this.updateTotalOrder(detail.order_id, detail.subtotal), 
+                updateNumberOfSales(detail.product_id, detail.quantity),
+                updateQuantity(detail.product_id, -detail.quantity)
+            ]);
         }
-    
-        await updateNubmerOfSales(detail.product_id, detail.quantity);
+            
     }
     catch(error) {
         throw error;
@@ -122,11 +128,15 @@ exports.cancelOrder = async (order_id) => {
             where:{
                 order_id:order_id
             },
-            raw:true
+            raw : true
         })
-    
-        Promise.all(detail.map(async (item) => {
-            await updateNubmerOfSales(item.product_id,-item.quantity);
+        
+        await Promise.all(detail.map(async (item) => {
+            await updateQuantity(item.product_id, item.quantity);
+        }))
+
+        await Promise.all(detail.map(async (item) => {
+            await updateNumberOfSales(item.product_id, -item.quantity);
         }))
     }
     catch(error) {
