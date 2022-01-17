@@ -13,7 +13,7 @@ exports.getUserByEmail = async (email) => {
 				where: {
 					user_id: user.user_id,
 					role_id: {
-						[Op.ne] : [1, 2]
+						[Op.notIn] : [1, 2]
 					}
 				},
 				raw: true

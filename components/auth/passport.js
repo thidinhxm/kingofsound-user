@@ -13,12 +13,11 @@ passport.use(new LocalStrategy({
         if (!user) {
             return done(null, false, req.flash('error', 'Thông tin tài khoản hoặc mật khẩu chưa chính xác'));
         }
-        if (user === 'admin') {
-            return done(null, false, req.flash('error', 'Tài khoản này không thể đăng nhập'));
-        }
-        
         if (!validPassword(user, password)) {
             return done(null, false , req.flash('error', 'Thông tin tài khoản hoặc mật khẩu chưa chính xác'));
+        }
+        if (user === 'admin') {
+            return done(null, false, req.flash('error', 'Tài khoản này không thể đăng nhập'));
         }
         if (!user.is_verified) {
             return done(null, false, req.flash('error', 'Tài khoản chưa được xác thực'));
