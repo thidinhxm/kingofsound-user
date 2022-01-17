@@ -92,7 +92,7 @@
 						<div class="product-body">
 							{{!-- <p class="product-category">LOẠI</p> --}}
 							<h3 class="product-name"><a href="/products/{{product_id}}">{{product_name}}</a></h3>
-							<h4 class="product-price">{{price}} VNĐ</h4>
+							<h4 class="product-price" >{{price}}</h4>
 						</div>
 					</div>
 					</a>
@@ -354,4 +354,5 @@
 		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
 		window.location.search = urlRemoved;
     }
+
 </script>
