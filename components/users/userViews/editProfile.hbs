@@ -31,15 +31,23 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="firtname">Họ</label>
-                                        <input type="text" class="form-control" name="firstname"
-                                            value="{{user.firstname}}" required="" maxlength="40" oninput="while(this.value[0] == ' ') {this.value = this.value.slice(1) }; ">
+                                        <input 
+                                            type="text" class="form-control" name="firstname"
+                                            value="{{user.firstname}}" required="" maxlength="40" 
+                                            oninvalid="this.setCustomValidity('Họ không được để trống')"
+                                            oninput="this.setCustomValidity('');while(this.value[0] == ' ') {this.value = this.value.slice(1) };"
+                                        >
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="lastname">Tên</label>
-                                        <input type="text" class="form-control" name="lastname"
-                                            value="{{user.lastname}}" required="" maxlength="20" oninput="while(this.value[0] == ' ') {this.value = this.value.slice(1) }; ">
+                                        <input 
+                                            type="text" class="form-control" name="lastname"
+                                            value="{{user.lastname}}" required="" maxlength="20" 
+                                            oninvalid="this.setCustomValidity('Tên không được để trống')"
+                                            oninput="this.setCustomValidity('');while(this.value[0] == ' ') {this.value = this.value.slice(1) };"
+                                        >
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
@@ -51,7 +59,14 @@
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-12">
                                     <div class="form-group">
                                         <label for="phone">Điện thoại</label>
-                                        <input type="text" class="form-control" name="phone" value="{{user.phone}}" required="" maxlength="10"   oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');" >
+                                        <input 
+                                            type="text" class="form-control" 
+                                            name="phone" value="{{user.phone}}" 
+                                            required="" maxlength="10"   
+                                            pattern="(03[2-9]|05[689]|07[06-9]|08[0-9]|09[0-46-9])+([0-9]{7})\b"
+                                            oninvalid="this.setCustomValidity('Không đúng định dạng số điện thoại Việt Nam')"
+                                            oninput="this.setCustomValidity('');while(this.value[0] == ' ') {this.value = this.value.slice(1) };"
+                                        >
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +74,12 @@
                                 <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
                                     <div class="form-group">
                                         <label for="address">Đia chỉ</label>
-                                        <input type="text" class="form-control" name="address" value="{{user.address}}" required="" maxlength="65000">
+                                        <input 
+                                            type="text" class="form-control" name="address" 
+                                            value="{{user.address}}" required="" maxlength="65000"
+                                            oninvalid="this.setCustomValidity('Địa chỉ không được để trống')"
+                                            oninput="this.setCustomValidity('');while(this.value[0] == ' ') {this.value = this.value.slice(1) };"
+                                        >
                                     </div>
                                 </div>
                             </div>
