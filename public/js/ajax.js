@@ -403,41 +403,6 @@ const checkVoucher = function (id, total) {
     }
 };
 
-// const checkVoucher_on = function (id, total) {
-//     if (id != "")
-//         $.ajax({
-//             url: '/cart/checkout/voucher',
-//             type: 'POST',
-//             data: {
-//                 voucher_id: id,
-//             },
-//             success: function (data) {
-//                 if (data.success) {
-//                     $('#discount').text(data.discount);
-//                     $('#voucher-success').text("Áp dụng khuyến mại thành công");
-//                     $('#voucher-error').text("");
-//                     $('#discount-total').text((total * data.discount / 100).toLocaleString(undefined,));
-//                     $('#total').text((total - total * data.discount / 100).toLocaleString(undefined,));
-//                     return true;
-//                 }
-//                 else {
-//                     $('#discount').text(0);
-//                     $('#voucher-error').text('Mã khuyến mại "' + $('#voucher').val() + '" không hợp lệ hoặc hết hạn dùng!');
-//                     $('#voucher-success').text("");
-//                     $('#discount-total').text(0);
-//                     $('#total').text((total).toLocaleString(undefined,));
-//                     return false;
-//                 }
-//             }
-//         });
-//     else {
-//         $('#voucher-error').text("");
-//         $('#voucher-success').text("");
-//         $('#discount').text(0);
-//         $('#discount-total').text(0);
-//         $('#total').text((total).toLocaleString(undefined,));
-//     }
-// };
 /*----------------------Search suggest-----------------*/
 const suggest = function (search) {
     $('#search-suggest').empty();
