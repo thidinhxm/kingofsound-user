@@ -87,9 +87,8 @@ const checkInputLogin = function (email, password) {
 /*------------ AJAX LOGIN --------------*/
 $('#button-login').click(function (e) {
     e.preventDefault();
-    const email = $('#email-login').val();
-    const password = $('#password-login').val();
-
+    const email = $('#email-login').val().trim();
+    const password = $('#password-login').val().trim();
     const error = checkInputLogin(email, password);
     if (error != null) {
         $('#error-login').addClass('alert-danger').text(error);
@@ -126,7 +125,7 @@ $('#button-forgot-password').click(function (e) {
     e.preventDefault();
     const email = $('#email-forgot-password').val();
     if (email == '') {
-        $('#error-forgot-password').text('Vui lòng nhập email');
+        $('#error-forgot-password').addClass('alert-danger').text('Vui lòng nhập email');
         return false;
     }
     if (!checkValidEmail(email)) {
@@ -146,7 +145,7 @@ $('#button-forgot-password').click(function (e) {
                 return false;
             }
             else if (data === 'admin') {
-                $('#error-forgot-password').addClass('alert-danger').text('Tài khoản này không thể đổi mật');
+                $('#error-forgot-password').addClass('alert-danger').text('Tài khoản này không thể đổi mật khẩu');
                 return false;
             }
             else {

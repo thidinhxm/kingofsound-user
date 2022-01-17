@@ -16,19 +16,19 @@
 				<div class="login_form_inner register_form_inner">
 					<div class="row justify-content-center message-block-register">
 						{{#if error}}
-						<div class="alert alert-danger col-6">
-							<p class="text-center text-success message">{{error}}</p>
+						<div class="col-6">
+							<p class="alert alert-danger message" id="error-register">{{error}}</p>
 						</div>
 						{{else}}
-							{{#if success}}
-								<div class="alert alert-success col-6">
-									<p class="text-center text-danger message">{{success}}</p>
-								</div>
-							{{else}}
-								<div class="col-6">
-									<p class="alert text-center text-danger message" id="error-register"></p>
-								</div>
-							{{/if}}
+						{{#if success}}
+						<div class="col-6">
+							<p class="alert alert-success message" id="error-register">{{success}}</p>
+						</div>
+						{{else}}
+							<div class="col-6">
+								<p class="alert text-center text-danger message" id="error-register"></p>
+							</div>
+						{{/if}}
 						{{/if}}
 					</div>
 					<h3>Tạo tài khoản</h3>
