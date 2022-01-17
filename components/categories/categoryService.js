@@ -6,7 +6,8 @@ exports.getAll = async () => {
         attributes : [ 'category_id', 'category_name'],
         group: ['category_id', 'category_name'],
         where : {
-            parent_category: null
+            parent_category: null,
+            is_active : 1
         },
         raw: true,
     });
@@ -16,7 +17,8 @@ exports.getAll = async () => {
             attributes : [ 'category_id', 'category_name', [fn('COUNT', col('*')), 'length']],
             group: ['category_id', 'category_name'],
             where : {
-                parent_category: parentCategory.category_id
+                parent_category: parentCategory.category_id,
+                is_active : 1
             },
             include: [{
                 model: models.products,
@@ -40,7 +42,8 @@ exports.getCategory = async (id) => {
         const category = await models.categories.findOne({
             attributes : [ 'category_id', 'category_name'],
             where : {
-                category_id : id
+                category_id : id,
+                is_active : 1
             },
             include : [{
                 model : models.categories,

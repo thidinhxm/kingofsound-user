@@ -22,7 +22,12 @@ module.exports = function(sequelize, DataTypes) {
         model: 'categories',
         key: 'category_id'
       }
-    }
+    },
+    is_active: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: true
+    },
   }, {
     sequelize,
     tableName: 'categories',
