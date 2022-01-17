@@ -4,7 +4,7 @@ const checkValidEmail = function (email) {
 }
 
 const checkValidPhone = function (phone) {
-    const phoneRegex = /(03|05|07|08|09|01[2|6|8|9])+([0-9]{8})\b/;
+    const phoneRegex = /(03[2-9]|05[689]|07[06-9]|08[0-9]|09[0-46-9])+([0-9]{7})\b/;
     return phoneRegex.test(phone);
 }
 
