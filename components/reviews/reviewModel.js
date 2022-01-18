@@ -7,22 +7,6 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       primaryKey: true
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'user_id'
-      }
-    },
-    product_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-      references: {
-        model: 'products',
-        key: 'product_id'
-      }
-    },
     rating: {
       type: DataTypes.INTEGER,
       allowNull: false

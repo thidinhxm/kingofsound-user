@@ -58,16 +58,14 @@ function initModels(sequelize) {
   products.hasMany(detailorders, { as: "detailorders", foreignKey: "product_id"});
   images.belongsTo(products, { as: "product", foreignKey: "product_id"});
   products.hasMany(images, { as: "images", foreignKey: "product_id"});
-  reviews.belongsTo(products, { as: "product", foreignKey: "product_id"});
-  products.hasMany(reviews, { as: "reviews", foreignKey: "product_id"});
+  detailorders.belongsTo(reviews, { as: "review", foreignKey: "review_id"});
+  reviews.hasMany(detailorders, { as: "detailorders", foreignKey: "review_id"});
   userroles.belongsTo(roles, { as: "role", foreignKey: "role_id"});
   roles.hasMany(userroles, { as: "userroles", foreignKey: "role_id"});
   carts.belongsTo(users, { as: "user", foreignKey: "user_id"});
   users.hasMany(carts, { as: "carts", foreignKey: "user_id"});
   orders.belongsTo(users, { as: "user", foreignKey: "user_id"});
   users.hasMany(orders, { as: "orders", foreignKey: "user_id"});
-  reviews.belongsTo(users, { as: "user", foreignKey: "user_id"});
-  users.hasMany(reviews, { as: "reviews", foreignKey: "user_id"});
   userroles.belongsTo(users, { as: "user", foreignKey: "user_id"});
   users.hasMany(userroles, { as: "userroles", foreignKey: "user_id"});
   orders.belongsTo(vouchers, { as: "voucher_voucher", foreignKey: "voucher"});

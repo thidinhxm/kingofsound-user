@@ -32,8 +32,11 @@ module.exports = function(sequelize, DataTypes) {
     review_id: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      defaultValue: null
-    },
+      references: {
+        model: 'reviews',
+        key: 'review_id'
+      }
+    }
   }, {
     sequelize,
     tableName: 'detailorders',
@@ -53,6 +56,13 @@ module.exports = function(sequelize, DataTypes) {
         using: "BTREE",
         fields: [
           { name: "product_id" },
+        ]
+      },
+      {
+        name: "fk_detailorders_review_id",
+        using: "BTREE",
+        fields: [
+          { name: "review_id" },
         ]
       },
     ]

@@ -251,9 +251,10 @@ exports.getProductSuggest = (search_name) =>{
     })
 }
 
-exports.updateAverageRating = (id, rating) => {
+exports.updateRatingProduct = (id, rating) => {
     return models.products.update({
-        average_rating : rating,
+        number_of_rating : literal('number_of_rating + 1'),
+        average_rating : literal(`(average_rating * (number_of_rating - 1) + ${rating}) / number_of_rating`)
     }, {
         where : {
             product_id : id

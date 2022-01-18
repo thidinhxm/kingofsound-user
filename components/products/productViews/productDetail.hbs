@@ -40,7 +40,7 @@
 						<div class="product-rating">
 							{{{createRating product.average_rating}}}
 						</div>
-						<span class="review-link" href="#">{{product.reviews.length}} Lượt đánh giá</span>
+						<span class="review-link" href="#tab2">{{product.number_of_rating}} Lượt đánh giá</span>
 					</div>
 
 					<div>
@@ -129,7 +129,7 @@
 											{{#each product.reviews}}
 											<li>
 												<div class="review-heading">
-													<h5 class="name">{{'user.lastname'}}</h5>
+													<h5 class="name">{{'detailorders.order.user.lastname'}}</h5>
 													<p class="date">{{formatDateTime created_at}}</p>
 													<div class="review-rating">
 														{{{createRating rating}}}

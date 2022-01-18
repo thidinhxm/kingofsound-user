@@ -102,10 +102,9 @@ exports.createDetail = async (detail) => {
     }
 }
 
-exports.reviewDetailOrder = (order_id,product_id,review_id) => {
+exports.updateReviewInDetail = (order_id, product_id, review_id) => {
     return models.detailorders.update({
         review_id : review_id,
-        
     }, {
         where:{
             order_id:order_id,
