@@ -458,7 +458,7 @@ const closemodal_check = function () {
 
 const checkReview = function (review_id) {
     $.ajax({
-        url: '/orders/get-review',
+        url: '/orders/getreview',
         type: 'POST',
         data: {
             review_id: review_id

@@ -22,6 +22,6 @@ exports.index = async (req, res, next) => {
 }
 
 exports.about = (req, res, next) => {
-    res.render('../components/home/homeViews/about', { aboutActive: 'active' });
+    res.render('../components/home/homeViews/about', { aboutActive: 'active', css:'/css/about.css'  });
 }
 
