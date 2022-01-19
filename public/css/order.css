@@ -1,0 +1,87 @@
+.order .table>tbody>tr>td, .table>tfoot>tr>td{
+    vertical-align: middle;
+}
+@media screen and (max-width: 600px) {
+    .order table#cart tbody td .form-control{
+		width:20%;
+		display: inline !important;
+	}
+	.order .actions .btn{
+		width:36%;
+		margin:1.5em 0;
+	}
+	
+	.order .actions .btn-info{
+		float:left;
+	}
+    .order	.actions .btn-danger{
+		float:right;
+	}
+	
+	.order table#cart thead { display: none; }
+	.order table#cart tbody td { display: block; padding: .6rem; min-width:320px;}
+	.order table#cart tbody tr td:first-child { background: #333; color: #fff; }
+	.order table#cart tbody td:before {
+		content: attr(data-th); font-weight: bold;
+		display: inline-block; width: 8rem;
+	}
+	
+	
+	
+	.order table#cart tfoot td{display:block; }
+	.order table#cart tfoot td .btn{display:block;}
+	
+}
+.order .title
+{
+    margin-top: 5px;
+    padding: 5px;
+    text-decoration: underline;
+    color: tomato;
+}
+.order .container
+{
+    width: 95%;
+}
+
+.order .empty-title
+{
+    color: orangered;
+    text-align: center;
+    padding: 10px;
+    margin: 5px;
+}
+
+.reviews-btn i
+{
+	font-size: 20px;
+	color: black;
+}
+
+.reviews-btn:hover
+{
+	color:blue;
+}
+
+.star label, .star input
+{
+	display: inline;
+	font-size: 20px;
+}
+.star span
+{
+	float: left;
+	margin-left: 10px;
+}
+.star i
+{
+	font-size: 30px;
+	color: yellow;
+}
+
+.star input
+{
+	font-size: 15px;
+	color: black;
+	font-weight: 300;
+}

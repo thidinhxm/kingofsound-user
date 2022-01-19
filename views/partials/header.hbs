@@ -1,0 +1,366 @@
+<!-- HEADER -->
+<header>
+    <!-- TOP HEADER -->
+    <div id="top-header">
+        <div class="container">
+            <ul class="header-links pull-left">
+                <li><a ><i class="fa fa-phone"></i>012-345-6789</a></li>
+                <li><a ><i class="fa fa-envelope-o"></i>kingofsound@gmail.com</a></li>
+                <li><a ><i class="fa fa-map-marker"></i>228, Nguyễn Văn Cừ, Phường 4, Quận 5, TPHCM</a></li>
+            </ul>
+            <ul class="header-links pull-right">
+                <li><a ><i class="fa fa-dollar"></i> USD</a></li>
+                {{#if user}}
+                <div class="dropdown">
+                    <li>
+                        <a href="/user/profile">
+                            <i class="far fa-user" style=" font-size: 15px;"></i>
+                            {{user.firstname}} {{user.lastname}}
+                        </a>
+                    </li>
+                    <div class="dropdown-content">
+                        <a href="/user/profile">Tài khoản</a>
+                        <a href="/logout">Đăng xuất</a>
+                    </div>
+                </div>
+                {{else}}
+                <li><a href="/login"><i class="fas fa-sign-in-alt"></i>Đăng nhập</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </div>
+    <!-- /TOP HEADER -->
+
+    <!-- MAIN HEADER -->
+    <div id="header">
+        <!-- container -->
+        <div class="container">
+            <!-- row -->
+            <div class="row">
+                <!-- LOGO -->
+                <div class="col-md-3">
+                    <div class="header-logo">
+                        <a href="/" class="logo">
+                            <img src="/img/logo3.png" alt="">
+                        </a>
+                    </div>
+                </div>
+                <!-- /LOGO -->
+
+                <!-- SEARCH BAR -->
+                <div class="col-md-6">
+                    <div class="header-search">
+                        <form method="GET" action='/products' id="search-form">
+                            <input class="input" placeholder="Nhập từ khóa" id="search" name="search"
+                                onkeyup="suggest(this.value)" autocomplete="off">
+                            <button class="search-btn" id="search-btn">Tìm kiếm</button>
+                        </form>
+                        <div id="search-suggest">
+
+                        </div>
+                    </div>
+                </div>
+                <!-- /SEARCH BAR -->
+
+                <!-- ACCOUNT -->
+                <div class="col-md-3 clearfix">
+                    <div class="header-ctn">
+                        {{#if user}}
+                        <div class="dropdown" style ="margin-left: -10%;margin-right:-19%;" >
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <a>
+                                    <i class="fas fa-shipping-fast"></i>
+                                    <span>Đơn hàng</span>
+                                </a>
+                            </a>
+                            <div class="dropdown-content">
+                                <a href="/orders?status=Đang+chờ+xử+lý">Chờ xử lý</a>
+                                <a href="/orders?status=Đang+giao">Vận chuyển</a>
+                                <a href="/orders?status=Đã+giao">Đã giao</a>
+                                <a href="/orders?status=Đã+hủy">Đã hủy</a>
+                            </div>
+                        </div>
+                        {{/if}}
+
+                        <!-- Cart -->
+                        {{#with cart}}
+                        <div class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <a href="/cart">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <span>Giỏ hàng</span>
+                                    {{#if products}}
+                                    <div class="qty" id="cart-product-quantity">{{products.length}}</div>
+                                    {{else}}
+                                    <div class="qty" id="cart-product-quantity">0</div>
+                                    {{/if}}
+
+                                </a>
+                            </a>
+
+                            <div class="dropdown-content cart-box container">
+                                <div class="container">
+                                    <div class="shopping-cart" id="cart-list-dropdown">
+                                        {{#if products}}
+                                        <ul class="shopping-cart-items">
+                                            <li class="clearfix">
+                                                <table style="margin-top:10px;">
+                                                    {{#each products}}
+                                                    <tr>
+                                                        <td>
+                                                            <span>
+                                                                <img src="{{image}}" alt="" height="40px" width="40px"
+                                                                    style="border: 1px solid black;margin-bottom:10px;padding:5px">
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                                        </td>
+                                                        <td>
+                                                            <span>
+                                                                <span class="item-name">
+                                                                    <b>{{quantity}}</b> x {{product_name}}
+                                                                </span>
+                                                                <br>
+                                                                <span class="item-subtotal">
+                                                                    {{priceString}}
+                                                                </span>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            &emsp;&emsp;&emsp;
+                                                        </td>
+                                                        <td>
+                                                            <span class="item-subtotal" style="float: right;">
+                                                                {{subtotalString}}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    {{/each}}
+                                                </table>
+                                            </li>
+                                        </ul>
+
+                                        <div class="shopping-cart-total">
+                                            <span class="lighter-text"><b>Tổng tiền: </b></span>
+                                            <span class="total" id="cart-total-dropdwon">{{totalString}}</span>
+                                        </div>
+                                        <a href="/cart/checkout" class="cart-box-btn btn btn-primary">Đặt hàng</a>
+                                        {{else}}
+                                        <div class="no-item-cart">
+                                            <span class="lighter-text"><b>Giỏ hàng chưa có sản phẩm</b></span>
+                                        </div>
+                                        {{/if}}
+                                    </div>
+                                    <script type="text/x-handlebars-template" id="cart-dropdown-template">
+                                        \{{#if products}}
+                                        <ul class="shopping-cart-items">
+                                            <li class="clearfix">
+                                                <table style="margin-top:10px;">
+                                                    \{{#each products}}
+                                                    <tr>
+                                                        <td>
+                                                            <span>
+                                                                <img src="\{{image}}" alt="" height="40px" width="40px"
+                                                                    style="border: 1px solid black;margin-bottom:10px;padding:5px">
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            &nbsp;&nbsp;&nbsp;&nbsp;
+                                                        </td>
+                                                        <td>
+                                                            <span>
+                                                                <span class="item-name">
+                                                                    <b>\{{quantity}}</b> x \{{product_name}}
+                                                                </span>
+                                                                <br>
+                                                                <span class="item-subtotal">
+                                                                    \{{priceString}}
+                                                                </span>
+                                                            </span>
+                                                        </td>
+                                                        <td>
+                                                            &emsp;&emsp;&emsp;
+                                                        </td>
+                                                        <td>
+                                                            <span class="item-subtotal" style="float: right;">
+                                                                \{{subtotalString}}
+                                                            </span>
+                                                        </td>
+                                                    </tr>
+                                                    \{{/each}}
+                                                </table>
+                                            </li>
+                                        </ul>
+                                        
+                                        <div class="shopping-cart-total">
+                                            <span class="lighter-text"><b>Tổng tiền: </b></span>
+                                            <span class="total">\{{totalString}}</span>
+                                        </div>
+                                        <a href="/cart/checkout" class="cart-box-btn btn btn-primary">Đặt hàng</a>
+                                        \{{else}}
+                                        <div class="no-item-cart">
+                                            <span class="lighter-text"><b>Giỏ hàng chưa có sản phẩm</b></span>
+                                        </div>
+                                        \{{/if}}
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                        {{/with}}
+                        <!-- /Cart -->
+                        <!-- add to cart modal -->
+                        <!-- Menu Toogle -->
+                        <div class="menu-toggle">
+                            <a href="#" class="menu-icon-text">
+                                <i class="fa fa-bars"></i>
+                                <span>Menu</span>
+                            </a>
+                        </div>
+                        <!-- /Menu Toogle -->
+                        <div id="toast" role="alert" aria-live="assertive" aria-atomic="true"
+                            class="alert alert-success">
+                            <div class="toast-header">
+                                <img src="https://flyclipart.com/thumb2/verify-success-success-tick-icon-with-png-and-vector-format-372259.png"
+                                    width="20px" class="rounded mr-2" alt="...">
+                                <strong class="mr-auto">Thành công</strong>
+                                <small>vừa xong</small>
+                            </div>
+                            <div class="toast-body">
+                                Đã thêm sản phẩm vào giỏ hàng
+                            </div>
+                        </div>
+                        <div class="modal-review modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="closemodal()">
+                                            <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
+                                        </button>
+                                        <h5 class="modal-title">Đánh giá</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="review-form">
+                                            <form class="review-form" action="/orders/review" id="review-form"
+                                                method="POST">
+                                                <input type="hidden" name="order_id" id="order_id">
+                                                <input type="hidden" name="product_id" id="product_id">
+
+                                                <textarea class="input" form_id="review-form"
+                                                    placeholder="Đánh giá của bạn" name="content"></textarea>
+                                                <div class="input-rating">
+                                                    <span>Đánh giá của bạn: </span>
+                                                    <div class="stars">
+                                                        <input id="5" name="rating" value="5" type="radio"><label
+                                                            for="5"></label>
+                                                        <input id="4" name="rating" value="4" type="radio"><label
+                                                            for="4"></label>
+                                                        <input id="3" name="rating" value="3" type="radio"><label
+                                                            for="3"></label>
+                                                        <input id="2" name="rating" value="2" type="radio"><label
+                                                            for="2"></label>
+                                                        <input id="1" name="rating" value="1" type="radio"><label
+                                                            for="1"></label>
+                                                    </div>
+                                                </div>
+                                                <button class="primary-btn" type="submit" value="submit">Gửi</button>
+
+                                                
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-check-review modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="closemodal_check()">
+                                            <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
+                                        </button>
+                                        <h5 class="modal-title">Đánh giá</h5>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div id="review-form">
+                                            <form class="review-form" action="/orders/review" method="POST">
+                                                <input type="hidden" name="order_id" id="order_id">
+                                                <input type="hidden" name="product_id" id="product_id">
+                                                <textarea class="input" id="my-review" readonly></textarea>
+                                                <div class="input-rating">
+                                                    <span>Đánh giá của bạn: </span>
+                                                    <div class="stars">
+                                                        <input id="star5" name="star" value="5" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star5"></label>
+                                                        <input id="star4" name="star" value="4" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star4"></label>
+                                                        <input id="star3" name="star" value="3" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star3"></label>
+                                                        <input id="star2" name="star" value="2" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star2"></label>
+                                                        <input id="star1" name="star" value="1" type="radio"
+                                                            onclick="javascript: return false;"><label
+                                                            for="star1"></label>
+                                                    </div>
+                                                </div>
+                                                    
+                                            </form>
+                                            <button class="primary-btn"  onclick="closemodal_check()">Thoát</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-cancel-order modal">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"
+                                            onclick="closemodal_delete()">
+                                            <span aria-hidden="true" style="font-size: 30px;color:red">&times;</span>
+                                        </button>
+                                        <h4 class="modal-title" style="color:red">Hủy đơn hàng</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div style="font-size: 18px;" class="alert alert-warning" role="alert">
+                                            <div>
+                                                Đơn hàng hủy sẽ không được tiến hành giao tới bạn
+                                                <br>
+                                                Bạn có thực sự muốn xóa đơn hàng này?
+                                                <br>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <form action="/orders/cancel" method="POST">
+                                                <input type="hidden" name="order_id" id="id">
+                                                <button type="submit" value="submit" class="btn btn-danger">Xác
+                                                    nhận</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                                                    onclick="closemodal_delete()">Hủy</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        
+                    </div>
+                    <!-- /ACCOUNT -->
+                </div>
+            </div>
+            <!--end container -->
+        </div>
+        <!-- /MAIN HEADER -->
+</header>
+<!-- /HEADER -->

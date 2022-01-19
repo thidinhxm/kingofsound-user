@@ -1,0 +1,358 @@
+
+{{> header }}
+{{> navigation }}
+<!-- SECTION -->
+<div class="section">
+	<!-- container -->
+	<div class="container">
+		<!-- row -->
+		<div class="row">
+			<!-- ASIDE -->
+			<div id="aside" class="col-md-3">
+				<!-- aside Widget -->
+				<div class="aside">
+					<h3 class="aside-title">Loại sản phẩm</h3>
+					<div class="checkbox-filter">
+						{{#each categories}}
+						<div class="group-checkbox">
+							<div class="input-checkbox checkall" id="categories{{category_id}}">
+								<input type="checkbox" id="category{{category_id}}" value="{{category_id}}" name="categories">
+								<label for="category{{category_id}}">
+									<span></span>
+									{{category_name}}
+									<small>({{totalProducts}})</small>
+								</label>
+							</div>
+							{{#each subCategories}}
+							<div class="input-checkbox checksub" id="subCategories{{category_id}}">
+								<input type="checkbox" id="subCategory{{category_id}}" value="{{category_id}}" name="subCategories" class="category_{{../category_id}}">
+								<label for="subCategory{{category_id}}"  class="subcheck">
+									<span></span>
+									{{category_name}}
+									<small>({{length}})</small>
+								</label>
+							</div>
+							{{/each}}
+						</div>
+						{{/each}}
+
+					
+					</div>
+				</div>
+				<!-- /aside Widget -->
+
+				<!-- aside Widget -->
+				<div class="aside">
+					<h3 class="aside-title">Giá (000 vnd)</h3>
+					<div class="price-filter">
+						<div id="price-slider"></div>
+						<div class="input-number price-min prices">
+							<input id="price-min" type="number">
+							<span class="qty-up">+</span>
+							<span class="qty-down">-</span>
+						</div>
+						<span>-</span>
+						<div class="input-number price-max prices">
+							<input id="price-max" type="number">
+							<span class="qty-up">+</span>
+							<span class="qty-down">-</span>
+						</div>
+					</div>
+				</div>
+				<!-- /aside Widget -->
+
+				<!-- aside Widget -->
+				<div class="aside">
+					<h3 class="aside-title">Thương hiệu</h3>
+					<div class="checkbox-filter">
+						{{#each brands}}
+						<div class="input-checkbox" id="brands{{brand_id}}">
+							<input type="checkbox" id="brand{{brand_id}}" name="brands" value="{{brand_id}}">
+							<label for="brand{{brand_id}}">
+								<span></span>
+								{{brand_name}}
+								<small>({{length}})</small>
+							</label>
+						</div>
+						{{/each}}
+					</div>
+				</div>
+				<!-- /aside Widget -->
+
+				<!-- aside Widget -->
+				<div class="aside">
+					<h3 class="aside-title">Bán chạy nhất</h3>
+
+					{{#each bestSalesProducts}}
+					<a href="/products/{{product_id}}">
+					<div class="product-widget">
+						<div class="product-img">
+							<img src="{{'images.image_link'}}" alt="">
+						</div>
+						<div class="product-body">
+							{{!-- <p class="product-category">LOẠI</p> --}}
+							<h3 class="product-name"><a href="/products/{{product_id}}">{{product_name}}</a></h3>
+							<h4 class="product-price">{{formatPrice price}} VNĐ</h4>
+						</div>
+					</div>
+					</a>
+					{{/each}}
+				</div>
+			</div>
+			<!-- /ASIDE -->
+
+			<!-- STORE -->
+			<div id="store" class="col-md-9">
+				<!-- store top filter -->
+				<div class="store-filter clearfix">
+					<div class="store-sort">
+						<label>
+							Sắp xếp theo:
+							<select class="input-select" id="sort">
+								<option value="model_year">Sản phẩm mới nhất</option>
+								<option value="name">Tên sản phẩm</option>
+								<option value="price_asc">Giá sản phẩm tăng dần</option>
+								<option value="price_desc">Giá sản phẩm giảm dần</option>
+							</select>
+						</label>
+
+						<label>
+							Hiển thị:
+							<select class="input-select" id="limit">
+								<option value="6">6</option>
+								<option value="9">9</option>
+								<option value="12">12</option>
+								<option value="18">18</option>
+							</select>
+						</label>
+					</div>
+					<ul class="store-grid">
+						<li class="active"><i class="fa fa-th"></i></li>
+						<li><a href="#"><i class="fa fa-th-list"></i></a></li>
+					</ul>
+				</div>
+				<!-- /store top filter -->
+
+				<!-- store products -->
+				<div class="row">
+					<!-- product -->
+					{{#each products}}
+					<a href="/products/{{product_id}}">
+					<div class="col-md-4 col-xs-6">
+						<div class="product">
+							<div class="product-img">
+								<img src="{{'images.image_link'}}" alt="">
+								<div class="product-label">
+									<span class="sale">-30%</span>
+									<span class="new">MỚI</span>
+								</div>
+							</div>
+							<div class="product-body">
+								{{!-- <p class="product-category">Loại</p> --}}
+								<h3 class="product-name"><a href="/products/{{product_id}}">{{product_name}}</a></h3>
+								<h4 class="product-price">{{formatPrice price}} VNĐ</h4>
+								<div class="product-rating">
+									{{{createRating average_rating}}}
+								</div>
+								<div class="product-btns">
+									<button class="add-to-cart" onclick="addToCart({{product_id}})"><i class="fa fa-shopping-cart"></i><span class="tooltipp">Thêm vào giỏ hàng</span></button>
+									<button class="quick-view"><a href="/products/{{product_id}}"><i class="fa fa-eye"></i></a><span class="tooltipp">Xem sản phẩm</span></button>
+								</div>
+							</div>
+							<div class="buy-now">
+								<button class="buy-now-btn">Mua ngay</button>
+							</div>
+						</div>
+					</div>
+					</a>
+					{{/each}}
+					<!-- /product -->
+				</div>
+				<!-- /store products -->
+
+				<!-- store bottom filter -->
+				{{#if pagination.pages}}
+				<div class="row justify-content-center">
+					<nav aria-label="Page navigation example" id="pagination">
+						{{{paginate pagination paginationClass="store-pagination"}}}
+					</nav>
+				</div>
+				{{/if}}
+				<!-- /store bottom filter -->
+			</div>
+			<!-- /STORE -->
+		</div>
+		<!-- /row -->
+	</div>
+	<!-- /container -->
+</div>
+<!-- /SECTION -->
+{{> newsletter}}
+{{> footer }}
+<script>
+	const urlParams = new URLSearchParams(window.location.search);
+	let params = {
+		page: 1,
+		min: '',
+		max: '',
+		limit: '',
+		categories: '',
+		subCategories: '',
+		brands: '',
+		sort: '',
+		search: '',
+	}
+
+	for (let key in params) {
+      if (!urlParams.has(key)) {
+        urlParams.append(key, params[key])
+      }
+    }
+	$(document).ready(function() {
+		const checkboxes = ['categories', 'brands', 'subCategories'];
+		for (let key of checkboxes) {
+			if (urlParams.has(key)) {
+				const values = urlParams.get(key);
+				if (values) {
+					for (let value of values.split(',')) {
+						$(`input[name=${key}][value=${value}]`).prop('checked', true);
+					}
+				}
+
+			}
+		}
+
+		$('#limit').val(urlParams.get('limit'));
+		$('#sort').val(urlParams.get('sort'));
+		$('input[name=search]').val(urlParams.get('search'));
+
+		const savePage = urlParams.get('page');
+		$('#pagination li a').each((index, item) => {
+			const page = $(item).attr('href').split('=')[1]
+			urlParams.set('page', page)
+			const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+			const href = '/products?' + urlRemoved;
+			$(item).attr('href', href);
+		})
+		urlParams.set('page', savePage)
+	});
+
+	$('input[name=categories]').change(function() {
+		if ($(this).prop('checked')) {
+			$(this).closest('.group-checkbox').find('input').prop('checked', true);
+		} else {
+			$(this).closest('.group-checkbox').find('input').prop('checked', false);
+		}
+		let categories = [];
+		let subCategories = [];
+		$('input[name=categories]:checked').each(function() {
+			categories.push($(this).val());
+		});
+
+		$('input[name=subCategories]:checked').each(function() {
+			subCategories.push($(this).val());
+		});
+
+		urlParams.set('categories', categories.join(','));
+		urlParams.set('subCategories', subCategories.join(','));
+		urlParams.set('page', 1);
+
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+
+	$('input[name=subCategories]').change(function() {
+
+		let subCategories = [];
+		let partSubCategories = [];
+		let categories = [];
+		$('input[name=subCategories]:checked').each(function() {
+			subCategories.push($(this).val());
+		});
+		
+		const className = $(this).attr('class');
+		$('input[name=subCategories]').each(function() {
+			if ($(this).attr('class') == className && $(this).prop('checked')) {
+				partSubCategories.push($(this).val());
+			}
+		});
+		const category_id = className.split('_')[1];
+		if (partSubCategories.length > 0) {
+			$(`input[name=categories][value=${category_id}]`).prop('checked', true);
+		} else {
+			$(`input[name=categories][value=${category_id}]`).prop('checked', false);
+		}
+		
+		$('input[name=categories]:checked').each(function() {
+			categories.push($(this).val());
+		});
+		
+		urlParams.set('subCategories', subCategories.join(','));
+		urlParams.set('categories', categories.join(','));
+		urlParams.set('page', 1);
+
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+	
+	$('input[name=brands]').change(function() {
+		let brands = [];
+		$('input[name=brands]:checked').each(function() {
+			brands.push($(this).val());
+		});
+		urlParams.set('brands', brands.join(','));
+		urlParams.set('page', 1);
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+
+	$('#sort').change(function() {
+		urlParams.set('sort', $(this).val());
+		urlParams.set('page', 1);
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+
+	$('#search-btn').click(function(event) {
+		event.preventDefault();
+		urlParams.set('search', $('input[name=search]').val());
+		urlParams.set('page', 1);
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+
+	$('#limit').change(function() {
+		urlParams.set('limit', $(this).val());
+		urlParams.set('page', 1);
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+
+	$('#price-min').change(function() {
+		urlParams.set('min', $(this).val());
+		urlParams.set('page', 1);
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+
+	$('#price-max').change(function() {
+		urlParams.set('max', $(this).val());
+		urlParams.set('page', 1);
+		
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+	});
+
+	function changePrice(key, value) {
+		urlParams.set(key, value)
+		urlParams.set('page', 1);
+		const urlRemoved = urlParams.toString().split('&').filter(item => item.split('=')[1] != '').join('&');
+		window.location.search = urlRemoved;
+    }
+
+</script>

@@ -1,0 +1,74 @@
+{{> header }}
+{{> navigation }}
+<div class="cart">
+	<div class="basket">
+		<div class="order">
+			<h3 class="title">Đơn hàng #{{order.order_id}}</h3>
+		</div>
+		<div class="basket-labels">
+			<ul>
+				<li class="item item-heading">Sản phẩm</li>
+				<li class="price">Đơn giá</li>
+				<li class="quantity" style="width:10%">Số lượng</li>
+				<li class="subtotal">Thành tiền</li>
+	
+			</ul>
+		</div>
+		{{#each detailOrder}}
+		<div class="basket-product">
+			<div class="item">
+				<a href="/products/{{'product.product_id'}}">
+					<div class="product-image">
+						<img src="{{'product.images.image_link'}}" alt="Placholder Image" class="product-frame"
+							height="100px" width="100px">
+					</div>
+					<div class="product-details">
+						<h1><strong><span class="item-quantity">{{quantity}}</span> x
+								{{'product.product_name'}}</strong></h1>
+						<p><strong>Loại : {{'product.category.category_name'}}</strong></p>
+						<p>Phiên bản - {{'product.model_year'}}</p>
+				</a>
+				{{#if is_complete}}
+				{{#if review_id}}
+				<b style ="color: rgb(79, 153, 4); cursor: pointer;" >
+					<div onclick="checkReview({{review_id}})" class = "check-review">Xem đánh giá</div>
+				</b>
+				{{else}}
+				<div class="reviews reviews-btn" style ="margin-top:5px; cursor: pointer;"
+					onclick="addreviews({{order_id}},{{product_id}})"><b>Thêm đánh giá</b>&ensp;&ensp;<i class="fas fa-comments-dollar"></i></div>
+				{{/if}}
+				{{/if}}
+			</div>
+
+		</div>
+		<div class="price">{{'product.price'}}</div>
+		<div class="quantity" style="width:12%">
+			&emsp;{{quantity}}
+		</div>
+		<div class="subtotal">{{formatPrice subtotal}}</div>
+	</div>
+
+	{{/each}}
+</div>
+<div class="container order-exc">
+	<div class="row">
+		<div class="col-md-2">
+			<a href="/orders"><button class="promo-code-cta"
+					style="float: left;padding:5px 15px ;background-color:#f0ad4e; margin-left:-35%">Quay
+					lại</a></button>
+		</div>
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-6" class="final-total">
+			<div style="text-align:right;margin-right:12%">
+				<b>{{#if discount}}Giảm giá - {{discount}}%{{/if}}</b>
+			</div>
+			<div class="total-value final-value" style="margin-right:-8%">
+				<b class="total">Thanh toán :</b> <i id="basket-total">{{formatPrice order.total_price}}</i>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+{{> newsletter}}
+{{> footer }}

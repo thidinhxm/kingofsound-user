@@ -1,0 +1,53 @@
+
+{{>header}}
+{{>navigation}}
+<section class="login_box_area section-margin">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 col-ms-12">
+				<div class="login_box_img">
+					<div class="hover">
+						<h4>Bạn chưa có tài khoản?</h4>
+						<a class="button button-account" href="/register">Tạo tài khoản</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6 col-ms-12">
+				<div class="login_form_inner">
+					<div class="row justify-content-center message-block">
+						{{#if error}}
+						<div class="col-12">
+							<p class="alert alert-danger text-center message" id="error-login">{{error}}</p>
+						</div>
+						{{else}}
+						{{#if success}}
+						<div class="col-12">
+							<p class="alert alert-success text-center message" id="error-login">{{success}}</p>
+						</div>
+						{{else}}
+							<div class="col-12">
+								<p class="alert text-center message" id="error-login"></p>
+							</div>
+						{{/if}}
+						{{/if}}
+					</div>
+					<h3>Đăng nhập tài khoản</h3>
+					<form class="row login_form" action="/login" id="login_form" method="POST">
+
+						<div class="col-md-12 form-group">
+							<input type="text" class="form-control" id="email-login" name="email" placeholder="Email" maxlength="50">
+						</div>
+						<div class="col-md-12 form-group">
+							<input type="password" class="form-control" id="password-login" name="password" placeholder="Mật khẩu" maxlength="16">
+						</div>
+						<div class="col-md-12 form-group">
+							<button type="submit" value="submit" class="button button-login" id="button-login">Đăng nhập</button>
+							<a href="/forgot-password">Quên mật khẩu?</a>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+{{>footer}}
