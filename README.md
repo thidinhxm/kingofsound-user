@@ -9,21 +9,22 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 
 ## 1. Contributors
 
-|    ID    |      Fullname      |            Github                  |  Role  |
-| -------- | ------------------ | ---------------------------------- | ------ |
-| 19120662 | Đinh Trần Xuân Thi | https://github.com/thidinhxm       | Leader |
-| 19120517 | Trương Văn Hoàng   | https://github.com/Hoangtruongvann | Member |
-| 19120695 | Nguyễn Văn Trịnh   | https://github.com/nvtrinh2412     | Member |
+|    ID    |      Fullname      |            Github                  |  Role           |
+| -------- | ------------------ | ---------------------------------- | --------------- |
+| 19120662 | Đinh Trần Xuân Thi | https://github.com/thidinhxm       | PM, Dev, Tester |
+| 19120517 | Trương Văn Hoàng   | https://github.com/Hoangtruongvann | Dev, Tester     |
+| 19120695 | Nguyễn Văn Trịnh   | https://github.com/nvtrinh2412     | Dev, Tester     |
 
 ## 2. Technical stack
-- Frontend: HTML5, CSS3, Bootstrap, Jquery, AJAX
-- Backend: NodeJS, ExpressJS
+- NodeJS, ExpressJS
+- View engine: express-handlebars
+- AJAX, Jquery, Bootstrap
 - Database: MySQL
 - Hosting: heroku.com
 
 
 ## 3. Admin Project
-> ***https://github.com/thidinhxm/web-app-admin-project***
+> ***https://github.com/thidinhxm/kingofsound-admin***
 
 ## 4. Features of website
 #### 1. Features when not logged in
@@ -74,11 +75,12 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 - 4.12. Statistics of sales by day, week, month, year
 - 4.13. Statistics on the number of top 10 sales of products
 
-#### 5. Some advanced feature
+#### 5. Some extra features outside the project
 - 5.1. Hosting webiste
-- 5.2. AJAX (pagination, mangage cart, check exists account,...)
-- 5.3. Vouchers
-- 5.4. Rating
+- 5.2. AJAX (pagination, mangage cart, check exists account, voucher, search, filter, add comment,...)
+- 5.3. Vouchers (CRUD in admins, use in users)
+- 5.4. Rating (Rate products after purchase, see reviews,...) 
+- 5.5. Draw charts of revenue statistics
 
 ## 5. Usage
     
