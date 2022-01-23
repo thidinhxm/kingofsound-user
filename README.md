@@ -52,7 +52,7 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 - 2.6. Prohibit non-logged-in users from using features that require login by authority
 - 2.7. Forgot password and Reset password
 
-#### 3. Feature when logged in
+#### 3. Features when logged in
 - 3.1. Update personal information
 - 3.2. Check constraints
 - 3.3. Change password
@@ -60,7 +60,7 @@ KingOfSound is a website that sells all kinds of audio equipment and accessories
 - 3.5. Fill in shipping information
 - 3.6. View process history information and purchase status
 
-#### 4. Feature of administrator
+#### 4. Features of administrator
 - 4.1. Update personal information
 - 4.2. View a list of user accounts
 - 4.3. User list pagination
